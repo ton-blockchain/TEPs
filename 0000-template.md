@@ -1,4 +1,3 @@
-
 ---
 TEP: [0](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
 title: TEP Template *(write title of TEP here)*
