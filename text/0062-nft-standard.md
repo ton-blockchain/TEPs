@@ -1,3 +1,12 @@
+- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0)
+- **title**: NFT Standard
+- **status**: Draft
+- **type**: Contract Interface
+- **authors**: [Tolya](https://github.com/tolya-yanot)
+- **created**: 14.08.2022
+- **replaces**: -
+- **replaced by**: -
+
 # Summary
 A standard interface for non-fungible tokens.
 
@@ -9,6 +18,8 @@ NFT standard describes:
 * The way of ownership changing.
 * The way of association of items into collections.
 * The way of deduplication of common part of collection.
+
+# Guide
 
 # Specification
 The NFT collection and each NFT item are separate smart contracts.
@@ -105,7 +116,7 @@ Must implement:
 # Implementation example
 https://github.com/ton-blockchain/token-contract/tree/main/nft
 
-# Rationale
+# Rationale and alternatives
 1. "One NFT - one smart contract" simplifies fees calculation and allows to give gas-consumption guarantees.
 2. NFT collection with sequential NFT index provide easy way of association and search of linked NFTs.
 3. Division of NFT content into individual and common (collection) part allows to deduplicate storage as well as cheap mass update.
@@ -148,6 +159,12 @@ Another variation of this scheme is to make all transfers chargeable.
 By prohibiting the free transfer of tokens, we make tokens inconvenient in many cases - the user simply updated the wallet, the user wants to donate NFT, the user wants to send NFT to some smart contract.
 
 Given the poor usability and that NFTs are a general concept and not all of them are created for sale - this approach was rejected.
+
+# Prior art
+
+# Unresolved questions
+
+# Future possibilities
 
 # Standard extensions
 The functionality of the basic NFT standard can be extended:
