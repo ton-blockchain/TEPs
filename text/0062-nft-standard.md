@@ -2,8 +2,8 @@
 - **title**: NFT Standard
 - **status**: Draft
 - **type**: Contract Interface
-- **authors**: [Tolya](https://github.com/tolya-yanot)
-- **created**: 14.08.2022
+- **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK)
+- **created**: 01.02.2022
 - **replaces**: -
 - **replaced by**: -
 
