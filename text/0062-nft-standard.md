@@ -161,6 +161,10 @@ By prohibiting the free transfer of tokens, we make tokens inconvenient in many 
 Given the poor usability and that NFTs are a general concept and not all of them are created for sale - this approach was rejected.
 
 # Prior art
+1. [Ethereum NFT Standard (EIP-721)](https://eips.ethereum.org/EIPS/eip-721)
+2. [Polkadot NFT Standard (RMRK)](https://github.com/rmrk-team/rmrk-spec)
+3. [Cosmos InterNFT Standards](https://github.com/interNFT/nft-rfc)
+4. [Everscale NFT Standard (TIP-4.1)](https://docs.everscale.network/standard/TIP-4.1)
 
 # Unresolved questions
 
