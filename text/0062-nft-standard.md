@@ -2,7 +2,7 @@
 - **title**: NFT Standard
 - **status**: Draft
 - **type**: Contract Interface
-- **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK)
+- **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
 - **created**: 01.02.2022
 - **replaces**: -
 - **replaced by**: -
@@ -219,6 +219,9 @@ Tags were calculated via tlbc as follows (request_flag is equal to `0x7fffffff` 
 `crc32('get_static_data query_id:uint64 = InternalMsgBody') = 0x2fcb26a2 & 0x7fffffff = 0x2fcb26a2`
 
 `crc32('report_static_data query_id:uint64 index:uint256 collection:MsgAddress = InternalMsgBody') = 0xb771735 | 0x80000000 = 0x8b771735`
+
+# Acknowledgements
+We are grateful to the [Tonwhales](https://github.com/tonwhales) developers for collaborating on the current draft of the standard 🤝
 
 # Changelog
 [01 Feb 2022](https://github.com/ton-blockchain/TIPs/issues/62#issuecomment-1027167743) 
