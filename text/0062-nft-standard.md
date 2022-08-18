@@ -20,6 +20,45 @@ NFT standard describes:
 * The way of deduplication of common part of collection.
 
 # Guide
+Non-Fungible Token (NFT) represents an ownership over unique digital asset (kitten images, title deeds, artworks, etc). Each separate token is an _NFT Item_. It is also convenient to gather NFT Items into an _NFT Collection_. In TON, each NFT Item and NFT Collection are separate smart contracts.
+
+## NFT Metadata
+_Main article_: TEP-64
+
+Each NFT Item and NFT Collection itself has its own metadata (TEP-64). It contains some info about NFT, such as title and associated image. Metadata can be stored offchain (smart contract will contain only a link to json) or onchain (all data will be stored in smart contract).
+
+Collection metadata example (offchain):
+```json
+{
+   "image": "https://s.getgems.io/nft/b/c/62fba50217c3fe3cbaad9e7f/image.png",
+   "name": "TON Smart Challenge #2",
+   "description": "TON Smart Challenge #2 Winners Trophy",
+   "social_links": [],
+   "marketplace": "getgems.io"
+}
+```
+
+Item metadata example (offchain):
+```json
+{
+   "name": "TON Smart Challenge #2 Winners Trophy",
+   "description": "TON Smart Challenge #2 Winners Trophy 1 place out of 181",
+   "image": "https://s.getgems.io/nft/b/c/62fba50217c3fe3cbaad9e7f/images/943e994f91227c3fdbccbc6d8635bfaab256fbb4",
+   "content_url": "https://s.getgems.io/nft/b/c/62fba50217c3fe3cbaad9e7f/content/84f7f698b337de3bfd1bc4a8118cdfd8226bbadf",
+   "attributes": []
+}
+```
+
+Offchain metadata needs to be published on web. It is recommended to use IPFS, so you don't need to host your own server.
+
+## Single NFT Item deployment
+TODO
+
+## NFT Collection deployment
+TODO
+
+## Useful links
+TODO
 
 # Specification
 The NFT collection and each NFT item are separate smart contracts.
@@ -167,8 +206,11 @@ Given the poor usability and that NFTs are a general concept and not all of them
 4. [Everscale NFT Standard (TIP-4.1)](https://docs.everscale.network/standard/TIP-4.1)
 
 # Unresolved questions
+1. Owner index is not implemented yet, should we implement it in future standards?
+2. There is no standard methods to perform "safe transfer", which will revert ownership transfer in case of contract execution failure.
 
 # Future possibilities
+None
 
 # Standard extensions
 The functionality of the basic NFT standard can be extended:
