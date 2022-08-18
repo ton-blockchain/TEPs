@@ -152,6 +152,9 @@ Must implement:
    As an example, if an NFT item stores a metadata URI in its content, then a collection smart contract can store a domain (e.g. "https://site.org/"), and an NFT item smart contract in its content will store only the individual part of the link (e.g "kind-cobra").
    In this example the `get_nft_content` method concatenates them and return "https://site.org/kind-cobra".
 
+# Drawbacks
+TODO
+
 # Implementation example
 https://github.com/ton-blockchain/token-contract/tree/main/nft
 
