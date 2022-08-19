@@ -9,7 +9,9 @@
 
 # Summary
 
-Which feature this document introduces? Describe it in one paragraph.
+Extension for [NFT Standard](https://github.com/ton-blockchain/TIPs/issues/62).
+
+A standardized way to retrieve royalty payment information for non-fungible tokens (NFTs) to enable universal support for royalty payments across all NFT marketplaces and ecosystem participants.
 
 # Motivation
 
@@ -21,9 +23,44 @@ Explain this document in simple language, as if you were teaching it to another 
 
 # Specification
 
-This section describes your feature formally. It contains requirements, which must be followed in order to implement your TEP. To keep things formal, it is convenient to follow [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt). You should include following text at the beginning of this section:
-
 > The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
+
+NFT Collection smart contract MUST implement:
+
+(if this is a variant of NFT items without collection then NFT item smart contract MUST implement this).
+
+#### Get-methods
+1. `royalty_params()` returns `(int numerator, int denominator, slice destination)`
+   Royalty share is `numerator / denominator`.
+   E.g if `numerator = 11` and `denominator = 1000` then royalty share is `11 / 1000 * 100% = 1.1%`.
+   `numerator` must be less `denominator`.
+   `destination` - address to send royalty. Slice of type `MsgAddress`.
+
+#### Internal messages
+1. `get_royalty_params`
+   **Request**
+   TL-B schema of inbound message:
+   `get_royalty_params#693d3950 query_id:uint64 = InternalMsgBody;`
+   `query_id` - arbitrary request number.
+   **Should do:**
+   Send back message with the following layout and send-mode `64` (return msg amount except gas fees):
+   TL-B schema `report_royalty_params#a8cb00ad query_id:uint64 numerator:uint16 denominator:uint16 destination:MsgAddress = InternalMsgBody;`
+
+It is expected that marketplaces which want to participate in royalty payments will send `muldiv(price, nominator, denominator)` to `destination` address after NFT sale.
+
+Marketplaces SHOULD neglect zero-value royalty payments.
+
+Marketplaces MAY deduct gas and message fees required to send royalty from royalty amount.
+
+## TL-B Schema
+```
+get_royalty_params query_id:uint64 = InternalMsgBody;
+report_royalty_params query_id:uint64 numerator:uint16 denominator:uint16 destination:MsgAddress = InternalMsgBody;
+```
+
+`crc32('get_royalty_params query_id:uint64 = InternalMsgBody') = 0xe93d3950 & 0x7fffffff = 0x693d3950`
+
+`crc32('report_royalty_params query_id:uint64 numerator:uint16 denominator:uint16 destination:MsgAddress = InternalMsgBody') = 0xa8cb00ad | 0x80000000 = 0xa8cb00ad`
 
 # Drawbacks
 
@@ -31,9 +68,11 @@ Why should we *not* do this?
 
 # Rationale and alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not choosing them?
-- What is the impact of not doing this?
+## Why are there no obligatory royalties to the author from all sales?
+See the relevant paragraph in [NFT Standard](https://github.com/ton-blockchain/TIPs/issues/62).
+
+## Why can't I set a fixed amount of royalties?
+We do not know in what currency the sale will take place. Percentage royalty is universal.
 
 # Prior art
 
