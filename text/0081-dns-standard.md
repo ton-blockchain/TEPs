@@ -13,7 +13,7 @@ TON DNS is a service for translating human-readable domain names (such as `test.
 
 # Motivation
 
-Which problem we address? Why it is important to make a new TEP?
+The goal of this document is to collect feedback from community and to provide documentation for dApps developers.
 
 # Guide
 
