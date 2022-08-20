@@ -59,6 +59,7 @@ TODO
 2. [Getgems NFT contracts](https://github.com/getgems-io/nft-contracts)
 3. [TON NFT Deployer](https://github.com/tondiamonds/ton-nft-deployer)
 4. FunC Lesson - NFT Standard ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/889424ae6a28453c4188ad65cdd9dbfeb750ecdb/10lesson/tenthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/427037e7937f0e2e9caa4b866ee29f9d8e19b3c0/10lesson/tenthlesson.md))
+5. [TON NFT Explorer](https://explorer.tonnft.tools/)
 
 # Specification
 The NFT collection and each NFT item are separate smart contracts.
