@@ -153,7 +153,7 @@ Must implement:
    In this example the `get_nft_content` method concatenates them and return "https://site.org/kind-cobra".
 
 # Drawbacks
-TODO
+There is no way to get current owner of NFT onchain because TON is an asynchronous blockchain. When the message with info about NFT owner will be delivered, this info may become irrelevant, so we can't guarantee that current owner hasn't changed.
 
 # Implementation example
 https://github.com/ton-blockchain/token-contract/tree/main/nft
