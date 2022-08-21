@@ -51,9 +51,6 @@ Item metadata example (offchain):
 
 Offchain metadata needs to be published on web. It is recommended to use IPFS, so you don't need to host your own server.
 
-## NFT Collection deployment
-TODO
-
 ## Useful links
 1. [Reference NFT implementation](https://github.com/ton-blockchain/token-contract/tree/main/nft)
 2. [Getgems NFT contracts](https://github.com/getgems-io/nft-contracts)
