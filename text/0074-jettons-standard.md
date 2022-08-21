@@ -22,7 +22,9 @@ Jetton standard describes:
 
 # Guide
 
-TODO
+## Useful links
+1. [Jetton deployer](https://jetton.live/)
+2. FunC Jetton lesson ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/main/9lesson/ninthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/main/9lesson/ninthlesson.md))
 
 # Specification
 
