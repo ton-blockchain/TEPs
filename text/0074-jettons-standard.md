@@ -217,11 +217,11 @@ burn_notification query_id:uint64 amount:(VarUInteger 16)
 
 # Drawbacks
 
-TODO
+There is no way to get actual wallet balance onchain, because when the message with balance will arrive, wallet balance may be not actual.
 
 # Rationale and alternatives
 
-"One wallet - one contract" way greatly simplifies gas fee calculation, however, it is not possible to get actual wallet balance onchain, because when the message with balance will arrive, wallet balance may be not actual. As an alternative, there exists ["TRC20 Token"](https://github.com/cod1ng-studio/TRC20) which contains all balances in one contract. Also, there was an idea to implement [external message tokens](https://t.me/ton_overview/35) (by [EmelyanenkoK](https://github.com/EmelyanenkoK)), however, it also suffers from high gas usage.
+"One wallet - one contract" way greatly simplifies gas fee calculation, however, it is not possible to get actual wallet balance onchain. As an alternative, there exists ["TRC20 Token"](https://github.com/cod1ng-studio/TRC20) which contains all balances in one contract. Also, there was an idea to implement [external message tokens](https://t.me/ton_overview/35) (by [EmelyanenkoK](https://github.com/EmelyanenkoK)), however, it also suffers from high gas usage.
 
 # Prior art
 
