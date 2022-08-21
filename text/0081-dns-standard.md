@@ -17,7 +17,9 @@ The goal of this document is to collect feedback from community and to provide d
 
 # Guide
 
-Explain this document in simple language, as if you were teaching it to another developers. Give examples how your feature will work in real life.
+## Useful links
+1. [DNS Auction](https://dns.ton.org/) ([source code](https://github.com/ton-blockchain/dns))
+2. [ton.org documentation](https://ton.org/docs/#/web3/dns)
 
 # Specification
 
@@ -159,22 +161,20 @@ cap_name#ff name:Text = SmcCapability;
 
 # Drawbacks
 
-Why should we *not* do this?
+TODO
 
 # Rationale and alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not choosing them?
-- What is the impact of not doing this?
+TODO
 
 # Prior art
 
-Discuss prior art, both the good and the bad, in relation to this proposal. How the problem stated in "Motivation" section was solved in another blockchains? This section encourages you as an author to learn from others' mistakes. Feel free to include links to blogs, books, Durov's whitepapers, etc.
+1. [EIP-137](https://eips.ethereum.org/EIPS/eip-137)
 
 # Unresolved questions
 
-If there are some questions that have to be discussed during review process or to be solved during implementation of this TEP, write it here.
+TODO
 
 # Future possibilities
 
-Do you have ideas, which things can be implemented on top of this TEP later? Write possible ideas of new TEPs, which are related to this TEP.
+None
