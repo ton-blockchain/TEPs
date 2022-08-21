@@ -228,6 +228,7 @@ There is no way to get actual wallet balance onchain, because when the message w
 # Prior art
 
 1. [EIP-20 Token Standard](https://eips.ethereum.org/EIPS/eip-20)
+2. [Sharded Smart Contracts for Smart Contract Developers](https://www.youtube.com/watch?v=svOadLWwYaM)
 
 # Unresolved questions
 
