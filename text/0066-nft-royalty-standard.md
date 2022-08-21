@@ -80,7 +80,7 @@ TODO
 
 # Unresolved questions
 
-TODO
+1. Shall we standardize the way marketplaces send internal message with royalties to the author?
 
 # Future possibilities
 
