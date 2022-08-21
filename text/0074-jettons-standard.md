@@ -22,7 +22,7 @@ Jetton standard describes:
 
 # Guide
 
-Explain this document in simple language, as if you were teaching it to another developers. Give examples how your feature will work in real life.
+TODO
 
 # Specification
 
@@ -217,22 +217,20 @@ burn_notification query_id:uint64 amount:(VarUInteger 16)
 
 # Drawbacks
 
-Why should we *not* do this?
+TODO
 
 # Rationale and alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not choosing them?
-- What is the impact of not doing this?
+"One wallet - one contract" way greatly simplifies gas fee calculation, however, it is not possible to get actual wallet balance onchain, because when the message with balance will arrive, wallet balance may be not actual. As an alternative, there exists ["TRC20 Token"](https://github.com/cod1ng-studio/TRC20) which contains all balances in one contract. Also, there was an idea to implement [external message tokens](https://t.me/ton_overview/35) (by [EmelyanenkoK](https://github.com/EmelyanenkoK)), however, it also suffers from high gas usage.
 
 # Prior art
 
-Discuss prior art, both the good and the bad, in relation to this proposal. How the problem stated in "Motivation" section was solved in another blockchains? This section encourages you as an author to learn from others' mistakes. Feel free to include links to blogs, books, Durov's whitepapers, etc.
+1. [EIP-20 Token Standard](https://eips.ethereum.org/EIPS/eip-20)
 
 # Unresolved questions
 
-If there are some questions that have to be discussed during review process or to be solved during implementation of this TEP, write it here.
+1. There is no standard methods to perform "safe transfer", which will revert ownership transfer in case of contract execution failure.
 
 # Future possibilities
 
-Do you have ideas, which things can be implemented on top of this TEP later? Write possible ideas of new TEPs, which are related to this TEP.
+None
