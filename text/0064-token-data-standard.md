@@ -152,7 +152,7 @@ Discuss prior art, both the good and the bad, in relation to this proposal. How 
 
 # Future possibilities
 
-Do you have ideas, which things can be implemented on top of this TEP later? Write possible ideas of new TEPs, which are related to this TEP.
+None
 
 # Changelog
 * 14 May 2022 - the standard is now used not only for NFT, but for all tokens in the TON. Added section "Jetton metadata attributes".
