@@ -146,7 +146,9 @@ Discuss prior art, both the good and the bad, in relation to this proposal. How 
 
 # Unresolved questions
 
-If there are some questions that have to be discussed during review process or to be solved during implementation of this TEP, write it here.
+1. Shall we authenticate offchain data to prevent it from changing? ([NoelJacob](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1029900008))
+2. Shall we support semichain layout, where only some metadata fields may be stored onchain? ([tvorogme](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1028622110))
+3. Shall we standardize attributes, traits, and non-image content? ([tolya-yanot](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1041919338))
 
 # Future possibilities
 
