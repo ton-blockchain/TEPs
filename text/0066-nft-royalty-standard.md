@@ -15,11 +15,11 @@ A standardized way to retrieve royalty payment information for non-fungible toke
 
 # Motivation
 
-Which problem we address? Why it is important to make a new TEP?
+It is convenient to standardize royalty, so all NFT markets will pay royalty to collection author independently of how this collection was deployed.
 
 # Guide
 
-Explain this document in simple language, as if you were teaching it to another developers. Give examples how your feature will work in real life.
+TODO
 
 # Specification
 
@@ -64,7 +64,7 @@ report_royalty_params query_id:uint64 numerator:uint16 denominator:uint16 destin
 
 # Drawbacks
 
-Why should we *not* do this?
+TODO
 
 # Rationale and alternatives
 
@@ -76,12 +76,12 @@ We do not know in what currency the sale will take place. Percentage royalty is 
 
 # Prior art
 
-Discuss prior art, both the good and the bad, in relation to this proposal. How the problem stated in "Motivation" section was solved in another blockchains? This section encourages you as an author to learn from others' mistakes. Feel free to include links to blogs, books, Durov's whitepapers, etc.
+TODO
 
 # Unresolved questions
 
-If there are some questions that have to be discussed during review process or to be solved during implementation of this TEP, write it here.
+TODO
 
 # Future possibilities
 
-Do you have ideas, which things can be implemented on top of this TEP later? Write possible ideas of new TEPs, which are related to this TEP.
+None
