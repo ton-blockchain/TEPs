@@ -132,17 +132,16 @@ Note, that while TL-B scheme does not constrain bit size of each chunk it is exp
 
 # Drawbacks
 
-Why should we *not* do this?
+TODO
 
 # Rationale and alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not choosing them?
-- What is the impact of not doing this?
+TODO
 
 # Prior art
 
-Discuss prior art, both the good and the bad, in relation to this proposal. How the problem stated in "Motivation" section was solved in another blockchains? This section encourages you as an author to learn from others' mistakes. Feel free to include links to blogs, books, Durov's whitepapers, etc.
+1. [EIP-721](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md)
+2. [OpenSea metadata guide](https://docs.opensea.io/docs/metadata-standards)
 
 # Unresolved questions
 
