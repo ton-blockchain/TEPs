@@ -177,4 +177,4 @@ TODO
 
 # Future possibilities
 
-None
+1. Implement private (encrypted) fields
