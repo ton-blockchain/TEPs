@@ -1,6 +1,6 @@
 - **TEP**: [74](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
 - **title**: Fungible tokens (Jettons) standard
-- **status**: Draft
+- **status**: Active
 - **type**: Contract Interface
 - **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
 - **created**: 12.03.2022
