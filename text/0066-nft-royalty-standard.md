@@ -64,19 +64,16 @@ report_royalty_params query_id:uint64 numerator:uint16 denominator:uint16 destin
 
 # Drawbacks
 
-TODO
+There is no way to enforce royalty for each sale. There should be an option to gift NFT for free, however, it is not possible to track, was it really for free or not. See the relevant paragraph in [TEP-62](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#why-are-there-no-obligatory-royalties-to-the-author-from-all-sales).
 
 # Rationale and alternatives
-
-## Why are there no obligatory royalties to the author from all sales?
-See the relevant paragraph in [NFT Standard](https://github.com/ton-blockchain/TIPs/issues/62).
 
 ## Why can't I set a fixed amount of royalties?
 We do not know in what currency the sale will take place. Percentage royalty is universal.
 
 # Prior art
 
-TODO
+1. [EIP-2981: NFT Royalty Standard](https://eips.ethereum.org/EIPS/eip-2981)
 
 # Unresolved questions
 
