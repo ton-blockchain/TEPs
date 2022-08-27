@@ -1,6 +1,6 @@
 - **TEP**: [62](https://github.com/ton-blockchain/TEPs/pull/2)
 - **title**: NFT Standard
-- **status**: Draft
+- **status**: Active
 - **type**: Contract Interface
 - **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
 - **created**: 01.02.2022
