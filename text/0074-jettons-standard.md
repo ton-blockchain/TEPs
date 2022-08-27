@@ -1,4 +1,4 @@
-- **TEP**: [74](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
+- **TEP**: [74](https://github.com/ton-blockchain/TEPs/pull/4)
 - **title**: Fungible tokens (Jettons) standard
 - **status**: Active
 - **type**: Contract Interface
