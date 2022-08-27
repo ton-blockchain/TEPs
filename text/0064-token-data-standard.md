@@ -1,6 +1,6 @@
 - **TEP**: [64](https://github.com/ton-blockchain/TEPs/pull/0)
 - **title**: Token Data Standard
-- **status**: Draft
+- **status**: Review
 - **type**: Contract Interface
 - **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
 - **created**: 03.02.2022
