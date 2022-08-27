@@ -132,7 +132,7 @@ Note, that while TL-B scheme does not constrain bit size of each chunk it is exp
 
 # Drawbacks
 
-TODO
+None
 
 # Rationale and alternatives
 
