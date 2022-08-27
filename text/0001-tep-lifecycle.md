@@ -1,6 +1,6 @@
 - **TEP**: [1](https://github.com/ton-blockchain/TEPs/pull/1)
 - **title**: TEP Lifecycle
-- **status**: Review
+- **status**: Active
 - **type**: Meta
 - **authors**: [Vladimir Lebedev](https://github.com/hacker-volodya)
 - **created**: 11.06.2022
