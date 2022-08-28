@@ -1,6 +1,6 @@
-- **TEP**: [66](https://github.com/ton-blockchain/TEPs/pull/0)
+- **TEP**: [66](https://github.com/ton-blockchain/TEPs/pull/6)
 - **title**: NFTRoyalty Standard Extension
-- **status**: Draft
+- **status**: Review
 - **type**: Contract Interface
 - **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
 - **created**: 12.02.2022
