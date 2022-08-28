@@ -175,6 +175,7 @@ If we will not burn coins from DNS auctions, then, who we will need send money t
 ## Why only ASCII domains are allowed?
 
 ## Why there is resolver for subdomains? 
+It is possible to implement any logic for subdomains in custom resolver contract.
 
 ## Why domains are not bought forever?
 There is a possibility that access to wallet which owns a domain will be lost, so domain will be lost forever. In TON DNS, it is required to prolong domains each year by sending 0.00000001 TON to the contract.
