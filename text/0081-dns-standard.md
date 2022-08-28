@@ -177,6 +177,7 @@ If we will not burn coins from DNS auctions, then, who we will need send money t
 ## Why there is resolver for subdomains? 
 
 ## Why domains are not bought forever?
+There is a possibility that access to wallet which owns a domain will be lost, so domain will be lost forever. In TON DNS, it is required to prolong domains each year by sending 0.00000001 TON to the contract.
 
 # Prior art
 
