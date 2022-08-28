@@ -162,11 +162,19 @@ cap_name#ff name:Text = SmcCapability;
 
 # Drawbacks
 
-TODO
+None
 
 # Rationale and alternatives
 
-TODO
+## Why domains are so expensive?
+
+## Why DNS auction burns coins?
+
+## Why only ASCII domains are allowed?
+
+## Why there is resolver for subdomains? 
+
+## Why domains are not bought forever?
 
 # Prior art
 
@@ -174,7 +182,7 @@ TODO
 
 # Unresolved questions
 
-TODO
+None
 
 # Future possibilities
 
