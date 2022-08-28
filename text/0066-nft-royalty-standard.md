@@ -19,7 +19,19 @@ It is convenient to standardize royalty, so all NFT markets will pay royalty to 
 
 # Guide
 
-TODO
+1. report_royalty_params example implementation: [ton-blockchain/token-contract](https://github.com/ton-blockchain/token-contract/blob/2c13d3ef61ca4288293ad65bf0cfeaed83879b93/nft/nft-collection.fc#L58-L68).
+2. get_royalty_params example implementation: [ton-blockchain/token-contract](https://github.com/ton-blockchain/token-contract/blob/2c13d3ef61ca4288293ad65bf0cfeaed83879b93/nft/nft-collection.fc#L149-L153).
+
+Royalty data example:
+```
+"EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N" parse-smc-addr drop 2=: royalty-addr
+
+<b
+    11 16 u, // numerator
+    1000 16 u, // denominator
+    royalty-addr Addr, // address to send royalty
+b> =: royalty-params
+```
 
 # Specification
 
