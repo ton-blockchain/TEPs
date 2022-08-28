@@ -170,6 +170,7 @@ None
 Without minimal price, it is possible to buy all 4-letters domains (26^4 = ~457000) for several tens of thousands TON. So, minimal price depends on the length of domain name. It is also worth noting that after a few months minimal price for all domains will decrease to 100 TON.
 
 ## Why DNS auction burns coins?
+If we will not burn coins from DNS auctions, then, who we will need send money to?
 
 ## Why only ASCII domains are allowed?
 
