@@ -20,6 +20,7 @@ The goal of this document is to collect feedback from community and to provide d
 ## Useful links
 1. [DNS Auction](https://dns.ton.org/) ([source code](https://github.com/ton-blockchain/dns))
 2. [ton.org documentation](https://ton.org/docs/#/web3/dns)
+3. Tolya answers about TON DNS (ru) - [1](https://github.com/ton-blockchain/TEPs/commit/4a09bfc737823f09f05dfb7008eec7784543bb2b), [2](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-2-08-06), [3](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-3-08-09)
 
 # Specification
 
