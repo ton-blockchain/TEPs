@@ -1,6 +1,6 @@
 - **TEP**: [81](https://github.com/ton-blockchain/TEPs/pull/0)
 - **title**: TON DNS Standard
-- **status**: Draft
+- **status**: Review
 - **type**: Contract Interface
 - **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
 - **created**: 25.06.2022
