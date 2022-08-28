@@ -173,6 +173,7 @@ Without minimal price, it is possible to buy all 4-letters domains (26^4 = ~4570
 If we will not burn coins from DNS auctions, then, who we will need send money to?
 
 ## Why only ASCII domains are allowed?
+If we support UTF-8, it would be possible to create domains which will look same, but still will be different domains (example.ton and ехаmрlе.ton).
 
 ## Why there is resolver for subdomains? 
 It is possible to implement any logic for subdomains in custom resolver contract.
