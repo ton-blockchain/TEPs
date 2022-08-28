@@ -1,4 +1,4 @@
-- **TEP**: [81](https://github.com/ton-blockchain/TEPs/pull/0)
+- **TEP**: [81](https://github.com/ton-blockchain/TEPs/pull/5)
 - **title**: TON DNS Standard
 - **status**: Review
 - **type**: Contract Interface
