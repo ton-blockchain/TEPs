@@ -1,4 +1,4 @@
-- **TEP**: [64](https://github.com/ton-blockchain/TEPs/pull/0)
+- **TEP**: [64](https://github.com/ton-blockchain/TEPs/pull/3)
 - **title**: Token Data Standard
 - **status**: Review
 - **type**: Contract Interface
