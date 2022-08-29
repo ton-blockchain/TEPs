@@ -136,7 +136,9 @@ None
 
 # Rationale and alternatives
 
-TODO
+Proposed standard allows developers to extend (meta)data on demand by introducing new fields without risk of collisions. An alternative to this approach could be [predefined set of data fields](https://github.com/ton-blockchain/TIPs/issues/79) which, from first glance, could save some storage and gas fees. However, there is no reason not to store the metadata in some compact predefined form in the contract and then just render it in get method (which works offline and thus doesn't waste gas) as Data Standard suggested, allowing lower fees without sacrificing flexibility.
+
+While on-chain data storage is preferred, off-chain/semi-chain options allow flexibly adapt tokens for required usecases.
 
 # Prior art
 
