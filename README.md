@@ -15,5 +15,12 @@ Proposal management is done using GitHub pull requests, the process is described
 5. Submit a pull request.
 
 ## Merged TEPs
-| TEP | Title | Type | Status | Created | 
-|-----|-------|------|--------|---------|
+## Active
+|                   TEP                   |               Title              |       Type       |  Created |
+|-----------------------------------------|----------------------------------|------------------|----------|
+|    [1](./text/0001-tep-lifecycle.md)    |           TEP Lifecycle          |       Meta       |11.06.2022|
+|    [62](./text/0062-nft-standard.md)    |           NFT Standard           |Contract Interface|01.02.2022|
+| [64](./text/0064-token-data-standard.md)|        Token Data Standard       |Contract Interface|03.02.2022|
+|[66](./text/0066-nft-royalty-standard.md)|   NFTRoyalty Standard Extension  |Contract Interface|12.02.2022|
+|  [74](./text/0074-jettons-standard.md)  |Fungible tokens (Jettons) standard|Contract Interface|12.03.2022|
+|    [81](./text/0081-dns-standard.md)    |         TON DNS Standard         |Contract Interface|25.06.2022|
