@@ -20,12 +20,13 @@ Also, here comes more convinient project bootstapping.
 
 # Specification
 
-I suppose it should be yaml file, named like .func.yml or something else.
+I suppose it should be yaml file, named like .func.yml or something else. Configuration **must** be extensible and stack-agnostic.  
 In first implementation it should contain:
-- root source folder
-- entrypoints (contract root files), relative to source folder
+- entrypoints (contract root files)
+- (optional) root source folder
 - (optional) library directories
-- (optional) compiler configuration (version, etc.)  
+- (optional) compiler configuration (version, etc.)
+- (optional) tool-specific configuration (custom sections)    
 
 Example file looks like:
 ```yml
@@ -37,6 +38,37 @@ entrypoints:
     - contracts/nft-collection.fc
 libraries:
     - node_modules/func-*
+```
+
+### Root source folder (sources)
+It's a folder where tools can discover source files. Especially for IDEs (old compiler versions support) and, in the future, for absolute includes.
+
+### Entrypoints
+Contains main contract files. Every entrypoint is a single contract or library.  
+Entrypoint can be relative to the source folder, if it was specified in config. If not, entrypoint is relative to the config's parent directory.  
+May contain aliases, referenced in another sections:
+```yaml
+entrypoints:
+  nft: contracts/nft.fc
+  nft-collection: contracts/nft-collection.fc
+```
+
+### Library directories
+Now can be used for IDEs to discover and suggest to include third-party library. In the future can be used to resolve absolute include of the library.
+
+### Compiler configuration
+This section may contain info about compiler version/executable and configuration.
+
+### Custom sections
+Config may include custom sections for various tools. This section can contain references to the entrypoints.  
+For example, toncli's section may look like:
+
+```yaml
+toncli:
+  nft:
+    ...
+  nft-collection:
+    ...
 ```
 
 # Drawbacks
