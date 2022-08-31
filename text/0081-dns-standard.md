@@ -13,14 +13,17 @@ TON DNS is a service for translating human-readable domain names (such as `test.
 
 # Motivation
 
-The goal of this document is to collect feedback from community and to provide documentation for dApps developers.
+While anybody might in principle implement such a service using the TON Blockchain, 
+it is useful to have such a predefined service with a wellknown interface, 
+to be used by default whenever an application or a service wants to translate human-readable identifiers into addresses.
 
 # Guide
 
 ## Useful links
-1. [DNS Auction](https://dns.ton.org/) ([source code](https://github.com/ton-blockchain/dns))
-2. [ton.org documentation](https://ton.org/docs/#/web3/dns)
-3. Tolya answers about TON DNS (ru) - [1](https://github.com/ton-blockchain/TEPs/commit/4a09bfc737823f09f05dfb7008eec7784543bb2b), [2](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-2-08-06), [3](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-3-08-09)
+1. [Reference DNS smart contracts](https://github.com/ton-blockchain/dns-contract)
+2. [DNS Auction](https://dns.ton.org/) ([source code](https://github.com/ton-blockchain/dns))
+3. [ton.org documentation](https://ton.org/docs/#/web3/dns)
+4. Tolya answers about TON DNS (ru) - [1](https://github.com/ton-blockchain/TEPs/commit/4a09bfc737823f09f05dfb7008eec7784543bb2b), [2](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-2-08-06), [3](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-3-08-09)
 
 # Specification
 
@@ -134,13 +137,6 @@ TL-B Schema of DNS Records values:
 
 ```
 _ (HashmapE 256 ^DNSRecord) = DNS_RecordSet;
-
-chunk_ref$_ {n:#} ref:^(TextChunks (n + 1)) = TextChunkRef (n + 1);
-chunk_ref_empty$_ = TextChunkRef 0;
-text_chunk$_ {n:#} len:(## 8) data:(bits (len * 8)) next:(TextChunkRef n) = TextChunks (n + 1);
-text_chunk_empty$_ = TextChunks 0;
-text$_ chunks:(## 8) rest:(TextChunks chunks) = Text;
-dns_text#1eda _:Text = DNSRecord;
 
 dns_next_resolver#ba93 resolver:MsgAddressInt = DNSRecord;
 
