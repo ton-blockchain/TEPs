@@ -102,6 +102,8 @@ Data that does not fit in one cell can be stored in two ways:
 
 Data that fits into one cell is stored in "Snake format".
 
+If the prefix is not `0x00` or `0x01`, then the data is probably encoded by the TL-B schema (relating to a specific smart contract), for example, like in the [DNS contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0081-dns-standard.md#dns-records).
+
 ## Informal TL-B scheme:
 ```
 text#_ {n:#} data:(SnakeData ~n) = Text;
@@ -156,4 +158,7 @@ While on-chain data storage is preferred, off-chain/semi-chain options allow fle
 None
 
 # Changelog
+
 * 14 May 2022 - the standard is now used not only for NFT, but for all tokens in the TON. Added section "Jetton metadata attributes".
+
+* 31 Aug 2022 - added note about data encoded in TL-B schema in "Data serialization" paragraph.
