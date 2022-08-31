@@ -23,8 +23,9 @@ Jetton standard describes:
 # Guide
 
 ## Useful links
-1. [Jetton deployer](https://jetton.live/)
-2. FunC Jetton lesson ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/main/9lesson/ninthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/main/9lesson/ninthlesson.md))
+1. [Reference jetton implementation](https://github.com/ton-blockchain/token-contract/)
+2. [Jetton deployer](https://jetton.live/)
+3. FunC Jetton lesson ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/main/9lesson/ninthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/main/9lesson/ninthlesson.md))
 
 # Specification
 
@@ -87,7 +88,6 @@ transfer_notification#7362d09c query_id:uint64 amount:(VarUInteger 16)
                               = InternalMsgBody;
 ```
 
-```
 `query_id` should be equal with request's `query_id`.
 
 `amount` amount of transferred jettons.
@@ -97,7 +97,6 @@ transfer_notification#7362d09c query_id:uint64 amount:(VarUInteger 16)
 `forward_payload` should be equal with request's `forward_payload`.
 
 If `forward_amount` is equal to zero, notification message should not be sent.
-```
 
 3. Receiver's wallet should send all excesses of incoming message coins to `response_destination` with the following layout:
    TL-B schema: `excesses#d53276db query_id:uint64 = InternalMsgBody;`
@@ -153,9 +152,6 @@ burn#595f07bc query_id:uint64 amount:(VarUInteger 16)
    `jetton_wallet_code` - cell - code of wallet for that jetton
 2. `get_wallet_address(slice owner_address)` return `slice jetton_wallet_address`
    Returns jetton wallet address (MsgAddressInt) for this owner address (MsgAddressInt).
-
-# Implementation example
-https://github.com/ton-blockchain/token-contract/
 
 # TL-B schema
 ```
@@ -223,7 +219,7 @@ There is no way to get actual wallet balance onchain, because when the message w
 
 # Rationale and alternatives
 
-"One wallet - one contract" way greatly simplifies gas fee calculation, however, it is not possible to get actual wallet balance onchain. As an alternative, there exists ["TRC20 Token"](https://github.com/cod1ng-studio/TRC20) which contains all balances in one contract. Also, there was an idea to implement [external message tokens](https://t.me/ton_overview/35) (by [EmelyanenkoK](https://github.com/EmelyanenkoK)), however, it also suffers from high gas usage.
+Distributed architecture "One wallet - one contract" well described in the NFT standard in paragraph "Rationale".
 
 # Prior art
 
@@ -236,4 +232,4 @@ There is no way to get actual wallet balance onchain, because when the message w
 
 # Future possibilities
 
-None
+There was an idea to implement [external message tokens](https://t.me/ton_overview/35) (by [EmelyanenkoK](https://github.com/EmelyanenkoK)).
