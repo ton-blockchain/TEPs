@@ -18,7 +18,7 @@ Current TIP system is too informal to manage the process of writing, discussing 
 # Guide
 
 ## For authors
-If you have an idea for proposal, discuss it with community, for example in TON Dev chat ([ru](https://t.me/tondev)/[en](https://t.me/tondev_eng)). Discussion may help you to quickly identify potential gaps and not to spend a lot of time on writing actual proposal if you realized that your idea is not so clear as you thought before. Also you may look through the [TEP template](./0000-template.md) and think about each section first before writing.
+If you have an idea for proposal, discuss it with community, for example in TON Dev chat ([en](https://t.me/tondev_eng)/[ru](https://t.me/tondev)). Discussion may help you to quickly identify potential gaps and not to spend a lot of time on writing actual proposal if you realized that your idea is not so clear as you thought before. Also you may look through the [TEP template](./0000-template.md) and think about each section first before writing.
 
 When you feel yourself ready to write, just fork this repo and copy the template to `./text/0000-my-new-standard.md`, where "my-new-standard" is a short title of your TEP. Fill all sections and answer questions stated in template. If you need to include images or another additional files, upload them to `./assets/0000-my-new-standard/` folder.
 

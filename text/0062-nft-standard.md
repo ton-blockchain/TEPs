@@ -49,7 +49,7 @@ Item metadata example (offchain):
 }
 ```
 
-Offchain metadata needs to be published on web. It is recommended to use IPFS, so you don't need to host your own server.
+Offchain metadata is published for example on web. 
 
 ## Useful links
 1. [Reference NFT implementation](https://github.com/ton-blockchain/token-contract/tree/main/nft)
@@ -153,9 +153,6 @@ Must implement:
 # Drawbacks
 There is no way to get current owner of NFT onchain because TON is an asynchronous blockchain. When the message with info about NFT owner will be delivered, this info may become irrelevant, so we can't guarantee that current owner hasn't changed.
 
-# Implementation example
-https://github.com/ton-blockchain/token-contract/tree/main/nft
-
 # Rationale and alternatives
 1. "One NFT - one smart contract" simplifies fees calculation and allows to give gas-consumption guarantees.
 2. NFT collection with sequential NFT index provide easy way of association and search of linked NFTs.
@@ -216,7 +213,7 @@ None
 # Standard extensions
 The functionality of the basic NFT standard can be extended:
 
-* [NFTRoyalty (Release Candidate)](https://github.com/ton-blockchain/TIPs/issues/66)
+* [NFTRoyalty](https://github.com/ton-blockchain/TIPs/issues/66)
 * [NFTBounceable (Draft)](https://github.com/ton-blockchain/TIPs/issues/67)
 * [NFTEditable (Draft)](https://github.com/ton-blockchain/TIPs/issues/68)
 * [NFTUpgradable (Draft)](https://github.com/ton-blockchain/TIPs/issues/69)
@@ -231,13 +228,13 @@ var_uint$_ {n:#} len:(#< n) value:(uint (len * 8))
          = VarUInteger n;
 
 addr_none$00 = MsgAddressExt;
-addr_extern$01 len:(## 9) external_address:(bits len)
+addr_extern$01 len:(## 9) external_address:(bits len) 
              = MsgAddressExt;
 anycast_info$_ depth:(#<= 30) { depth >= 1 }
    rewrite_pfx:(bits depth) = Anycast;
-addr_std$10 anycast:(Maybe Anycast)
+addr_std$10 anycast:(Maybe Anycast) 
    workchain_id:int8 address:bits256  = MsgAddressInt;
-addr_var$11 anycast:(Maybe Anycast) addr_len:(## 9)
+addr_var$11 anycast:(Maybe Anycast) addr_len:(## 9) 
    workchain_id:int32 address:(bits addr_len) = MsgAddressInt;
 _ _:MsgAddressInt = MsgAddress;
 _ _:MsgAddressExt = MsgAddress;
