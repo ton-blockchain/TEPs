@@ -148,7 +148,7 @@ burn#595f07bc query_id:uint64 amount:(VarUInteger 16)
    `total_supply` - (integer) - the total number of issues jettons
    `mintable` - (-1/0) - flag which indicates whether number of jettons can increase
    `admin_address` - (MsgAddressInt) - address of smart-contrac which control Jetton
-   `jetton_content` - cell - data in accordance to [Token Data Standard #64](https://github.com/ton-blockchain/TIPs/issues/64)
+   `jetton_content` - cell - data in accordance to [Token Data Standard #64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md)
    `jetton_wallet_code` - cell - code of wallet for that jetton
 2. `get_wallet_address(slice owner_address)` return `slice jetton_wallet_address`
    Returns jetton wallet address (MsgAddressInt) for this owner address (MsgAddressInt).
@@ -219,7 +219,7 @@ There is no way to get actual wallet balance onchain, because when the message w
 
 # Rationale and alternatives
 
-Distributed architecture "One wallet - one contract" well described in the NFT standard in paragraph "Rationale".
+Distributed architecture "One wallet - one contract" well described in the [NFT standard](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#rationale-and-alternatives) in paragraph "Rationale".
 
 # Prior art
 

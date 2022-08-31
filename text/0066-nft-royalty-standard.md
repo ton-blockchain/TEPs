@@ -9,7 +9,7 @@
 
 # Summary
 
-Extension for [NFT Standard](https://github.com/ton-blockchain/TIPs/issues/62).
+Extension for [NFT Standard](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md).
 
 A standardized way to retrieve royalty payment information for non-fungible tokens (NFTs) to enable universal support for royalty payments across all NFT marketplaces and ecosystem participants.
 

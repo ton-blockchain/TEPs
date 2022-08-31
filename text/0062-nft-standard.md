@@ -131,7 +131,7 @@ TL-B schema of inbound message:
    `collection_address` - (MsgAddress) address of the smart contract of the collection to which this NFT belongs. For collection-less NFT this parameter should be addr_none;
    `owner_address` - (MsgAddress) address of the current owner of this NFT.
    `individual_content` - if NFT has collection - individual NFT content in any format;
-   if NFT has no collection - NFT content in format that complies with standard [TIP-64](https://github.com/ton-blockchain/TIPs/issues/64).
+   if NFT has no collection - NFT content in format that complies with standard [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md).
 
 ## NFT Collection smart contract
 It is assumed that the smart contract of the collection deploys smart contracts of NFT items of this collection.
@@ -141,12 +141,12 @@ Must implement:
 ### Get-methods
 1. `get_collection_data()` returns `(int next_item_index, cell collection_content, slice owner_address)`
    `next_item_index` - the count of currently deployed NFT items in collection. Generally, collection should issue NFT with sequential indexes (see Rationale(2) ). `-1` value of `next_item_index` is used to indicate non-sequential collections, such collections should provide their own way for index generation / item enumeration.
-   `collection_content` - collection content in a format that complies with standard [TIP-64](https://github.com/ton-blockchain/TIPs/issues/64).
+   `collection_content` - collection content in a format that complies with standard [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md).
    `owner_address` - collection owner address, zero address if no owner.
 2. `get_nft_address_by_index(int index)` returns `slice address`
    Gets the serial number of the NFT item of this collection and returns the address (MsgAddress) of this NFT item smart contract.
 3. `get_nft_content(int index, cell individual_content)` returns `cell full_content`
-   Gets the serial number of the NFT item of this collection and the individual content of this NFT item and returns the full content of the NFT item in format that complies with standard [TIP-64](https://github.com/ton-blockchain/TIPs/issues/64).
+   Gets the serial number of the NFT item of this collection and the individual content of this NFT item and returns the full content of the NFT item in format that complies with standard [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md).
    As an example, if an NFT item stores a metadata URI in its content, then a collection smart contract can store a domain (e.g. "https://site.org/"), and an NFT item smart contract in its content will store only the individual part of the link (e.g "kind-cobra").
    In this example the `get_nft_content` method concatenates them and return "https://site.org/kind-cobra".
 
@@ -213,7 +213,7 @@ None
 # Standard extensions
 The functionality of the basic NFT standard can be extended:
 
-* [NFTRoyalty](https://github.com/ton-blockchain/TIPs/issues/66)
+* [NFTRoyalty](https://github.com/ton-blockchain/TEPs/blob/master/text/0066-nft-royalty-standard.md)
 * [NFTBounceable (Draft)](https://github.com/ton-blockchain/TIPs/issues/67)
 * [NFTEditable (Draft)](https://github.com/ton-blockchain/TIPs/issues/68)
 * [NFTUpgradable (Draft)](https://github.com/ton-blockchain/TIPs/issues/69)
