@@ -102,6 +102,20 @@ If `forward_amount` is equal to zero, notification message should not be sent.
    TL-B schema: `excesses#d53276db query_id:uint64 = InternalMsgBody;`
    `query_id` should be equal with request's `query_id`.
 
+#### `forward_payload` format
+
+If you want to send a simple comment in the `forward_payload` then the `forward_payload` must starts with `0x00000000` (32-bits unsigned integer equals to zero) and the comment is contained in the remainder of the `forward_payload`.
+
+If comment does not begin with the byte `0xff`, the comment is a text one; it can be displayed "as is" to the end user of a wallet (after filtering invalid and control characters and checking that it is a valid UTF-8 string). 
+For instance, users may indicate the purpose ("for coffee") of a simple transfer from their wallet to the wallet of another user in this text field. 
+
+On the other hand, if the comment begins with the byte `0xff`, the remainder is a "binary comment", which should not be displayed to the end user as text (only as hex dump if necessary). 
+The intended use of "binary comments" is, e.g., to contain a purchase identifier for payments in a store, to be automatically generated and processed by the store's software.
+
+If the `forward_payload` contains a binary message for interacting with the destination smart contract (for example, with DEX), then there are no prefixes.
+
+These rules are the same with the payload format when simply sending Toncoins from a regular wallet ([Smart Contract Guidelines: Internal Messages, 3](https://ton.org/docs/#/howto/smart-contract-guidelines?id=internal-messages)).
+
 #### 2. `burn`
 **Request**
 
@@ -233,3 +247,7 @@ Distributed architecture "One wallet - one contract" well described in the [NFT 
 # Future possibilities
 
 There was an idea to implement [external message tokens](https://t.me/ton_overview/35) (by [EmelyanenkoK](https://github.com/EmelyanenkoK)).
+
+# Changelog
+
+31 Aug 2022 - Added `forward_payload` format. 
