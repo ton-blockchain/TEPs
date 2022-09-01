@@ -23,7 +23,7 @@ TL-B schema of inbound message:
 ```
 pull_ownership#03fdd6c9 query_id:uint64 signature:^(signature:(bits 512)) 
 sbt_nonce:uint64 new_owner:MsgAddress response_destination:MsgAddress 
-custom_payload:(Maybe ^Cell)
+custom_payload:(Maybe ^Cell) = InternalMsgBody;
 ```
 `query_id` -  arbitrary request number.
 
@@ -58,7 +58,7 @@ custom_payload:(Maybe ^Cell)
 TL-B schema of inbound message:
 ```
 prove_ownership#38061b82 query_id:uint64 dest:MsgAddress 
-data:^Cell with_content:bool
+data:^Cell with_content:bool = InternalMsgBody;
 ```
 `query_id` -  arbitrary request number.
 
@@ -68,15 +68,12 @@ data:^Cell with_content:bool
 
 `with_content` - if true, SBT's content cell will be included in message to contract.
 
-**Should be rejected if:**
-Sender address is not an owner address.
-
-**Otherwise should do:**
+**Should do:**
 
 Send message with TL-B schema to `dest` contract:
 ```
 verify_ownership#01b628aa query_id:uint64 sbt_id:uint256 owner:MsgAddress 
-data:^Cell content:(Maybe ^Cell)
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 
 `query_id` - request number passed in `prove_ownership`.
@@ -92,14 +89,14 @@ data:^Cell content:(Maybe ^Cell)
 In case when `verify_ownership` was bounced back to SBT, SBT should send message to owner with schema:
 ```
 verify_ownership_bounced#450cc71b query_id:uint64 sbt_id:uint256 owner:MsgAddress 
-data:^Cell content:(Maybe ^Cell)
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 
 #### 3. `destroy`
 
 TL-B schema of inbound message:
 ```
-destroy#2124b0b9 query_id:uint64
+destroy#2124b0b9 query_id:uint64 = InternalMsgBody;
 ```
 `query_id` -  arbitrary request number.
 
@@ -113,7 +110,7 @@ Set owner's address to null and set public key to 0.
 
 TL-B schema of inbound message:
 ```
-revoke#6a6f099e query_id:uint64
+revoke#6a6f099e query_id:uint64 = InternalMsgBody;
 ```
 `query_id` -  arbitrary request number.
 
@@ -142,7 +139,7 @@ If you migrated to newer version of wallet and you want to move your SBT to it, 
 ```
 pull_ownership#03fdd6c9 query_id:uint64 signature:^(signature:(bits 512)) 
 sbt_nonce:uint64 new_owner:MsgAddress response_destination:MsgAddress 
-custom_payload:(Maybe ^Cell)
+custom_payload:(Maybe ^Cell) = InternalMsgBody;
 ```
 1. To do this, first you need to know current SBT's nonce, you can trigger `get_nonce` method of the SBT contract to get it.
 2. `new_owner` should equals your wallet from which you sends message.
@@ -160,12 +157,12 @@ This way, target contract could know that you are owner of SBT that relates to e
 To use this functionality, SBT owner's wallet can send transfer with this scheme to SBT:
 ```
 prove_ownership#38061b82 query_id:uint64 dest:MsgAddress 
-data:^Cell with_content:bool
+data:^Cell with_content:bool = InternalMsgBody;
 ```
 After that SBT will send transfer to `dest` with scheme:
 ```
 verify_ownership#01b628aa query_id:uint64 sbt_id:uint256 owner:MsgAddress 
-data:^Cell content:(Maybe ^Cell)
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 If something goes wrong, target contract does not accept message and message will be bounced back to SBT. SBT will proxy this bounce to owner. This way, coins will not stuck on SBT.
 
