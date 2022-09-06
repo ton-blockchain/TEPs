@@ -72,7 +72,7 @@ data:^Cell with_content:bool = InternalMsgBody;
 
 Send message with TL-B schema to `dest` contract:
 ```
-verify_ownership#a553079c query_id:uint64 sbt_id:uint256 owner:MsgAddress 
+verify_ownership#a553079c query_id:uint64 sbt_id:uint256 initiator:MsgAddress owner:MsgAddress 
 data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 
@@ -80,15 +80,17 @@ data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 
 `sbt_id` -  id of SBT.
 
+`initiator` - `prove_ownersip` initiator's address.
+
 `owner` - current owner's address.
 
 `data` - data cell passed in `prove_ownership`.
 
 `content` - SBT's content, it is passed if `with_content` was true in `prove_ownership`.
 
-In case when `verify_ownership` was bounced back to SBT, SBT should send message to owner with schema:
+In case when `verify_ownership` was bounced back to SBT, SBT should send message to initiator with schema:
 ```
-verify_ownership_bounced#81b510c2 query_id:uint64 sbt_id:uint256 owner:MsgAddress 
+verify_ownership_bounced#81b510c2 query_id:uint64 sbt_id:uint256 initiator:MsgAddress owner:MsgAddress 
 data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 
@@ -161,7 +163,7 @@ data:^Cell with_content:bool = InternalMsgBody;
 ```
 After that SBT will send transfer to `dest` with scheme:
 ```
-verify_ownership#a553079c query_id:uint64 sbt_id:uint256 owner:MsgAddress 
+verify_ownership#a553079c query_id:uint64 sbt_id:uint256 initiator:MsgAddress owner:MsgAddress 
 data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 If something goes wrong, target contract does not accept message and message will be bounced back to SBT. SBT will proxy this bounce to owner. This way, coins will not stuck on SBT.
@@ -209,7 +211,12 @@ slice calculate_sbt_address(slice collection_addr, cell sbt_item_code, int wc, i
     (slice collection_addr, cell sbt_code) = load_data();
     throw_unless(403, equal_slices(sender_address, collection_addr.calculate_sbt_address(sbt_code, 0, id)));
 
+    slice initiator_addr = in_msg~load_msg_addr();
     slice owner_addr = in_msg~load_msg_addr();
+    
+    ;; allow requests only initiated by SBT owner
+    throw_unless(401, equal_slices(initiator_addr, owner_addr));
+
     cell payload = in_msg~load_ref();
 
     int with_content = in_msg~load_uint(1);
@@ -244,7 +251,11 @@ Currently, TON have no owner-bounded token standard, so it is a problem to issue
 
 # Prior art
 
-In ETH - SBT was done as an NFT which could not be transferred between wallets at all, but in TON - architecture is different, and sometimes it is required to update wallet version. This action will also change wallet address but owner will remain the same. Thus, pull ownership method was introduced to change owner's wallet address of SBT.
+In ETH ([EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973)) - SBT was done as an NFT which could not be transferred between accounts at all, but in TON - architecture is different, and sometimes it is required to update wallet version. This action will also change wallet address but owner will remain the same. Thus, pull ownership method was introduced to change owner's wallet address of SBT.
+
+# Drawbacks
+
+[EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973) has equip/unequip mechanics which allows to show/hide SBT temporarily. In current proposal we can only destroy SBT. Actually not sure that show/hide logic is needed for us, since owner can just move SBT to his diff address or even burn. 
 
 # Future possibilities
 
