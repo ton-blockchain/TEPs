@@ -21,7 +21,7 @@ SBT implements [NFT standard interface](https://github.com/ton-blockchain/TIPs/i
 
 TL-B schema of inbound message:
 ```
-pull_ownership#14726d45 query_id:uint64 signature:^(bits 512) 
+pull_ownership#08496845 query_id:uint64 signature:^(bits 512) 
 sbt_nonce:uint64 new_owner:MsgAddress response_destination:MsgAddress 
 custom_payload:(Maybe ^Cell) = InternalMsgBody;
 ```
@@ -57,8 +57,8 @@ custom_payload:(Maybe ^Cell) = InternalMsgBody;
 
 TL-B schema of inbound message:
 ```
-prove_ownership#5c9b0fb1 query_id:uint64 dest:MsgAddress 
-data:^Cell with_content:bool = InternalMsgBody;
+prove_ownership#04ded148 query_id:uint64 dest:MsgAddress 
+forward_payload:^Cell with_content:Bool = InternalMsgBody;
 ```
 `query_id` -  arbitrary request number.
 
@@ -72,7 +72,7 @@ data:^Cell with_content:bool = InternalMsgBody;
 
 Send message with TL-B schema to `dest` contract:
 ```
-verify_ownership#a553079c query_id:uint64 sbt_id:uint256 initiator:MsgAddress owner:MsgAddress 
+verify_ownership#1eac6b5d query_id:uint64 sbt_id:uint256 initiator:MsgAddress owner:MsgAddress 
 data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 
@@ -90,7 +90,7 @@ data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 
 In case when `verify_ownership` was bounced back to SBT, SBT should send message to initiator with schema:
 ```
-verify_ownership_bounced#81b510c2 query_id:uint64 sbt_id:uint256 initiator:MsgAddress owner:MsgAddress 
+verify_ownership_bounced#b645e081 query_id:uint64 sbt_id:uint256 initiator:MsgAddress owner:MsgAddress 
 data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 
@@ -139,7 +139,7 @@ It can be done using basic NFT collection, SBT should be an item. In mint messag
 #### Changing owner's address
 If you migrated to newer version of wallet and you want to move your SBT to it, you could send transfer to SBT from new wallet with payload:
 ```
-pull_ownership#14726d45 query_id:uint64 signature:^(bits 512) 
+pull_ownership#08496845 query_id:uint64 signature:^(bits 512) 
 sbt_nonce:uint64 new_owner:MsgAddress response_destination:MsgAddress 
 custom_payload:(Maybe ^Cell) = InternalMsgBody;
 ```
@@ -158,12 +158,12 @@ This way, target contract could know that you are owner of SBT that relates to e
 
 To use this functionality, SBT owner's wallet can send transfer with this scheme to SBT:
 ```
-prove_ownership#5c9b0fb1 query_id:uint64 dest:MsgAddress 
-data:^Cell with_content:bool = InternalMsgBody;
+prove_ownership#04ded148 query_id:uint64 dest:MsgAddress 
+forward_payload:^Cell with_content:Bool = InternalMsgBody;
 ```
 After that SBT will send transfer to `dest` with scheme:
 ```
-verify_ownership#a553079c query_id:uint64 sbt_id:uint256 initiator:MsgAddress owner:MsgAddress 
+verify_ownership#1eac6b5d query_id:uint64 sbt_id:uint256 initiator:MsgAddress owner:MsgAddress 
 data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 If something goes wrong, target contract does not accept message and message will be bounced back to SBT. SBT will proxy this bounce to owner. This way, coins will not stuck on SBT.
@@ -171,7 +171,7 @@ If something goes wrong, target contract does not accept message and message wil
 #### Verify SBT contract example
 
 ```C
-int op::verify_ownership() asm "0xa553079c PUSHINT";
+int op::verify_ownership() asm "0x1eac6b5d PUSHINT";
 
 int equal_slices (slice a, slice b) asm "SDEQ";
 
