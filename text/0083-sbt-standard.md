@@ -103,10 +103,12 @@ destroy#1f04537a query_id:uint64 = InternalMsgBody;
 `query_id` -  arbitrary request number.
 
 **Should be rejected if:**
-Sender address is not an owner's address.
+* Sender address is not an owner's address.
+* Not enough balance to reserve 0.05 TON
 
 **Otherwise should do:**
-Set owner's address to null and set public key to 0.
+ * Set owner's address to null and set public key to 0.
+ * Send message to sender with schema `excesses#d53276db query_id:uint64 = InternalMsgBody;` that will pass contract's balance amount over 0.05 TON
 
 #### 4. `revoke`
 
