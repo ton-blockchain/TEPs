@@ -1,4 +1,4 @@
-- **TEP**: [87](https://github.com/ton-blockchain/TEPs/pull/87)
+- **TEP**: [88](https://github.com/ton-blockchain/TEPs/pull/87)
 - **title**: TVM update
 - **status**: Draft
 - **type**: Core
