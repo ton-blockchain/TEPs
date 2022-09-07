@@ -223,7 +223,7 @@ if SFT minter has no collection - SFT minter content in format that complies wit
 
 `sft_wallet_code` - (cell) - code of wallet for that SFTs
 
- 2. `get_wallet_address(slice owner_address)` return `slice sft_wallet_address`
+ 2. `get_sft_wallet_address(slice owner_address)` return `slice sft_wallet_address`
 
  Returns SFT wallet address (MsgAddress) for this owner address (MsgAddress).
  
