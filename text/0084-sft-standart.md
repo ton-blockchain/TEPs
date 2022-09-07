@@ -251,7 +251,7 @@ Gets the serial number of the SFT minter item of this collection and the individ
 
 As an example, if an SFT minter item stores a metadata URI in its content, then a collection smart contract can store a domain (e.g. "[https://site.org/](https://site.org/)"), and an SFT minter item smart contract in its content will store only the individual part of the link (e.g "kind-cobra").
 
-In this example the `get_nft_content` method concatenates them and return "[https://site.org/kind-cobra](https://site.org/kind-cobra)".
+In this example the `get_sft_minter_content` method concatenates them and return "[https://site.org/kind-cobra](https://site.org/kind-cobra)".
 
 # Drawbacks
 There is no way to get current owner of SFT collection and SFT minter onchain because TON is an asynchronous blockchain. When the message with info about SFT owner will be delivered, this info may become irrelevant, so we can't guarantee that current owner hasn't changed.
