@@ -19,7 +19,7 @@ This method allows to perform arbitrary execution offchain and have a signed res
 
 # Guide
 
-There are a lot of different tech that allows you to execute code in environment that could provide tools for proofing that code execution is exactly what third-party expects. This is done by exporting ability to sign arbitrary data with a certificate that's is embedded into hardware. Such enviromnents protects the most sencitive information in the world, such as Tax IDs, credit card numbers, health profiles, HSMs etc. Trusted execution environments are exist in almost all mobile phones, often as a separate chip.
+There are a lot of different tech that allows you to execute code in environment that could provide tools for proofing that code execution is exactly what third-party expects. This is done by exporting ability to sign arbitrary data with a certificate that's is embedded into hardware. Such enviromnents protects the most sensitive information in the world, such as Tax IDs, credit card numbers, health profiles, HSMs etc. Trusted execution environments are exist in almost all mobile phones, often as a separate chip.
 
 There are two publicily available technologies:
 * AWS Nitro Enclave
