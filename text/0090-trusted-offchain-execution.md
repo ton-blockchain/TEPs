@@ -61,7 +61,7 @@ First you MUST to verify `attestation` document and check `PRC0` values, extract
 
 # Drawbacks
 
-We are relying on third-party organization that have one of the strictest facilities in the world and protects very sencivive data, it is still not a good an idea to use for something very important. Also this implementations are very limited and this tech in general is not widespread.
+We are relying on third-party organization that have one of the strictest facilities in the world and protects very sensitive data, it is still not a good an idea to use for something very important. Also this implementations are very limited and this tech in general is not widespread.
 
 # Rationale and alternatives
 
