@@ -13,7 +13,7 @@ This proposal suggest to extend standard Jetton master by adding mandatory oncha
 
 # Motivation
 
-Some application may want to be able to discover their or other contract wallets for some specific Jetton Master. For instance DEX may want to spawn pair-contract based on Jetton master contracts (and thus calculable by users) and authenticate wallets for that pair.
+Some application may want to be able to discover their or other contract wallets for some specific Jetton Master. For instance some contract may want to obtain and store it's jetton wallet for some Jetton to handle transfer notifications from it in specific way.
 
 # Guide
 
@@ -25,6 +25,8 @@ Upon receiving `get_wallet_address` message with address in question, Jetton Mas
 Jettom Master should handle message
 
 `get_wallet_address#418cbb4e query_id:uint64 owner_address:MsgAddress include_address:Bool = InternalMsgBody;`
+
+with TON amount higher than `5000 gas-units + msg_forward_prices.lump_price + msg_forward_prices.cell_price` = 0.0061 TON for current basechain settings (if amount is less than that it is not possible to send response) attached
 
 and either throw an exception if amount of incoming value is not enough to calculate wallet address or
 response with message (sent with mode 64)
