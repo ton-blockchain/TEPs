@@ -72,7 +72,7 @@ JSON file provided by a specific **verifier** for a specific **contract code has
     * `url` - Human-readable source-code URL on IPFS and later TON Storage, e.g. [ipfs://QmWQE1HhYuWieFcocfZZvK4gvJqgswNpj3zUCvdPNCC12T](https://tonsource.infura-ipfs.io/ipfs/QmWQE1HhYuWieFcocfZZvK4gvJqgswNpj3zUCvdPNCC12T)
     * `originalFilename` - e.g. wallet-v3.fc or imports/stdlib.fc
 * `compilerType` - Compiler used to compile the verified sources, e.g. `func`
-* `compileVersion` - Version of compiler, e.g. 0.2.0
+* `compilerVersion` - Version of compiler, e.g. 0.2.0
 * `commandLine` - Command-line used to compile sources, e.g. func -o output.fif -SPA wallet-v3.fc stdlib.fc
 
 ## Verifier registry contract
