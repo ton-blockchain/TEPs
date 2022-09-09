@@ -26,7 +26,7 @@ TON smart contracts originate from higher level languages such as FunC which are
 The standard covers the interactions between multiple relevant stakeholders in the community:
 
 * **Contract developers** - Any developer who writes contract source code, compiles it and deploys on-chain. These developers do not necessarily bother with publishing or paying for the source code to be verified.
-* **Source-code uploaders** - Any community member that has access to source code that matches an on-chain code cell and is interested in publishing this source code and paying for its verification. This is not necessarily the devloper of the contract.
+* **Source-code uploaders** - Any community member that has access to source code that matches an on-chain code cell and is interested in publishing this source code and paying for its verification. This is not necessarily the developer of the contract.
 * **Source-code verifiers** - A permissionless group of community validators that are performing a validation process to check that a specific source-code yields the required compiled on-chain result and publish signed attestations towards this.
 * **Source-code displayers** - Normally explorers (see https://ton.app/explorers) that will display the verified source-code to their users by incorporating a widget in their websites.
 * **End users** - Consumers that would like to see the verified source code for a specific contract address. They would normally visit one of the *source-code displayers* and query it to witness the validators' verification attestations and maybe even verify them locally.
