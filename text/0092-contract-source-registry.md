@@ -1,4 +1,4 @@
-- **TEP**: [92](https://github.com/ton-blockchain/TEPs/pull/92)
+- **TEP**: [91](https://github.com/ton-blockchain/TEPs/pull/91)
 - **title**: Contract Source Registry
 - **status**: Draft
 - **type**: Contract Interface
@@ -15,28 +15,28 @@ The standard also defines a simple permissionless protocol where community sourc
 
 # Motivation
 
-Like many other blockchains, TON stores smart contracts on-chain as compiled TVM bitcode which is not human-readable.
+Like many other blockchains, TON blockchain stores smart contracts on-chain as compiled TVM bitcode which is not human-readable.
 
-Since TON follows the general principle that "code is law", users who participate in a smart contract, by sending it transactions or depositing funds, effectively agree to the terms coded in this smart contract. Just as nobody would expect users to sign a legal agreement written in a language that they cannot read, the on-chain bitcode is not enough to reassure participants of the terms of agreement.
+TON follows the general principle that "code is law". Users who participate in a smart contract by sending it transactions or depositing funds, effectively agree to the terms coded in this smart contract. In the traditional world, nobody would expect users to sign a binding legal agreement written in a language that they cannot read. This is not very different, as the on-chain bitcode is insufficient to educate participants about the implied terms of agreement.
 
-TON smart contracts originate from higher level languages such as FunC which are human-readable and have been compiled. Since these source files are human-readable, offering a well-known registry where they can be located benefits the community. Making sure that this infrastructure is decentralized would guarantee that this critical resource is always available to anyone under equal access.
+TON smart contracts normally originate from higher level languages such as FunC which are human-readable and have been compiled. Since these source files are sufficient to educate participants, offering a well-known registry where they can be located will benefit the community. Making sure that this infrastructure is decentralized would guarantee that this critical resource is always available to anyone under equal access.
 
 # Guide
 
-The standard covers the interactions between multiple relevant stakeholders in the community:
+The standard covers interactions between the relevant stakeholders in the community:
 
-* **Contract developers** - Any developer who writes contract source code, compiles it and deploys on-chain. These developers do not necessarily bother with publishing or paying for the source code to be verified.
-* **Source-code uploaders** - Any community member that has access to source code that matches an on-chain code cell and is interested in publishing this source code and paying for its verification. This is not necessarily the developer of the contract.
+* **Contract developers** - Any developer who writes contract source code, compiles it and deploys on-chain. These developers do not necessarily bother with publishing the source code or paying for it to be verified.
+* **Source-code uploaders** - Any community member that has access to source code that matches an on-chain code cell and is interested in publishing this source code and paying for its verification. This is not necessarily the deployer of the contract.
 * **Source-code verifiers** - A permissionless group of community validators that are performing a validation process to check that a specific source-code yields the required compiled on-chain result and publish signed attestations towards this.
-* **Source-code displayers** - Normally explorers (see https://ton.app/explorers) that will display the verified source-code to their users by incorporating a widget in their websites.
-* **End users** - Consumers that would like to see the verified source code for a specific contract address. They would normally visit one of the *source-code displayers* and query it to witness the validators' verification attestations and maybe even verify them locally.
+* **Source-code displayers** - These would normally be explorers (see https://ton.app/explorers) that display the verified source-code to their users by incorporating a widget in their websites.
+* **End users** - Consumers that want to see the verified source code for a specific contract address. They would normally visit one of the *source-code displayers* and query it to witness the validators' verification attestations and maybe even audit them by verifying locally.
 
 The standard relies on the following services to store data:
 
-* **IPFS migrated to TON Storage when released** - To store the human-readable source-code files and attestations. Required due to the potential size of source-code which is too expensive to store fully on-chain.
-* **On-chain registry contracts** - Contracts deployed to TON blockchain mainnet that hold registrations of code hash to IPFS/TON Storage URL and who are the active verifiers and their public keys.
+* **IPFS migrated to TON Storage when released** - Used to store the human-readable source-code files and attestations. This medium is required due to the potentially large size of source-code that may become too expensive to store on-chain.
+* **On-chain registry contracts** - Contracts deployed to TON mainnet that map code hash values of various contracts to the IPFS/TON Storage URL that holds the sources of these contracts. A different registry contract lists all active verifiers and their public keys.
 
-The standard puts emphasis on keeping all stakeholders equal and storing data on neutral ground.
+The standard puts emphasis on keeping all stakeholders equal and storing all data on neutral ground.
 
 ## Inspiration mock-ups for user facing aspects
 
@@ -46,6 +46,7 @@ The standard puts emphasis on keeping all stakeholders equal and storing data on
 4. [User wants to see the proofs published by verifiers](https://docs.google.com/presentation/d/1lk4W8-7cOxnKJjytRXWXKqIs04MRW7pKZVEuU0Dj8f0/edit#slide=id.g1470cb0de57_0_14)
 5. [Verified source-code embedded inside tonscan.org explorer](https://docs.google.com/presentation/d/1lk4W8-7cOxnKJjytRXWXKqIs04MRW7pKZVEuU0Dj8f0/edit#slide=id.g1470cb0de57_0_18)
 6. [Verified source-code embedded inside TonWhales explorer](https://docs.google.com/presentation/d/1lk4W8-7cOxnKJjytRXWXKqIs04MRW7pKZVEuU0Dj8f0/edit#slide=id.g1470cb0de57_0_22)
+7. [Working demo showing the client for publishing and verifying sources](https://ton-defi-org.github.io/ton-src-webclient/EQDerEPTIh0O8lBdjWc6aLaJs5HYqlfBN2Ruj1lJQH_6vcaZ)
 
 # Specification
 
