@@ -2,7 +2,7 @@
 - **title**: Contract Introspection
 - **status**: Draft
 - **type**: Contract Interface
-- **authors**: [Steve Korshakov](https://github.com/ex3ndr), 
+- **authors**: [Steve Korshakov](https://github.com/ex3ndr), [Danila Volkov](https://github.com/dvlkv), [Narek Abovyan](https://github.com/Naltox)
 - **created**: 12.09.2022
 - **replaces**: [TEP-0](https://github.com/ton-blockchain/TEPs/blob/master/0000-template.md)
 - **replaced by**: -
