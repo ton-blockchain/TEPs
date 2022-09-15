@@ -40,7 +40,7 @@ The difference is that signal can be called only by NFT owner, so it is preferre
 signal_ownership#7d72ae8c query_id:uint64 dest:MsgAddress 
 forward_payload:^Cell with_content:Bool = InternalMsgBody;
 ```
-After that SBT will send transfer to `dest` with scheme:
+After that NFT will send transfer to `dest` with scheme:
 ```
 ownership_signal#74f8d5f5 query_id:uint64 item_id:uint256 owner:MsgAddress 
 data:^Cell content:(Maybe ^Cell)
@@ -58,7 +58,7 @@ data:^Cell content:(Maybe ^Cell)
 request_ownership_proof#87046795 query_id:uint64 dest:MsgAddress 
 forward_payload:^Cell with_content:Bool = InternalMsgBody;
 ```
-After that SBT will send transfer to `dest` with scheme:
+After that NFT will send transfer to `dest` with scheme:
 ```
 ownership_proof#9c3013fd query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
 data:^Cell content:(Maybe ^Cell)
