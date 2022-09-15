@@ -152,7 +152,7 @@ In ETH, contracts can read nft owner directly from nft. In TON we dont have such
 
 # Drawbacks
 
-This is optional standard extension, so it
+This is optional standard extension, so it can be used only when it is required, I don't see any drawbacks.
 
 # Future possibilities
 
