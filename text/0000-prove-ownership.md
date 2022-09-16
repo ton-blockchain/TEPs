@@ -31,48 +31,48 @@ You can send message to NFT and it will proxify message to target contract with 
 This way, target contract could know that you are owner of NFT that relates to expected collection. 
 Contract could know that NFT relates to collection by calculating address of NFT using code and index, and comparing it with sender.
 
-There are 2 methods which allow to use this functionality, **ownership proof** and **ownership signal**. 
-The difference is that signal can be called only by NFT owner, so it is preferred to use when you need to accept messages only from owner, for example votes in DAO.
+There are 2 methods which allow to use this functionality, **ownership proof** and **request owner info**. 
+The difference is that proof can be called only by NFT owner, so it is preferred to use when you need to accept messages only from owner, for example votes in DAO.
 
-##### Ownership signal
+##### Ownership proof
 **NFT owner** can send message to NFT with this schema:
 ```
-signal_ownership#7d72ae8c query_id:uint64 dest:MsgAddress 
+prove_ownership#04ded148 query_id:uint64 dest:MsgAddress 
 forward_payload:^Cell with_content:Bool = InternalMsgBody;
 ```
 After that NFT will send transfer to `dest` with scheme:
 ```
-ownership_signal#74f8d5f5 query_id:uint64 item_id:uint256 owner:MsgAddress 
-data:^Cell content:(Maybe ^Cell)
+ownership_proof#6ecd55cc query_id:uint64 item_id:uint256 owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 If something goes wrong and target contract not accepts message, and it will be bounced back to NFT, NFT will proxy this bounce to **owner**, this way coins will not stuck on NFT.
 Schema of message that will be send back to owner:
 ```
-ownership_signal_bounced#adfd3d4b query_id:uint64 item_id:uint256 owner:MsgAddress 
-data:^Cell content:(Maybe ^Cell)
+ownership_proof_bounced#c18e86d2 query_id:uint64 item_id:uint256 owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 
-##### Ownership proof
+##### Owner info
 **anyone** can send message to NFT with this schema:
 ```
-request_ownership_proof#87046795 query_id:uint64 dest:MsgAddress 
+request_owner#d0c3bfea query_id:uint64 dest:MsgAddress 
 forward_payload:^Cell with_content:Bool = InternalMsgBody;
 ```
 After that NFT will send transfer to `dest` with scheme:
 ```
-ownership_proof#9c3013fd query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
-data:^Cell content:(Maybe ^Cell)
+owner_info#c2fa9387 query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 If something goes wrong and target contract not accepts message, and it will be bounced back to NFT, NFT will proxy this bounce to **initiator**.
 Schema of message that will be send back to initiator:
 ```
-ownership_proof_bounced#fe719b2c query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
-data:^Cell content:(Maybe ^Cell)
+owner_info_bounced#7ca7b0fe query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
 ```
 #### Verify NFT contract example
 
 ```C
-int op::ownership_signal() asm "0x74f8d5f5 PUSHINT";
+int op::ownership_proof() asm "0x6ecd55cc PUSHINT";
 
 int equal_slices (slice a, slice b) asm "SDEQ";
 
@@ -106,7 +106,7 @@ slice calculate_sbt_address(slice collection_addr, cell sbt_item_code, int wc, i
   int op = in_msg~load_uint(32);
   int query_id = in_msg~load_uint(64);
 
-  if (op == op::ownership_signal()) {
+  if (op == op::ownership_proof()) {
     int id = in_msg~load_uint(256);
 
     (slice collection_addr, cell sbt_code) = load_data();
@@ -135,7 +135,7 @@ slice calculate_sbt_address(slice collection_addr, cell sbt_item_code, int wc, i
 
 - **Why is this design the best in the space of possible designs?**
 
-This design allows us to safely send proof to contracts in 2 ways, **signal** can be used only by owner, and can be applied to DAO. 
+This design allows us to safely send proof to contracts in 2 ways, **proof** can be used only by owner, and can be applied to DAO. 
 And **proof** can be used by contracts or other chain members, for example to reverse-verify owner.
 
 - **What other designs have been considered and what is the rationale for not choosing them?**
