@@ -21,6 +21,86 @@ And **ownership proof** can be called by anyone to send message to contract to i
 
 # Specification
 
+#### 1. `prove_ownership`
+
+TL-B schema of inbound message:
+```
+prove_ownership#04ded148 query_id:uint64 dest:MsgAddress 
+forward_payload:^Cell with_content:Bool = InternalMsgBody;
+```
+`query_id` -  arbitrary request number.
+
+`dest` -  address of the contract to which the ownership of SBT should be proven.
+
+`forward_payload` - arbitrary data required by target contract.
+
+`with_content` - if true, NFT's content cell will be included in message to contract.
+
+**Should do:**
+
+Send message with TL-B schema to `dest` contract:
+```
+ownership_proof#6ecd55cc query_id:uint64 item_id:uint256 owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
+```
+
+`query_id` - request number passed in `prove_ownership`.
+
+`item_id` -  id of NFT.
+
+`owner` - current owner's address.
+
+`data` - data cell passed in `prove_ownership`.
+
+`content` - NFT's content, it is passed if `with_content` was true in `prove_ownership`.
+
+In case when `ownership_proof` was bounced back to NFT, NFT should send message to owner with schema:
+```
+ownership_proof_bounced#c18e86d2 query_id:uint64 item_id:uint256 owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
+```
+
+#### 2. `request_owner`
+
+TL-B schema of inbound message:
+```
+request_owner#d0c3bfea query_id:uint64 dest:MsgAddress 
+forward_payload:^Cell with_content:Bool = InternalMsgBody;
+```
+`query_id` -  arbitrary request number.
+
+`dest` -  address of the contract to which the ownership of SBT should be proven.
+
+`forward_payload` - arbitrary data required by target contract.
+
+`with_content` - if true, NFT's content cell will be included in message to contract.
+
+**Should do:**
+
+Send message with TL-B schema to `dest` contract:
+```
+owner_info#c2fa9387 query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
+```
+
+`query_id` - request number passed in `prove_ownership`.
+
+`item_id` -  id of NFT.
+
+`initiator` - address of request initiator.
+
+`owner` - current owner's address.
+
+`data` - data cell passed in `prove_ownership`.
+
+`content` - NFT's content, it is passed if `with_content` was true in `request_owner`.
+
+In case when `owner_info` was bounced back to NFT, NFT should send message to **initiator** with schema:
+```
+owner_info_bounced#7ca7b0fe query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
+```
+
 ### Implementation example
 https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc
 
