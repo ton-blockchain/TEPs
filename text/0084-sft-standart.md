@@ -60,9 +60,9 @@ Offchain metadata is published for example on web
 
 Here and following we use:
  - "SFT" - semi-fungible token. Almost the same as jetton from [Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md) standart. However, the decimal number is always 0 and we only need add `sft` object to token metadata for [Jettons metadata](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#jetton-metadata-example-offchain). It leads to the logic that each token is undivided but fungible.
- - "SFT wallet" - wallet for semi-fungible tokens. Stores information about amount of SFTs owned by each user. Almost the same as jetton-wallets from [Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md). Smart-contracts called **"[sft-wallet](https://github.com/ivklim-ton-play/TEPs/edit/master/text/0084-sft-standart.md#sft-wallet-smart-contract)"**.
- - "SFT minter" - minter of semi-fungible tokens. It stores one [Jettons metadata](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#jetton-metadata-example-offchain) with additional `sft` object for all SFTs that it minted. Contains all methods from [Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md) (it is fully compatible with them). Contains some additional methods for the collection. Smart-contracts called **"[sft-minter](https://github.com/ivklim-ton-play/TEPs/edit/master/text/0084-sft-standart.md#sft-minter-smart-contract)"**.
- - "SFT collection" - collection for SFT minters. Each SFT minter has its own unique id. Based on the idea of [nft-collection](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md). Smart-contracts called **"[sft-collection](https://github.com/ivklim-ton-play/TEPs/edit/master/text/0084-sft-standart.md#sft-collection-smart-contract)"**.
+ - "SFT wallet" - wallet for semi-fungible tokens. Stores information about amount of SFTs owned by each user. Almost the same as jetton-wallets from [Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md). Smart-contracts called **"[sft-wallet](https://github.com/ivklim-ton-play/TEPs/blob/master/text/0084-sft-standart.md#sft-minter-smart-contract)"**.
+ - "SFT minter" - minter of semi-fungible tokens. It stores one [Jettons metadata](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#jetton-metadata-example-offchain) with additional `sft` object for all SFTs that it minted. Contains all methods from [Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md) (it is fully compatible with them). Contains some additional methods for the collection. Smart-contracts called **"[sft-minter](https://github.com/ivklim-ton-play/TEPs/blob/master/text/0084-sft-standart.md#sft-collection-smart-contract)"**.
+ - "SFT collection" - collection for SFT minters. Each SFT minter has its own unique id. Based on the idea of [nft-collection](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md). Smart-contracts called **"[sft-collection](https://github.com/ivklim-ton-play/TEPs/blob/master/text/0084-sft-standart.md#sft-collection-smart-contract)"**.
 
 ### Example: 
 You release a SFT-collection with circulating supply of 200 SFTs for id = 0, and circulating supply of 100 SFTs for id = 1.
@@ -100,7 +100,7 @@ Must implement:
 
 ### Get-methods
 
-1. [**`get_jetton_data()`** as in Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md#get-methods-1) and `jetton_content` contains additional object `sft` ([offchain example](https://github.com/ivklim-ton-play/TEPs/edit/master/text/0084-sft-standart.md#sft-minter-metadata-example-offchain))
+1. [**`get_jetton_data()`** as in Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md#get-methods-1) and `jetton_content` contains additional object `sft` ([offchain example](https://github.com/ivklim-ton-play/TEPs/blob/master/text/0084-sft-standart.md#sft-minter-metadata-example-offchain))
 
 2. [**`get_wallet_address(slice owner_address)`** as in Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md#get-methods-1)
 
@@ -112,14 +112,14 @@ Must implement:
  
    `collection_address` - (MsgAddress) - address of the smart contract of the collection to which this SFT minter belongs. For collection-less SFT minter this parameter should be addr_none;
  
- # SFT Collection smart contract
+## SFT Collection smart contract
  
 It is assumed that the smart contract of the collection deploys smart contracts of SFT minters of this collection.
 
 Must implement:
 
 ### Get-methods
-1. [**`get_collection_data()`** as in NFT Collection smart contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#get-methods-1) and content contains additional object `sft` ([offchain example](https://github.com/ivklim-ton-play/TEPs/edit/master/text/0084-sft-standart.md#sft-collection-metadata-example-offchain))
+1. [**`get_collection_data()`** as in NFT Collection smart contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#get-methods-1) and content contains additional object `sft` ([offchain example](https://github.com/ivklim-ton-play/TEPs/blob/master/text/0084-sft-standart.md#sft-collection-metadata-example-offchain))
 
 2. [**`get_nft_address_by_index(int index)`** as in NFT Collection smart contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#get-methods-1)
 
