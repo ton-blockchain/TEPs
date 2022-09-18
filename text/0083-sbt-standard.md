@@ -14,33 +14,61 @@ Soul bound token (SBT) is a special kind of NFT which can be transferred only be
 There is a useful type of token which allows to give social permissions/roles or certificates to some users. For example, it can be used by marketplaces to give discounts to owners of SBT, or by universities to give attestation certificates in SBT form. Authority can revoke SBT in any time by it's will. For example in case of breaking some rules. Authority also could be null, then SBT is unmovable and cannot be revoked.
 
 # Specification
+SBT implements [NFT standard interface](https://github.com/ton-blockchain/TIPs/issues/62) with two modifications:
 
-SBT implements [NFT standard interface](https://github.com/ton-blockchain/TIPs/issues/62) but `transfer` should be available only for authority.
+* method `transfer` is only available to the `authority`, not the `owner`,
+* SBT adds method `destroy` that allows the `owner` to burn their SBT.
 
-It is also highly recommended to use [NFT Ownership proof interface](https://github.com/ton-blockchain/TEPs/blob/194709d699805186127f55ae089911b3aca79284/text/0095-prove-ownership.md) together with this standard. It opens many interesting mechanics onchain.
+You should consider implementing [NFT Ownership Proof interface](https://github.com/ton-blockchain/TEPs/blob/194709d699805186127f55ae089911b3aca79284/text/0095-prove-ownership.md) to allow SBT owners authenticate their actions within other smart contracts on TON blockchain.
 
-SBT also implements one more method **destroy** which can be used for burning SBT by its owner:
-#### `destroy`
+
+### internal `transfer`
 
 TL-B schema of inbound message:
+
+```
+transfer#5fcc3d14 query_id:uint64
+                  new_owner:MsgAddress
+                  response_destination:MsgAddress
+                  custom_payload:(Maybe ^Cell)
+                  forward_amount:(VarUInteger 16)
+                  forward_payload:(Either Cell ^Cell) 
+                  = InternalMsgBody;
+```
+
+The transfer method MUST check if the sender address is equal to the `authority` address.
+
+Otherwise the semantics of the method are identical to that of [NFT](https://github.com/ton-blockchain/TIPs/issues/62)
+
+
+### internal `destroy`
+
+TL-B schema of an internal message:
 ```
 destroy#1f04537a query_id:uint64 = InternalMsgBody;
 ```
 `query_id` -  arbitrary request number.
 
-**Should be rejected if:**
+Should be rejected if:
 * Sender address is not an owner's address.
 
-**Otherwise should do:**
+Otherwise should do:
  * Set owner's address and authority to null.
  * Send message to sender with schema `excesses#d53276db query_id:uint64 = InternalMsgBody;` that will pass contract's balance amount.
 
-**GET methods**
-1. `get_nft_data()` - same as in [NFT standard](https://github.com/ton-blockchain/TIPs/issues/62).
-2. `get_authority_address()` - returns `slice`, that is authority's address. Authority can revoke SBT.
+### `get_nft_data()`
 
-### Implementation example
-https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc
+Same as in [NFT standard](https://github.com/ton-blockchain/TIPs/issues/62).
+
+### `get_authority_address()`
+
+Returns `slice` containing the address of authority. Authority is able to revoke SBT.
+
+
+### Reference implementation
+
+[sbt-item.fc](https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc)
+
 
 # Guide
 
