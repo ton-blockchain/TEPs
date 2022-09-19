@@ -9,7 +9,7 @@
 
 # Summary
 
-This proposal suggest to extend standard Jetton master by adding mandatory onchain `get_wallet_address` handler.
+This proposal suggest to extend standard Jetton master by adding mandatory onchain `provide_wallet_address` handler.
 
 # Motivation
 
@@ -17,23 +17,23 @@ Some application may want to be able to discover their or other contract wallets
 
 # Guide
 
-Upon receiving `get_wallet_address` message with address in question, Jetton Master should response with message containing address.
+Upon receiving `provide_wallet_address` message with address in question, Jetton Master should response with message containing address.
 
 # Specification
 
 ## New Jetton Master contracts
 Jettom Master should handle message
 
-`get_wallet_address#418cbb4e query_id:uint64 owner_address:MsgAddress include_address:Bool = InternalMsgBody;`
+`provide_wallet_address#2c76b973 query_id:uint64 owner_address:MsgAddress include_address:Bool = InternalMsgBody;`
 
 with TON amount higher than `5000 gas-units + msg_forward_prices.lump_price + msg_forward_prices.cell_price` = 0.0061 TON for current basechain settings (if amount is less than that it is not possible to send response) attached
 
 and either throw an exception if amount of incoming value is not enough to calculate wallet address or
 response with message (sent with mode 64)
 
-`report_wallet_address#ad30f94a query_id:uint64 wallet_address:MsgAddress owner_address:(Maybe ^MsgAddress) = InternalMsgBody;`
+`take_wallet_address#d1735400 query_id:uint64 wallet_address:MsgAddress owner_address:(Maybe ^MsgAddress) = InternalMsgBody;`
 
-Note: if it is not possible to generate wallet address for address in question (for instance wrong workchain) `wallet_address` in `report_wallet_address` should be equal to `addr_none`. If `include_address` is set to `True`, `report_wallet_address` should include `owner_address` equal to `owner_address` in request (in other words response contains both owner address and associated jetton wallet address).
+Note: if it is not possible to generate wallet address for address in question (for instance wrong workchain) `wallet_address` in `take_wallet_address` should be equal to `addr_none`. If `include_address` is set to `True`, `take_wallet_address` should include `owner_address` equal to `owner_address` in request (in other words response contains both owner address and associated jetton wallet address).
 
 ## Already existing Jetton Master contracts
 
@@ -41,13 +41,13 @@ Jettons with non-upgradable Jetton Master may spawn separate smart-contract (Jet
 
 ## Scheme:
 ```
-get_wallet_address query_id:uint64 owner_address:MsgAddress include_address:Bool = InternalMsgBody;
-report_wallet_address query_id:uint64 wallet_address:MsgAddress owner_address:(Maybe ^MsgAddress) = InternalMsgBody;
+provide_wallet_address#2c76b973 query_id:uint64 owner_address:MsgAddress include_address:Bool = InternalMsgBody;
+take_wallet_address#d1735400 query_id:uint64 wallet_address:MsgAddress owner_address:(Maybe ^MsgAddress) = InternalMsgBody;
 ```
 
 ```
-crc32('get_wallet_address query_id:uint64 owner_address:MsgAddress include_address:Bool = InternalMsgBody') = 418cbb4e
-crc32('report_wallet_address query_id:uint64 wallet_address:MsgAddress owner_address:Maybe ^MsgAddress = InternalMsgBody') = ad30f94a
+crc32('provide_wallet_address query_id:uint64 owner_address:MsgAddress include_address:Bool = InternalMsgBody') = 2c76b973
+crc32('take_wallet_address query_id:uint64 wallet_address:MsgAddress owner_address:Maybe ^MsgAddress = InternalMsgBody') = d1735400
 ```
 
 # Drawbacks
