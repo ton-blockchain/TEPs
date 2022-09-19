@@ -1,5 +1,5 @@
 **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0)
-- **title**: NFT Ownership proof
+- **title**: Proof of NFT Ownership
 - **status**: Draft
 - **type**: Contract Interface
 - **authors**: [Oleg Baranov](https://github.com/xssnick), [Narek Abovyan](https://github.com/Naltox), [Kirill Emelyanenko](https://github.com/EmelyanenkoK), [Oleg Andreev](https://github.com/oleganza)
