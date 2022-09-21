@@ -104,16 +104,17 @@ Data that fits into one cell is stored in "Snake format".
 
 If you need to save an array to content, then you need to use the format for array:
 
-1. Array format allows you to store an array in content, this can be used when you need to store a list of attributes for a token. Array must be parsed as an array. Must be prefixed with 0x02 byte. TL-B scheme:
+1. Array format allows you to store an array in content, this can be used when you need to store a list of attributes for a token. Array must be parsed as an array. Dictionary key is the index of the element. The keys must be numbered from 0 to 2^32 - in order. 
+Must be prefixed with 0x02 byte. TL-B scheme:
 ```
- array_data#_ data:(HashMapE 32 ^FullContent) = FullContent;
+array_data#_ data:(HashMapE 32 ^ContentData) = ContentData;
 ```
 
 If you need to save a dict to content, then you need to use the format for dict:
 
 1. Dict format allows you to store an object in content, this can be used when you need to store attributes for a token. Dict must be parsed as an object. Must be prefixed with 0x03 byte. TL-B scheme:
 ```
- dict_data#_ data:(HashMapE 256 ^FullContent) = FullContent;
+dict_data#_ data:(HashMapE 256 ^ContentData) = ContentData;
 ```
 
 If the prefix is not `0x00`, `0x01`, `0x02` and `0x03` then the data is probably encoded by the TL-B schema (relating to a specific smart contract), for example, like in the [DNS contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0081-dns-standard.md#dns-records).
@@ -123,8 +124,8 @@ If the prefix is not `0x00`, `0x01`, `0x02` and `0x03` then the data is probably
 text#_ {n:#} data:(SnakeData ~n) = Text;
 snake#00 data:(SnakeData ~n) = ContentData;
 chunks#01 data:ChunkedData = ContentData;
-array#02 data:(HashMapE 32 ^FullContent) = FullContent;
-dict#03 data:(HashMapE 256 ^FullContent) = FullContent;
+array#02 data:(HashMapE 32 ^ContentData) = ContentData
+dict#03 data:(HashMapE 256 ^ContentData) = ContentData;
 onchain#00 data:(HashMapE 256 ^ContentData) = FullContent;
 offchain#01 uri:Text = FullContent;
 ```
