@@ -137,7 +137,7 @@ Note, that while TL-B scheme does not constrain bit size of each chunk it is exp
 3. `description` - Optional. UTF8 string. Describes the asset.
 4. `image` - Optional. ASCII string. A URI pointing to a resource with mime type image.
 5. `image_data` - Optional. Either binary representation of the image for onchain layout or base64 for offchain layout.
-6. `attributes` - Optional. A representation of a list of attributes: [{"trait_type"H:"trait_type", "value"H: "value"}]. List of attributes must be save to array format with prefix 0x02. Each element must be save to dict format with prefix 0x03: each attribute contains the keys "trait_type"H and "value"H. Key is sha256 hash of string. Values must be store by Snake format and Chunked format but by default it's a Snake format.
+6. `attributes` - Optional. A representation of a list of attributes: [{"trait_type"H:"trait_type", "value"H: "value"}]. List of attributes must be save to array format with prefix 0x02. Each element must be save to dict format with prefix 0x03: each attribute contains the keys "trait_type"H and "value"H. Key is sha256 hash of string. Values must be stored by Snake format and Chunked format, but the default is Snake format.
 
 ## Jetton metadata attributes
 1. `uri` - Optional. Used by "Semi-chain content layout". ASCII string. A URI pointing to JSON document with metadata.
