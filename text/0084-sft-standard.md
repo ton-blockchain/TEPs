@@ -34,10 +34,10 @@ Each SFT minter and SFT Collection itself has its own metadata ([TEP-64](https:/
    "symbol": "BOLT",
    "decimals": 0,
    "image_data": "https://image.com/img.png",
-   "sft": {}
+   "sft": "true"
 }
 ```
-It extends the [Jettons metadata](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#jetton-metadata-attributes) by adding a `sft` object. Decimals is always 0.
+It extends the [Jettons metadata](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#jetton-metadata-attributes) by adding a `sft` object with `"true"`. Decimals is always 0.
 
 ### SFT collection metadata example (offchain):
 ```json
@@ -45,11 +45,11 @@ It extends the [Jettons metadata](https://github.com/ton-blockchain/TEPs/blob/ma
    "image": "https://image.com/img.png",
    "name": "Huebel Bolt collection",
    "description": "Official collection of the Huebel Company",
-   "sft": {}
+   "sft": "true"
 }
 ```
 
-It extends the [NFT collection metadata](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#nft-metadata-attributes) by adding a `sft` object.
+It extends the [NFT collection metadata](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#nft-metadata-attributes) by adding a `sft` object with `"true"`.
 
 Offchain metadata is published for example on web 
 
