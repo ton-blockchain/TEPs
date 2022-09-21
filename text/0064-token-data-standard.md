@@ -102,13 +102,29 @@ Data that does not fit in one cell can be stored in two ways:
 
 Data that fits into one cell is stored in "Snake format".
 
-If the prefix is not `0x00` or `0x01`, then the data is probably encoded by the TL-B schema (relating to a specific smart contract), for example, like in the [DNS contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0081-dns-standard.md#dns-records).
+If you need to save an array to content, then you need to use the format for array:
+
+1. Array format allows you to store an array in content, this can be used when you need to store a list of attributes for a token. Array must be parsed as an array. Must be prefixed with 0x02 byte. TL-B scheme:
+```
+ array_data#_ data:(HashMapE 32 ^FullContent) = FullContent;
+```
+
+If you need to save a dict to content, then you need to use the format for dict:
+
+1. Dict format allows you to store an object in content, this can be used when you need to store attributes for a token. Dict must be parsed as an object. Must be prefixed with 0x03 byte. TL-B scheme:
+```
+ dict_data#_ data:(HashMapE 256 ^FullContent) = FullContent;
+```
+
+If the prefix is not `0x00`, `0x01`, `0x02` and `0x03` then the data is probably encoded by the TL-B schema (relating to a specific smart contract), for example, like in the [DNS contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0081-dns-standard.md#dns-records).
 
 ## Informal TL-B scheme:
 ```
 text#_ {n:#} data:(SnakeData ~n) = Text;
 snake#00 data:(SnakeData ~n) = ContentData;
 chunks#01 data:ChunkedData = ContentData;
+array#02 data:(HashMapE 32 ^FullContent) = FullContent;
+dict#03 data:(HashMapE 256 ^FullContent) = FullContent;
 onchain#00 data:(HashMapE 256 ^ContentData) = FullContent;
 offchain#01 uri:Text = FullContent;
 ```
@@ -121,6 +137,7 @@ Note, that while TL-B scheme does not constrain bit size of each chunk it is exp
 3. `description` - Optional. UTF8 string. Describes the asset.
 4. `image` - Optional. ASCII string. A URI pointing to a resource with mime type image.
 5. `image_data` - Optional. Either binary representation of the image for onchain layout or base64 for offchain layout.
+6. `attributes` - Optional. A representation of a list of attributes: [{"trait_type"H:"trait_type", "value"H: "value"}]. List of attributes must be save to array format with prefix 0x02. Each element must be save to dict format with prefix 0x03: each attribute contains the keys "trait_type"H and "value"H. Key is sha256 hash of string. Values must be store by Snake format and Chunked format but by default it's a Snake format.
 
 ## Jetton metadata attributes
 1. `uri` - Optional. Used by "Semi-chain content layout". ASCII string. A URI pointing to JSON document with metadata.
@@ -151,7 +168,7 @@ While on-chain data storage is preferred, off-chain/semi-chain options allow fle
 
 1. Shall we authenticate offchain data to prevent it from changing? ([NoelJacob](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1029900008))
 2. Shall we support semichain layout, where only some metadata fields may be stored onchain? ([tvorogme](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1028622110))
-3. Shall we standardize attributes, traits, and non-image content? ([tolya-yanot](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1041919338))
+3. Shall we standardize non-image content? ([tolya-yanot](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1041919338))
 
 # Future possibilities
 
