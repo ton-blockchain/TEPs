@@ -104,7 +104,7 @@ Data that fits into one cell is stored in "Snake format".
 
 If you need to save an array to content, then you need to use the format for array:
 
-1. Array format allows you to store an array in content, this can be used when you need to store a list of attributes for a token. Array must be parsed as an array. Dictionary key is the index of the element. The keys must be numbered from 0 to 2^32 - in order. 
+1. Array format allows you to store an array in content, this can be used when you need to store a list of attributes for a token. Array must be parsed as an array. Dictionary key is the index of the element. The keys must be numbered in order from 0 to (2^32) - 1. 
 Must be prefixed with 0x02 byte. TL-B scheme:
 ```
 array_data#_ data:(HashMapE 32 ^ContentData) = ContentData;
