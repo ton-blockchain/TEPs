@@ -2,7 +2,7 @@
 - **title**: Discoverable Jettons Wallets
 - **status**: Draft
 - **type**: Contract Interface
-- **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK)
+- **authors**: [sasha1618](https://github.com/sasha1618), [EmelyanenkoK](https://github.com/EmelyanenkoK) 
 - **created**: 08.09.2022 
 - **replaces**: -
 - **replaced by**: -
