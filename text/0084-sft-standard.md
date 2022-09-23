@@ -155,3 +155,4 @@ They both contain `transfer`, but it is important to consider the hash function 
 # Changelog
 [16 Sep 2022] The standard has been redesigned for greater compatibility with Jettons
 [21 Sep 2022] Use "sft":"true" in metadata instead of "sft" : {}
+[23 Sep 2022] For sft wallet use get_wallet_data()
