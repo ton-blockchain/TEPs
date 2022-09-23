@@ -86,7 +86,7 @@ Must implement:
 #### 2. [`burn` as in Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md#2-burn)
 
 ### Get-methods
-1. [**`get_sft_wallet_data()`** as in Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md#get-methods)
+1. [**`get_wallet_data()`** as in Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md#get-methods)
 
 ## SFT minter smart contract
 
