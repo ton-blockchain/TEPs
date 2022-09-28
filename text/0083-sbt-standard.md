@@ -144,6 +144,8 @@ https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources
 #### Minting
 It can be done using basic NFT collection, SBT should be an item. In mint message additionally authority address should be passed, [after content](https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc#L90). 
 
+Before mint, issuer is recommended to check the wallet code and confirm that it is standartized wallet and not some transferrable contract that can be sold to 3rd parties.
+
 #### Proving you ownership to contracts
 SBT contracts has a feature that let you implement interesting mechanics with contracts by proving ownership onchain. 
 
