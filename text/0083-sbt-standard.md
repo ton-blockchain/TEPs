@@ -7,41 +7,101 @@
 
 # Summary
 
-Soul bound token (SBT) is a special kind of NFT which can be transferred only between its owner's accounts and only by authority. For this, it stores immutable authority address, and authority is needed to send NFT transfer message to change owner's address, but in the same time owner is always able to destroy SBT.
+Soul bound token (SBT) is a special kind of NFT which can not be transferred. For this, it stores immutable public key of the owner, and it is needed to send transfer from new address with signature in payload to change owner's address.
 
 # Motivation
 
-There is a useful type of token which allows to give social permissions/roles or certificates to some users. For example, it can be used by marketplaces to give discounts to owners of SBT, or by universities to give attestation certificates in SBT form. Authority can revoke SBT in any time by it's will. For example in case of breaking some rules. Authority also could be null, then SBT is unmovable and cannot be revoked.
+There is a useful type of token which allows to give social permissions/roles or certificates to some users. For example, it can be used by marketplaces to give discounts to owners of SBT, or by universities to give attestation certificates in SBT form. Mechanics with ownership proof allows to easily prove to any contract that you are an owner of some SBT.
 
 # Specification
-SBT implements [NFT standard interface](https://github.com/ton-blockchain/TIPs/issues/62) with two modifications:
 
-* method `transfer` is only available to the `authority`, not the `owner`,
-* SBT adds method `destroy` that allows the `owner` to burn their SBT.
+SBT implements [NFT standard interface](https://github.com/ton-blockchain/TIPs/issues/62) but `transfer` should always be rejected.
 
-You should consider implementing [NFT Ownership Proof interface](https://github.com/ton-blockchain/TEPs/blob/194709d699805186127f55ae089911b3aca79284/text/0095-prove-ownership.md) to allow SBT owners authenticate their actions within other smart contracts on TON blockchain.
-
-
-### internal `transfer`
+#### 1. `prove_ownership`
 
 TL-B schema of inbound message:
-
 ```
-transfer#5fcc3d14 query_id:uint64
-                  new_owner:MsgAddress
-                  response_destination:MsgAddress
-                  custom_payload:(Maybe ^Cell)
-                  forward_amount:(VarUInteger 16)
-                  forward_payload:(Either Cell ^Cell) 
-                  = InternalMsgBody;
+prove_ownership#04ded148 query_id:uint64 dest:MsgAddress 
+forward_payload:^Cell with_content:Bool = InternalMsgBody;
+```
+`query_id` -  arbitrary request number.
+
+`dest` -  address of the contract to which the ownership of SBT should be proven.
+
+`forward_payload` - arbitrary data required by target contract.
+
+`with_content` - if true, SBT's content cell will be included in message to contract.
+
+**Should do:**
+
+Send message with TL-B schema to `dest` contract:
+```
+ownership_proof#0524c7ae query_id:uint64 item_id:uint256 owner:MsgAddress 
+data:^Cell revoked_at:uint64 content:(Maybe ^Cell) = InternalMsgBody;
 ```
 
-The transfer method MUST check if the sender address is equal to the `authority` address.
+`query_id` - request number passed in `prove_ownership`.
 
-Otherwise the semantics of the method are identical to that of [NFT](https://github.com/ton-blockchain/TIPs/issues/62)
+`item_id` -  id of NFT.
 
+`owner` - current owner's address.
 
-### internal `destroy`
+`data` - data cell passed in `prove_ownership`.
+
+`revoked_at` - unix time when SBT was revoked, 0 if it was not.
+
+`content` - NFT's content, it is passed if `with_content` was true in `prove_ownership`.
+
+In case when `ownership_proof` was bounced back to NFT, NFT should send message to owner with schema:
+```
+ownership_proof_bounced#c18e86d2 query_id:uint64 item_id:uint256 owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
+```
+
+#### 2. `request_owner`
+
+TL-B schema of inbound message:
+```
+request_owner#d0c3bfea query_id:uint64 dest:MsgAddress 
+forward_payload:^Cell with_content:Bool = InternalMsgBody;
+```
+`query_id` -  arbitrary request number.
+
+`dest` -  address of the contract to which the ownership of SBT should be proven.
+
+`forward_payload` - arbitrary data required by target contract.
+
+`with_content` - if true, SBT's content cell will be included in message to contract.
+
+**Should do:**
+
+Send message with TL-B schema to `dest` contract:
+```
+owner_info#0dd607e3 query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
+data:^Cell revoked_at:uint64 content:(Maybe ^Cell) = InternalMsgBody;
+```
+
+`query_id` - request number passed in `prove_ownership`.
+
+`item_id` -  id of NFT.
+
+`initiator` - address of request initiator.
+
+`owner` - current owner's address.
+
+`data` - data cell passed in `prove_ownership`.
+
+`revoked_at` - unix time when SBT was revoked, 0 if it was not.
+
+`content` - SBT's content, it is passed if `with_content` was true in `request_owner`.
+
+In case when `owner_info` was bounced back to SBT, SBT should send message to **initiator** with schema:
+```
+owner_info_bounced#7ca7b0fe query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
+data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
+```
+
+#### 3. `destroy`
 
 TL-B schema of an internal message:
 ```
@@ -56,40 +116,145 @@ Otherwise should do:
  * Set owner's address and authority to null.
  * Send message to sender with schema `excesses#d53276db query_id:uint64 = InternalMsgBody;` that will pass contract's balance amount.
 
-### `get_nft_data()`
+#### 4. `revoke`
 
-Same as in [NFT standard](https://github.com/ton-blockchain/TIPs/issues/62).
+TL-B schema of inbound message:
+```
+revoke#6f89f5e3 query_id:uint64 = InternalMsgBody;
+```
+`query_id` -  arbitrary request number.
 
-### `get_authority_address()`
+**Should be rejected if:**
+* Sender address is not an authority's address.
+* Was already revoked
 
-Returns `slice` containing the address of authority. Authority is able to revoke SBT.
+**Otherwise should do:**
+Set revoked_at to current unix time.
 
+**GET methods**
+1. `get_public_key()` - returns `int`, that is owner's public key.
+2. `get_nonce()` - returns `int`, which current nonce.
+3. `get_nft_data()` - same as in [NFT standard](https://github.com/ton-blockchain/TIPs/issues/62).
+4. `get_authority_address()` - returns `slice`, that is authority's address. Authority can revoke SBT.
+5. `get_revoked_time()` - returns `int`, that is unix time of when it was revoked. It is 0 when not revoked.
 
-### Reference implementation
-
-[sbt-item.fc](https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc)
-
+### Implementation example
+https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc
 
 # Guide
 
 #### Minting
-It can be done using basic NFT collection, SBT should be an item. In mint message additionally authority address should be passed, [after content](https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc#L137).
+It can be done using basic NFT collection, SBT should be an item. In mint message additionally uint256 owner's public key should be passed, [after content](https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc#L137). 
 
-Before mint, issuer is recommended to check the wallet code and confirm that it is standartized wallet and not some transferrable contract that can be sold to 3rd parties.
+#### Proving you ownership to contracts
+SBT contracts has a feature that let you implement interesting mechanics with contracts by proving ownership onchain. 
 
-#### Changing owner's address
+You can send message to SBT, and it will proxify message to target contract with its index, owner's address and initiator address in body, together with any useful for contract payload, 
+this way target contract could know that you are owner of SBT which relates to expected collection. Contract could know that SBT relates to collection by calculating address of SBT using code and index, and comparing it with sender.
 
-Authority should send transfer to SBT address and SBT will be reassigned to the new owner's address.
+There are 2 methods which allow to use this functionality, **ownership proof** and **ownership info**. 
+The difference is that proof can be called only by SBT owner, so it is preferred to use when you need to accept messages only from owner, for example votes in DAO.
+
+##### Ownership proof
+**SBT owner** can send message to SBT with this schema:
+```
+prove_ownership#04ded148 query_id:uint64 dest:MsgAddress 
+forward_payload:^Cell with_content:Bool = InternalMsgBody;
+```
+After that SBT will send transfer to `dest` with scheme:
+```
+ownership_proof#0524c7ae query_id:uint64 item_id:uint256 owner:MsgAddress 
+data:^Cell revoked_at:uint64 content:(Maybe ^Cell)
+```
+If something goes wrong and target contract not accepts message, and it will be bounced back to SBT, SBT will proxy this bounce to owner, this way coins will not stuck on SBT.
+
+##### Ownership info
+**anyone** can send message to SBT with this schema:
+```
+request_owner#d0c3bfea query_id:uint64 dest:MsgAddress 
+forward_payload:^Cell with_content:Bool = InternalMsgBody;
+```
+After that SBT will send transfer to `dest` with scheme:
+```
+owner_info#0dd607e3 query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
+data:^Cell revoked_at:uint64 content:(Maybe ^Cell)
+```
+If something goes wrong and target contract not accepts message, and it will be bounced back to SBT, SBT will proxy this bounce to initiator, this way coins will not stuck on SBT.
+
+#### Verify SBT contract example
+
+```C
+int op::ownership_proof() asm "0x0524c7ae PUSHINT";
+
+int equal_slices (slice a, slice b) asm "SDEQ";
+
+_ load_data() {
+    slice ds = get_data().begin_parse();
+
+    return (
+        ds~load_msg_addr(),    ;; collection_addr
+        ds~load_ref()          ;; sbt_code
+    );
+}
+
+slice calculate_sbt_address(slice collection_addr, cell sbt_item_code, int wc, int index) {
+  cell data = begin_cell().store_uint(index, 64).store_slice(collection_addr).end_cell();
+  cell state_init = begin_cell().store_uint(0, 2).store_dict(sbt_item_code).store_dict(data).store_uint(0, 1).end_cell();
+
+  return begin_cell().store_uint(4, 3)
+                     .store_int(wc, 8)
+                     .store_uint(cell_hash(state_init), 256)
+                     .end_cell()
+                     .begin_parse();
+}
+
+
+() recv_internal(int balance, int msg_value, cell in_msg_full, slice in_msg) impure {
+  slice cs = in_msg_full.begin_parse();
+  int flags = cs~load_uint(4);
+
+  slice sender_address = cs~load_msg_addr();
+
+  int op = in_msg~load_uint(32);
+  int query_id = in_msg~load_uint(64);
+
+  if (op == op::ownership_proof()) {
+    int id = in_msg~load_uint(256);
+
+    (slice collection_addr, cell sbt_code) = load_data();
+    throw_unless(403, equal_slices(sender_address, collection_addr.calculate_sbt_address(sbt_code, 0, id)));
+
+    slice owner_addr = in_msg~load_msg_addr();
+    cell payload = in_msg~load_ref();
+    
+    int revoked_at = in_msg~load_uint(64);
+    throw_if(403, revoked_at > 0);
+    
+    int with_content = in_msg~load_uint(1);
+    if (with_content != 0) {
+        cell sbt_content = in_msg~load_ref();
+    }
+    
+    ;;
+    ;; sbt verified, do something
+    ;;
+
+    return ();
+  }
+
+  throw(0xffff);
+}
+```
 
 # Rationale and alternatives
 
 - **Why is this design the best in the space of possible designs?**
 
-This design allows us to transfer SBT between owner's wallets and at the same time it restricts transfers to 3rd parties, because of authority transfer mechanics. To reattach SBT to new address, authority should send NFT transfer message with new owner's address.
+This design allows us to use SBT as certificates, with revoke and onchain proofs, and in the same time allows to make true SBT if authority in not set.
 
 - **What other designs have been considered and what is the rationale for not choosing them?**
 
-Initially, the design similar to ETH with address-bounded tokens was considered, but because of difference in TON architecture, especially wallet versions, design was reworked. In our standard we added authorities which can move and revoke SBT, this way those tokens becomes more usefull for community cases.
+Initially, the design similar to ETH with address-bounded tokens was considered, but it was extended with usefull onchain proofs and revoke option.
 
 - **What is the impact of not doing this?**
 
@@ -97,11 +262,10 @@ Currently, TON have no owner-bounded token standard, so it is a problem to issue
 
 # Prior art
 
-In ETH ([EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973)) - SBT was done as an NFT which could not be transferred between accounts at all, but in TON - architecture is different, and sometimes it is required to update wallet version. This action will also change wallet address but owner will remain the same. Thus, SBT owner can ask authority to transfer his SBT to new wallet, for example with proving identity.
-
+In ETH ([EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973)) - SBT was done as an NFT which could not be transferred between accounts at all. We did tha same but extended the logic with onchain proofs, and added authority which can revoke, so SBT can be used as fully functional certificate.
 # Drawbacks
 
-[EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973) has equip/unequip mechanics which allows to show/hide SBT temporarily. In current proposal we can only destroy SBT. Actually not sure that show/hide logic is needed for us, since owner can ask authority to move SBT to his diff address or even burn SBT himself. 
+[EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973) has equip/unequip mechanics which allows to show/hide SBT temporarily. In current proposal we can only destroy SBT. Actually not sure that show/hide logic is needed for us. 
 
 # Future possibilities
 
