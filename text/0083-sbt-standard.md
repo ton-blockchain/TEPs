@@ -132,8 +132,6 @@ revoke#6f89f5e3 query_id:uint64 = InternalMsgBody;
 Set revoked_at to current unix time.
 
 **GET methods**
-1. `get_public_key()` - returns `int`, that is owner's public key.
-2. `get_nonce()` - returns `int`, which current nonce.
 3. `get_nft_data()` - same as in [NFT standard](https://github.com/ton-blockchain/TIPs/issues/62).
 4. `get_authority_address()` - returns `slice`, that is authority's address. Authority can revoke SBT.
 5. `get_revoked_time()` - returns `int`, that is unix time of when it was revoked. It is 0 when not revoked.
