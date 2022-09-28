@@ -7,7 +7,7 @@
 
 # Summary
 
-Soul bound token (SBT) is a special kind of NFT which can not be transferred. For this, it stores immutable public key of the owner, and it is needed to send transfer from new address with signature in payload to change owner's address.
+Soul bound token (SBT) is a special kind of NFT which can not be transferred. It includes optional certificate mechanics with revoke by authority and onchain ownership proofs. Holder can destroy his SBT in any time.
 
 # Motivation
 
