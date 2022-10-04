@@ -25,7 +25,7 @@ Upon receiving `provide_wallet_address` message with address in question, Jetton
 Example of discoverable jetton minter code can be found [here](https://github.com/ton-blockchain/token-contract/blob/main/ft/jetton-minter-discoverable.fc)
 
 
-Jettom Master should handle message
+Jetton Master should handle message
 
 `provide_wallet_address#2c76b973 query_id:uint64 owner_address:MsgAddress include_address:Bool = InternalMsgBody;`
 
