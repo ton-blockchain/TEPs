@@ -22,7 +22,7 @@ Upon receiving `provide_wallet_address` message with address in question, Jetton
 # Specification
 
 ## New Jetton Master contracts
-Example of discoveable jetton minter code can be found [here](https://github.com/ton-blockchain/token-contract/blob/main/ft/jetton-minter-discoverable.fc)
+Example of discoverable jetton minter code can be found [here](https://github.com/ton-blockchain/token-contract/blob/main/ft/jetton-minter-discoverable.fc)
 
 
 Jettom Master should handle message
