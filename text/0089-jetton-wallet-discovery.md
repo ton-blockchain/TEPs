@@ -1,6 +1,6 @@
 - **TEP**: [89](https://github.com/ton-blockchain/TEPs/pull/89)
 - **title**: Discoverable Jettons Wallets
-- **status**: Draft
+- **status**: Active
 - **type**: Contract Interface
 - **authors**: [sasha1618](https://github.com/sasha1618), [EmelyanenkoK](https://github.com/EmelyanenkoK) 
 - **created**: 08.09.2022 
