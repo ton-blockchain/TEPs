@@ -132,9 +132,10 @@ revoke#6f89f5e3 query_id:uint64 = InternalMsgBody;
 Set revoked_at to current unix time.
 
 **GET methods**
-3. `get_nft_data()` - same as in [NFT standard](https://github.com/ton-blockchain/TIPs/issues/62).
-4. `get_authority_address()` - returns `slice`, that is authority's address. Authority can revoke SBT.
-5. `get_revoked_time()` - returns `int`, that is unix time of when it was revoked. It is 0 when not revoked.
+1. `get_nft_data()` - same as in [NFT standard](https://github.com/ton-blockchain/TIPs/issues/62).
+2. `get_authority_address()` - returns `slice`, that is authority's address. Authority can revoke SBT. 
+**This method is mandatory for SBT, if there is no authority it should return addr_none (2 zero bits)**
+3. `get_revoked_time()` - returns `int`, that is unix time of when it was revoked. It is 0 when not revoked.
 
 ### Implementation example
 https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc
