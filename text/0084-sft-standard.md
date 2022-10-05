@@ -94,9 +94,7 @@ Must implement:
 
 ### Internal message handlers
 
-#### 1. [`transfer` as in NFT item smart contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#nft-item-smart-contract) 
-
-#### 2. [`get_static_data` as in NFT item smart contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#2-get_static_data)
+#### 1. [`get_static_data` as in NFT item smart contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#2-get_static_data)
 
 ### Get-methods
 
@@ -144,15 +142,14 @@ Look in [NFT Rationale and alternatives](https://github.com/ton-blockchain/TEPs/
 
 This TL-B SFT uses a combination of two other standards.
 
-They both contain `transfer`, but it is important to consider the hash function when writing contracts.
+1. [TL-B schema from Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md#tl-b-schema)  
+`transfer` from Jettons need for SFT wallet. 
 
-1. [TL-B schema from Jettons](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md#tl-b-schema)
-`transfer` from Jettons need for sft wallet. 
-
-2. [TL-B schema from NFT](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#tl-b-schema)
-`transfer` from NFT belongs to the SFT minter.
+2. [TL-B schema from NFT](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#tl-b-schema)  
+`transfer` from NFT is not required in the SFT standard
 
 # Changelog
-[16 Sep 2022] The standard has been redesigned for greater compatibility with Jettons
-[21 Sep 2022] Use "sft":"true" in metadata instead of "sft" : {}
-[23 Sep 2022] For sft wallet use get_wallet_data()
+[16 Sep 2022] The standard has been redesigned for greater compatibility with Jettons  
+[21 Sep 2022] Use "sft":"true" in metadata instead of "sft" : {}  
+[23 Sep 2022] For SFT wallet use get_wallet_data()  
+[05 Oct 2022] Removed the transfer requirement for SFT minter
