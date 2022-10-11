@@ -1,4 +1,4 @@
-- **TEP**: [83](https://github.com/ton-blockchain/TEPs/pull/83)
+- **TEP**: [85](https://github.com/ton-blockchain/TEPs/pull/85)
 - **title**: SBT Contract
 - **status**: Active
 - **type**: Contract Interface

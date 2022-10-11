@@ -24,5 +24,5 @@ Proposal management is done using GitHub pull requests, the process is described
 |  [66](./text/0066-nft-royalty-standard.md) |   NFTRoyalty Standard Extension  |Contract Interface| 12.02.2022|
 |    [74](./text/0074-jettons-standard.md)   |Fungible tokens (Jettons) standard|Contract Interface| 12.03.2022|
 |      [81](./text/0081-dns-standard.md)     |         TON DNS Standard         |Contract Interface| 25.06.2022|
-|      [83](./text/0083-sbt-standard.md)     |           SBT Contract           |Contract Interface| 09.08.2022|
+|      [85](./text/0085-sbt-standard.md)     |           SBT Contract           |Contract Interface| 09.08.2022|
 |[89](./text/0089-jetton-wallet-discovery.md)|   Discoverable Jettons Wallets   |Contract Interface|08.09.2022 |
