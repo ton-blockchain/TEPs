@@ -54,12 +54,6 @@ data:^Cell revoked_at:uint64 content:(Maybe ^Cell) = InternalMsgBody;
 
 `content` - NFT's content, it is passed if `with_content` was true in `prove_ownership`.
 
-In case when `ownership_proof` was bounced back to NFT, NFT should send message to owner with schema:
-```
-ownership_proof_bounced#c18e86d2 query_id:uint64 item_id:uint256 owner:MsgAddress 
-data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
-```
-
 #### 2. `request_owner`
 
 TL-B schema of inbound message:
@@ -96,12 +90,6 @@ data:^Cell revoked_at:uint64 content:(Maybe ^Cell) = InternalMsgBody;
 `revoked_at` - unix time when SBT was revoked, 0 if it was not.
 
 `content` - SBT's content, it is passed if `with_content` was true in `request_owner`.
-
-In case when `owner_info` was bounced back to SBT, SBT should send message to **initiator** with schema:
-```
-owner_info_bounced#7ca7b0fe query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
-data:^Cell content:(Maybe ^Cell) = InternalMsgBody;
-```
 
 #### 3. `destroy`
 
@@ -169,7 +157,6 @@ After that SBT will send transfer to `dest` with scheme:
 ownership_proof#0524c7ae query_id:uint64 item_id:uint256 owner:MsgAddress 
 data:^Cell revoked_at:uint64 content:(Maybe ^Cell)
 ```
-If something goes wrong and target contract not accepts message, and it will be bounced back to SBT, SBT will proxy this bounce to owner, this way coins will not stuck on SBT.
 
 ##### Ownership info
 **anyone** can send message to SBT with this schema:
@@ -182,7 +169,6 @@ After that SBT will send transfer to `dest` with scheme:
 owner_info#0dd607e3 query_id:uint64 item_id:uint256 initiator:MsgAddress owner:MsgAddress 
 data:^Cell revoked_at:uint64 content:(Maybe ^Cell)
 ```
-If something goes wrong and target contract not accepts message, and it will be bounced back to SBT, SBT will proxy this bounce to initiator, this way coins will not stuck on SBT.
 
 #### Verify SBT contract example
 
@@ -273,4 +259,3 @@ In ETH ([EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973)) - SBT was done 
 # Future possibilities
 
 Standard looks finalized.
-
