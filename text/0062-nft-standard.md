@@ -30,11 +30,10 @@ Each NFT Item and NFT Collection itself has its own metadata (TEP-64). It contai
 Collection metadata example (offchain):
 ```json
 {
-   "image": "https://s.getgems.io/nft/b/c/62fba50217c3fe3cbaad9e7f/image.png",
+   "image": "https://ton.org/_next/static/media/smart-challenge1.7210ca54.png",
    "name": "TON Smart Challenge #2",
    "description": "TON Smart Challenge #2 Winners Trophy",
-   "social_links": [],
-   "marketplace": "getgems.io"
+   "social_links": []
 }
 ```
 
@@ -43,8 +42,8 @@ Item metadata example (offchain):
 {
    "name": "TON Smart Challenge #2 Winners Trophy",
    "description": "TON Smart Challenge #2 Winners Trophy 1 place out of 181",
-   "image": "https://s.getgems.io/nft/b/c/62fba50217c3fe3cbaad9e7f/images/943e994f91227c3fdbccbc6d8635bfaab256fbb4",
-   "content_url": "https://s.getgems.io/nft/b/c/62fba50217c3fe3cbaad9e7f/content/84f7f698b337de3bfd1bc4a8118cdfd8226bbadf",
+   "image": "https://ton.org/_next/static/media/duck.d936efd9.png",
+   "content_url": "https://ton.org/_next/static/media/dimond_1_VP9.29bcaf8e.webm",
    "attributes": []
 }
 ```
@@ -54,9 +53,10 @@ Offchain metadata is published for example on web.
 ## Useful links
 1. [Reference NFT implementation](https://github.com/ton-blockchain/token-contract/tree/main/nft)
 2. [Getgems NFT contracts](https://github.com/getgems-io/nft-contracts)
-3. [TON NFT Deployer](https://github.com/tondiamonds/ton-nft-deployer)
-4. FunC Lesson - NFT Standard ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/889424ae6a28453c4188ad65cdd9dbfeb750ecdb/10lesson/tenthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/427037e7937f0e2e9caa4b866ee29f9d8e19b3c0/10lesson/tenthlesson.md))
-5. [TON NFT Explorer](https://explorer.tonnft.tools/)
+3. [Toncli NFT scaffolding project](https://github.com/disintar/toncli/tree/master/src/toncli/projects/nft_collection) by Disintar
+4. [TON NFT Deployer](https://github.com/tondiamonds/ton-nft-deployer)
+5. FunC Lesson - NFT Standard ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/889424ae6a28453c4188ad65cdd9dbfeb750ecdb/10lesson/tenthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/427037e7937f0e2e9caa4b866ee29f9d8e19b3c0/10lesson/tenthlesson.md))
+6. [TON NFT Explorer](https://explorer.tonnft.tools/)
 
 # Specification
 The NFT collection and each NFT item are separate smart contracts.
