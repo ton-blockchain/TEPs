@@ -107,9 +107,9 @@ If the prefix is not `0x00` or `0x01`, then the data is probably encoded by the 
 ## Informal TL-B scheme:
 ```
 text#_ {n:#} data:(SnakeData ~n) = Text;
-snake#00 data:(SnakeData ~n) = ContentData;
+snake#00 {n:#} data:(SnakeData ~n) = ContentData;
 chunks#01 data:ChunkedData = ContentData;
-onchain#00 data:(HashMapE 256 ^ContentData) = FullContent;
+onchain#00 data:(HashmapE 256 ^ContentData) = FullContent;
 offchain#01 uri:Text = FullContent;
 ```
 
