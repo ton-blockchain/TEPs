@@ -32,14 +32,16 @@ Subwallet keys generation process is defined as follows:
 
 Sample implementation in JS:
 
-> async function subwalletMnemonicToSeed(mnemonicArray, password, subwallet) {
->   const entropy = await mnemonicToEntropy(mnemonicArray, password);
->   
->   const seed_level0 = await hmacSha512(entropy, 'Subwallet #' + subwallet);
->   const seed = await pbkdf2Sha512(seed_level0, 'TON default seed', PBKDF_ITERATIONS);
->   
->   return seed.slice(0, 32);
-> }
+```
+async function subwalletMnemonicToSeed(mnemonicArray, password, subwallet) {
+  const entropy = await mnemonicToEntropy(mnemonicArray, password);
+  
+  const seed_level0 = await hmacSha512(entropy, 'Subwallet #' + subwallet);
+  const seed = await pbkdf2Sha512(seed_level0, 'TON default seed', PBKDF_ITERATIONS);
+  
+  return seed.slice(0, 32);
+}
+```
 
 If user chooses that knowledge of his mnemonic is sufficient for exploring his assets, wallet application MUST use decimal representation of consequent numbers starting with 0 as subwallet identifiers. Otherwise, application SHALL either allow user to generate subaccount ID or generate and store it itself.  
 Applications, especially desktop ones, are RECOMMENDED to make user able to enter any combination of bytes as subwallet ID (maybe in HEX format).  
