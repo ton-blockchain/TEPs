@@ -1,6 +1,6 @@
 - **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0)
 - **title**: Deterministic subwallets
-- **status**: Draft
+- **status**: Review
 - **type**: Application
 - **authors**: [oleganza](https://github.com/oleganza),  [ProgramCrafter](https://github.com/ProgramCrafter)
 - **created**: 27.11.2022
@@ -16,6 +16,8 @@ This proposal introduces a standard way to create privacy-preserving subaccounts
 # Motivation
 
 Users who manage a number of assets for different purposes need to generate multiple wallets and switch between them. Each time a new wallet is generated, it needs to be backed up separately. We need a solution that lets create multiple independent wallets as subaccounts without redoing the work of backing things up.
+
+This TEP improves usability and privacy of multi-wallet scenarios for all TON users.
 
 # Guide
 
