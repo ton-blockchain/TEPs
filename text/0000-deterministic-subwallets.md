@@ -59,7 +59,9 @@ Users may remember their mnemonic words but forget subwallet identifier thus los
 
 # Rationale and alternatives
 
-- Subwallet identifier is chosen to be string to allow both fully non-discoverable wallet (even if user leaks his mnemonic words, his funds are temporarily safe until attacker finds correct subwallet) and accounts that can be explored knowing mnemonics (these are privacy-preserving because they can't be associated with each other from outside).
+- Subwallet identifier is chosen to be string to allow both fully non-discoverable wallet (even if user leaks his mnemonic words, his funds are temporarily safe until attacker finds correct subwallet) and accounts that can be explored knowing mnemonics (these are privacy-preserving because they can't be associated with each other from outside)
+- Subwallet is added using hmacSha512 because afterwards seed is hashed `PBKDF_ITERATIONS` times so there is no need to slow down wallet generation process even more
+- Subwallet is added before "TON default seed" because otherwise it would be pretty fast to bruteforce wallets with known mnemonic
 
 # Prior art
 
