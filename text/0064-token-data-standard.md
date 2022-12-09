@@ -30,7 +30,7 @@ Metadata:
    "name": "TON Smart Challenge #2",
    "description": "TON Smart Challenge #2 Winners Trophy",
    "social_links": [],
-   "marketplace": "getgems.io"
+   "marketplace": "disintar.io"
 }
 ```
 
