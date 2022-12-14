@@ -153,19 +153,19 @@ Domain name is transmitted separately within the request that is signed by the s
 TL-B:
 
 ```
-app_data data:^Cell address:(Maybe MsgAddress) domain_sha256:(Maybe bits256) = PayloadCell;
+app_data address:(Maybe MsgAddress) domain_sha256:(Maybe bits256) data:^Cell = PayloadCell;
 ```
 
 where:
-* `data` contains application-specific data;
 * `address` is an optional contract address that receives the signed message;
 * `domain_sha256` is a SHA-256 of the fully-qualified TON.DNS domain in a human-readable form (e.g. `sha256("myapp.example.ton")`);
+* `data` contains application-specific data;
 
 Schema:
 
 ```
-crc32('app_data data:^Cell address:(Maybe MsgAddress) domain_sha256:(Maybe bits256) = PayloadCell')
-    = 0xc175a7f6
+crc32('app_data address:(Maybe MsgAddress) domain_sha256:(Maybe bits256) data:^Cell = PayloadCell')
+    = 0x9bb162af
 ```
 
 Wallets MUST reject requests where neither domain, nor address are specified.
