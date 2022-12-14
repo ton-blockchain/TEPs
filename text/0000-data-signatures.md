@@ -124,25 +124,23 @@ For users’ safety every signature should be bound to a specific *place* and *t
 
 ### Short plain text message
 
-This schema is used to sign UTF-8 text messages using chunked encoding (same as in TON.DNS).
+This schema is used to sign UTF-8 text messages using _snake format_ (per [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md)).
 
 TL-B:
 
 ```
-plaintext text:ChunkedText = PayloadCell;
+plaintext text:Text = PayloadCell;
 
-// From block.tlb:
-chunk_ref$_ {n:#} ref:^(TextChunks (n + 1)) = TextChunkRef (n + 1);
-chunk_ref_empty$_ = TextChunkRef 0;
-text_chunk$_ {n:#} len:(## 8) data:(bits (len * 8)) next:(TextChunkRef n) = TextChunks (n + 1);
-text_chunk_empty$_ = TextChunks 0;
-text$_ chunks:(## 8) rest:(TextChunks chunks) = ChunkedText;
+// From TEP-64:
+tail#_ {bn:#} b:(bits bn) = SnakeData ~0;
+cons#_ {bn:#} {n:#} b:(bits bn) next:^(SnakeData ~n) = SnakeData ~(n + 1);
+text#_ {n:#} data:(SnakeData ~n) = Text;
 ```
 
 Schema:
 
 ```
-crc32('plaintext text:ChunkedText = PayloadCell') = 0x5c9f9d40
+crc32('plaintext text:Text = PayloadCell') = 0x754bf91b
 ```
 
 Wallets MUST display the text string to the user.
@@ -156,14 +154,12 @@ This schema allows signing binary data for a target application identified by th
 TL-B:
 
 ```
-app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe ChunkedText) = PayloadCell;
+app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe Text) = PayloadCell;
 
-// From block.tlb:
-chunk_ref$_ {n:#} ref:^(TextChunks (n + 1)) = TextChunkRef (n + 1);
-chunk_ref_empty$_ = TextChunkRef 0;
-text_chunk$_ {n:#} len:(## 8) data:(bits (len * 8)) next:(TextChunkRef n) = TextChunks (n + 1);
-text_chunk_empty$_ = TextChunks 0;
-text$_ chunks:(## 8) rest:(TextChunks chunks) = ChunkedText;
+// From TEP-64:
+tail#_ {bn:#} b:(bits bn) = SnakeData ~0;
+cons#_ {bn:#} {n:#} b:(bits bn) next:^(SnakeData ~n) = SnakeData ~(n + 1);
+text#_ {n:#} data:(SnakeData ~n) = Text;
 ```
 
 where:
@@ -174,15 +170,15 @@ where:
 Schema:
 
 ```
-crc32('app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe ChunkedText) = PayloadCell')
-    = 0xd35aba23
+crc32('app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe Text) = PayloadCell')
+    = 0xee8c4d2d
 ```
 
 Wallets MUST reject requests where neither domain, nor address are specified.
 
-Wallets MUST display the contract address to the user if it is specified.
+Wallets MUST display the contract address to the user if it is included in the signature.
 
-Wallets MUST display the TON.DNS name (if it is specified) and verify that the request came from the current owner of that DNS record.
+Wallets MUST display the TON.DNS name (if it is included under signature) and verify that the request came from the current owner of that DNS record.
 Verification of the request origin is outside the scope of this specification.
 
 TON contracts MUST verify that the message includes the address and it matches the target contract’s address.
