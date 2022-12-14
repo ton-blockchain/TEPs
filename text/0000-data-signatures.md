@@ -126,23 +126,18 @@ For users’ safety every signature should be bound to a specific *place* and *t
 
 This schema is used to sign UTF-8 text messages using chunked encoding (same as in TON.DNS).
 
+Text string is embedded through its SHA-256 hash while the original string is transmitted separately.
+
 TL-B:
 
 ```
-plaintext text:ChunkedText = PayloadCell;
-
-// From block.tlb:
-chunk_ref$_ {n:#} ref:^(TextChunks (n + 1)) = TextChunkRef (n + 1);
-chunk_ref_empty$_ = TextChunkRef 0;
-text_chunk$_ {n:#} len:(## 8) data:(bits (len * 8)) next:(TextChunkRef n) = TextChunks (n + 1);
-text_chunk_empty$_ = TextChunks 0;
-text$_ chunks:(## 8) rest:(TextChunks chunks) = ChunkedText;
+plaintext text_sha256:bits256 = PayloadCell;
 ```
 
 Schema:
 
 ```
-crc32('plaintext text:ChunkedText = PayloadCell') = 0x5c9f9d40
+crc32('plaintext text_sha256:bits256 = PayloadCell') = 0x51d557b9
 ```
 
 Wallets MUST display the text string to the user.
@@ -153,36 +148,31 @@ Applications MUST verify the contents of the signed string to enforce the domain
 
 This schema allows signing binary data for a target application identified by the TON.DNS name, contract address or both.
 
+Domain name is transmitted separately within the request that is signed by the service operator.
+
 TL-B:
 
 ```
-app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe ChunkedText) = PayloadCell;
-
-// From block.tlb:
-chunk_ref$_ {n:#} ref:^(TextChunks (n + 1)) = TextChunkRef (n + 1);
-chunk_ref_empty$_ = TextChunkRef 0;
-text_chunk$_ {n:#} len:(## 8) data:(bits (len * 8)) next:(TextChunkRef n) = TextChunks (n + 1);
-text_chunk_empty$_ = TextChunks 0;
-text$_ chunks:(## 8) rest:(TextChunks chunks) = ChunkedText;
+app_data data:^Cell address:(Maybe MsgAddress) domain_sha256:(Maybe bits256) = PayloadCell;
 ```
 
 where:
 * `data` contains application-specific data;
 * `address` is an optional contract address that receives the signed message;
-* `domain` is a fully-qualified TON.DNS domain in a reversed zero-delimited format (e.g. `ton\0example\0myapp\0` for `myapp.example.ton`);
+* `domain_sha256` is a SHA-256 of the fully-qualified TON.DNS domain in a human-readable form (e.g. `sha256("myapp.example.ton")`);
 
 Schema:
 
 ```
-crc32('app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe ChunkedText) = PayloadCell')
-    = 0xd35aba23
+crc32('app_data data:^Cell address:(Maybe MsgAddress) domain_sha256:(Maybe bits256) = PayloadCell')
+    = 0xc175a7f6
 ```
 
 Wallets MUST reject requests where neither domain, nor address are specified.
 
-Wallets MUST display the contract address to the user if it is specified.
+Wallets MUST display the contract address to the user if it is included in the signature.
 
-Wallets MUST display the TON.DNS name (if it is specified) and verify that the request came from the current owner of that DNS record.
+Wallets MUST display the TON.DNS name (if it is included in the signature) and verify that the request came from the current owner of that DNS record.
 Verification of the request origin is outside the scope of this specification.
 
 TON contracts MUST verify that the message includes the address and it matches the target contract’s address.
@@ -202,6 +192,18 @@ None
 ## Encoding data in cells
 
 Offchain applications do not generally need to work with TON cells, however we propose a single encoding that is also usable inside TVM to keep the specification simple.
+
+## Why plaintext message is hashed separately?
+
+To avoid unnecessary length limits and conceptual overhead with chunked encoding, the plaintext message is included via its SHA-256 hash.
+
+Applications should transmit plaintext messages separately. The goal of this proposal is to offer a safe signature protocol, not the transport protocol.
+
+## Why domain name is hashed separately?
+
+As with the plaintext message, we are avoiding unnecessary limits and complexity.
+This comes at virtually no cost since the domain name would be transmitted explicitly anyway within the request for signature.
+
 
 ## Binding signatures to a current timestamp
 
