@@ -174,8 +174,8 @@ where:
 Schema:
 
 ```
-crc32('app_data payload:^Cell address:(Maybe MsgAddress) domain:(Maybe ChunkedText) = PayloadCell')
-    = 0x6d3c5436
+crc32('app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe ChunkedText) = PayloadCell')
+    = 0xd35aba23
 ```
 
 Wallets MUST reject requests where neither domain, nor address are specified.
