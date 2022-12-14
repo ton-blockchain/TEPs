@@ -219,10 +219,6 @@ Applications enforce domain separation to reject signatures from other domains.
 
 Wallets enforce domain separation to protect users from inadvertently signing for another app.
 
-## Why messages are limited to 127 bytes?
-
-Current proposal offers the simplest text encoding using 1023 contiguous bits available in the payload cell. More complex text encoding schemes (e.g. chunked) are possible to add to this protocol later if needed.
-
 ## How to use contract address binding
 
 Wallets may display a name and an icon for the well-known contracts and even interpret parameters as specific actions.
