@@ -2,7 +2,7 @@
 - **title**: Data Signatures
 - **status**: Draft
 - **type**: Core
-- **authors**: [Steve Korshakov](https://github.com/ex3ndr), [Oleg Andreev](https://github.com/oleganza), [Sergey Andreev](https://github.com/siandreev)
+- **authors**: [Oleg Andreev](https://github.com/oleganza), [Sergey Andreev](https://github.com/siandreev), [Denis Subbotin](https://github.com/mr-tron)
 - **created**: 13.12.2022
 - **replaces**: [TEP-0](https://github.com/ton-blockchain/TEPs/blob/master/0000-template.md)
 - **replaced by**: -
@@ -26,26 +26,19 @@ The proposed protocol addresses scenarios where the wallet’s public key verifi
 
 # Safe hashing
 
-To sign a transaction (or just a cell) for TON it is required to create **Cell Representation**, hash it and then sign. Our goal is to create a signature scheme that guarantees to never collide with the signed cells, and therefore guarantee that this scheme cannot be abused to send transaction on behalf of the wallet.
+To sign a transaction (or just a cell) for TON it is required to create **Cell Representation**, hash it and then sign. Our goal is to create a signature scheme that guarantees to never collide with the signed cells so that signed data messages cannot be used as transactions made on behalf of the wallet.
 
-From the TON whitepaper:
+We observe the following implementation in wallet smart contracts (FunC) where signature is computed over 256-bit message equal to the SHA256 hash of an arbitrary cell:
 
->3.1.4. Standard cell representation.
->
->When a cell needs to be transferred by a network protocol or stored in a disk file, it must be serialized. 
->
->The standard representation `CellRepr(c) = CellRepr∞(c)` of a cell `c` as an octet (byte) sequence is constructed as follows:
->1. Two descriptor bytes `d1` and `d2` are serialized first. Byte `d1` equals `r+8s+32l`, where `0 ≤ r ≤ 4` is the quantity of cell references contained in the cell, `0 ≤ l ≤ 3` is the level of the cell, and `0 ≤ s ≤ 1` is 1 for exotic cells and 0 for ordinary cells. Byte `d2` equals ``⌊b/8⌋+⌈b/8⌉``, where `0 ≤ b ≤ 1023` is the quantity of data bits in `c`.
->2. Then the data bits are serialized as `⌈b/8⌉` 8-bit octets (bytes). If `b` is not a multiple of eight, a binary 1 and up to six binary 0s are appended to the data bits. After that, the data is split into `⌈b/8⌉` eight-bit groups, and each group is interpreted as 
->an unsigned big-endian integer 0 . . . 255 and stored into an octet.
->3. Finally, each of the `r` cell references is represented by 32 bytes containing the 256-bit representation hash `Hash(ci)`, explained below in 3.1.5, of the cell `ci` referred to.
->
->In this way, `2 + ⌈b/8⌉ + 32r` bytes of `CellRepr(c)` are obtained.
+```
+check_signature(slice_hash(in_msg), signature, public_key)
+```
 
+In this proposal we are going to compute signature over 352-bit message that consists of the schema identifier, timestamp and a hash of the payload cell X.
 
-From the documentation follows that if we want to sign a cell with a single reference it will have a form `<prefix><reference_hash>`. Now we need to construct such `prefix` that the cell representation became invalid. It is obvious that values `5 ≤ r ≤ 7`, `2 ≤ s ≤ 3` and `4 ≤ l ≤ 7` are all invalid. We will pick the maximum values for each of these parameters making the byte `d1` equal `0xff`.
+This signature is domain-separated from wallet transactions by having a different length of the message. 
+Domain separation for the data messages is provided using the schema identifier and various layouts of the payload X.
 
-While this is enough to make the cell representation invalid, we will strengthen it further in case the cell representation is expanded in the future. Second byte `d2` does not have invalid values by itself, so let's just pick the same maximum value `0xff`. This value would indicate `1023` bits of data in the cell. We make that value invalid if we write a bit string that is less than 127 bytes long.
 
 # Specification
 
@@ -58,43 +51,29 @@ Let `schema_crc` be the 4-byte CRC32 of the TL-B scheme that specifies the layou
 To sign an arbitrary cell that couldn't be used as a transaction in blockchain we compute data for signing in the following way:
 
 ```
-ed25519(
-    sha256(
-        0xffff ++
-        uint32be(schema_crc) ++
-        uint64be(timestamp) ++
-        cell_hash(X)
-    ),
-    privkey
-)
+ed25519(uint32be(schema_crc) ++ uint64be(timestamp) ++ cell_hash(X), privkey)
 ```
 
 In JS:
 
 ```js
-let X: Cell;                           // Payload cell
-let prefix = Buffer.alloc(2 + 4 + 8);  // d1 + d2 + version + timestamp
-prefix.writeUInt8(0xff);
-prefix.writeUInt8(0xff);
+let X: Cell;                       // Payload cell
+let prefix = Buffer.alloc(4 + 8);  // version + timestamp
 prefix.writeUint32BE(schema_crc);
 prefix.writeUint64BE(timestamp);
-let sighash = sha256(Buffer.concat([prefix, X.hash()]));
-let signature = Ed25519Sign(sighash, privkey);
+let signature = Ed25519Sign(Buffer.concat([prefix, X.hash()]), privkey);
 ```
 
 In FunC:
 
 ```
-cell X;    ;; Payload cell
-var b = begin_cell()
-                 .store_uint(0xff, 8)
-                 .store_uint(0xff, 8)
+cell X;  ;; Payload cell
+var m = begin_cell()
                  .store_uint(schema_crc, 32)
                  .store_uint(timestamp, 64)
                  .store_uint(cell_hash(x), 256)
                  .end_cell();
-var target_hash = string_hash(b);
-var is_valid = check_signature(target_hash, sig, pk);
+var is_valid = check_data_signature(begin_parse(m), sig, pk)
 ```
 
 ## Transporting signed data into smart contracts
@@ -146,6 +125,7 @@ crc32('plaintext text:Text = PayloadCell') = 0x754bf91b
 Wallets MUST display the text string to the user.
 
 Applications MUST verify the contents of the signed string to enforce the domain separation.
+
 
 ### Application binding
 
@@ -228,7 +208,9 @@ Binding the singature to the TON.DNS name allows wallets perform a real-time ver
 
 This proposal is a simplified variation of [Ethereum EIP-1271](https://eips.ethereum.org/EIPS/eip-1271).
 
-This is based on [Steve Korshakov’s](https://github.com/ex3ndr) [safe signing proposal](https://github.com/ton-blockchain/TEPs/pull/93).
+This is originally inspired by [Steve Korshakov’s](https://github.com/ex3ndr) [safe signing proposal](https://github.com/ton-blockchain/TEPs/pull/93), 
+but we observe that there is a possibility of avoiding unnecessary layer of hashing and constructing invalid cell representation
+since TVM support signature checks over arbitrary-sized messages.
 
 # Unresolved questions
 
@@ -237,5 +219,3 @@ None
 # Future possibilities
 
 In the future more schema versions could be added that specify the contents of the payload data along with the protocol for verifying that data.
-
-
