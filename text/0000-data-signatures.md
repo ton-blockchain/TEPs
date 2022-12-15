@@ -134,7 +134,7 @@ This schema allows signing binary data for a target application identified by th
 TL-B:
 
 ```
-app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe Text) = PayloadCell;
+app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe ^Text) = PayloadCell;
 
 // From TEP-64:
 tail#_ {bn:#} b:(bits bn) = SnakeData ~0;
@@ -150,8 +150,8 @@ where:
 Schema:
 
 ```
-crc32('app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe Text) = PayloadCell')
-    = 0xee8c4d2d
+crc32('app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe ^Text) = PayloadCell')
+    = 0xd38095a3
 ```
 
 Wallets MUST reject requests where neither domain, nor address are specified.
@@ -186,6 +186,10 @@ Schnorr signatures such as Ed25519 are non-repudiable and replayable by design. 
 ## Why timestamp is not a part of the payload?
 
 Timestamp binding is needed in almost every protocol, so it makes sense to save space for application-specific data in the payload cell.
+
+## Why domain name is in another cell?
+
+Domain name is declared as `^Text` to allow pruning and storing cell hash in its place.
 
 ## Notes on domain separation
 
