@@ -134,7 +134,7 @@ This schema allows signing binary data for a target application identified by th
 TL-B:
 
 ```
-app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe ^Text) = PayloadCell;
+app_data address:(Maybe MsgAddress) domain:(Maybe ^Text) data:^Cell = PayloadCell;
 
 // From TEP-64:
 tail#_ {bn:#} b:(bits bn) = SnakeData ~0;
@@ -150,8 +150,8 @@ where:
 Schema:
 
 ```
-crc32('app_data data:^Cell address:(Maybe MsgAddress) domain:(Maybe ^Text) = PayloadCell')
-    = 0xd38095a3
+crc32('app_data address:(Maybe MsgAddress) domain:(Maybe ^Text) data:^Cell = PayloadCell')
+    = 0xd6712a27
 ```
 
 Wallets MUST reject requests where neither domain, nor address are specified.
@@ -222,4 +222,5 @@ None
 
 # Future possibilities
 
-In the future more schema versions could be added that specify the contents of the payload data along with the protocol for verifying that data.
+A future extension to the protocol may specify the layout and semantics of the payload data (e.g. attaching a TL-B scheme).
+This would enable wallets display human-readable structure of the message to be signed.
