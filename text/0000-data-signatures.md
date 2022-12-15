@@ -210,7 +210,7 @@ Wallets may display a name and an icon for the well-known contracts and even int
 
 Binding the singature to the TON.DNS name allows wallets perform a real-time verification that the request is signed by the named service. This eliminates virtually any possibility for phishing since the service controls the entire authentication flow. Even if the user does not pay attention to the text in the confirmation window, it would not be possible to trick user confirm action on that service without hijacking their session.
 
-## How to display contents of signature
+## How to display data before signing
 
 In the `plaintext` scheme, the wallet simply shows the UTF-8 text as-is.
 
