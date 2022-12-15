@@ -134,7 +134,7 @@ This schema allows signing binary data for a target application identified by th
 TL-B:
 
 ```
-app_data address:(Maybe MsgAddress) domain:(Maybe ^Text) data:^Cell = PayloadCell;
+app_data address:(Maybe MsgAddress) domain:(Maybe ^Text) data:^Cell ext:(Maybe ^Cell) = PayloadCell;
 
 // From TEP-64:
 tail#_ {bn:#} b:(bits bn) = SnakeData ~0;
@@ -143,15 +143,16 @@ text#_ {n:#} data:(SnakeData ~n) = Text;
 ```
 
 where:
-* `data` contains application-specific data;
 * `address` is an optional contract address that receives the signed message;
 * `domain` is a fully-qualified TON.DNS domain in a reversed zero-delimited format (e.g. `ton\0example\0myapp\0` for `myapp.example.ton`);
+* `data` contains application-specific data;
+* `ext` is a cell for future extensions;
 
 Schema:
 
 ```
-crc32('app_data address:(Maybe MsgAddress) domain:(Maybe ^Text) data:^Cell = PayloadCell')
-    = 0xd6712a27
+crc32('app_data address:(Maybe MsgAddress) domain:(Maybe ^Text) data:^Cell ext:(Maybe ^Cell) = PayloadCell')
+    = 0x54b58535
 ```
 
 Wallets MUST reject requests where neither domain, nor address are specified.
@@ -160,6 +161,8 @@ Wallets MUST display the contract address to the user if it is included in the s
 
 Wallets MUST display the TON.DNS name (if it is included under signature) and verify that the request came from the current owner of that DNS record.
 Verification of the request origin is outside the scope of this specification.
+
+Wallets MUST display the `data` and `ext` contents to the user before signing.
 
 TON contracts MUST verify that the message includes the address and it matches the target contract’s address.
 
@@ -206,6 +209,13 @@ Wallets may display a name and an icon for the well-known contracts and even int
 ## How to use TON.DNS binding
 
 Binding the singature to the TON.DNS name allows wallets perform a real-time verification that the request is signed by the named service. This eliminates virtually any possibility for phishing since the service controls the entire authentication flow. Even if the user does not pay attention to the text in the confirmation window, it would not be possible to trick user confirm action on that service without hijacking their session.
+
+## How to display contents of signature
+
+In the `plaintext` scheme, the wallet simply shows the UTF-8 text as-is.
+
+In the `app_data` scheme, the wallet displays binary contents of the `data` and `ext` cells (e.g. in hex).
+Future extensions to this protocol may add layout description into the `ext` field to describe the contents of the `data` in a human-readable form.
 
 
 # Prior art
