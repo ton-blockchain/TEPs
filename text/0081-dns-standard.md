@@ -136,24 +136,29 @@ Category `sha256("site")` - TON Site, contains ADNL address in `dns_adnl_address
 TL-B Schema of DNS Records values:
 
 ```
-_ (HashmapE 256 ^DNSRecord) = DNS_RecordSet;
-
-dns_next_resolver#ba93 resolver:MsgAddressInt = DNSRecord;
-
-dns_adnl_address#ad01 adnl_addr:bits256 flags:(## 8) { flags <= 1 }
-  proto_list:flags . 0?ProtoList = DNSRecord;
-proto_list_nil$0 = ProtoList;
-proto_list_next$1 head:Protocol tail:ProtoList = ProtoList;
 proto_http#4854 = Protocol;
+proto_list_nil$0 = ProtoList;
 
-dns_smc_address#9fd3 smc_addr:MsgAddressInt flags:(## 8) { flags <= 1 }
-  cap_list:flags . 0?SmcCapList = DNSRecord;
-cap_list_nil$0 = SmcCapList;
-cap_list_next$1 head:SmcCapability tail:SmcCapList = SmcCapList;
+proto_list_next$1 head:Protocol tail:ProtoList = ProtoList;
+
+
+
 cap_method_seqno#5371 = SmcCapability;
 cap_method_pubkey#71f4 = SmcCapability;
 cap_is_wallet#2177 = SmcCapability;
 cap_name#ff name:Text = SmcCapability;
+
+cap_list_nil$0 = SmcCapList;
+cap_list_next$1 head:SmcCapability tail:SmcCapList = SmcCapList;
+
+dns_smc_address#9fd3 smc_addr:MsgAddressInt flags:(## 8) { flags <= 1 }
+  cap_list:flags . 0?SmcCapList = DNSRecord;
+dns_next_resolver#ba93 resolver:MsgAddressInt = DNSRecord;
+dns_adnl_address#ad01 adnl_addr:bits256 flags:(## 8) { flags <= 1 }
+  proto_list:flags . 0?ProtoList = DNSRecord;
+dns_storage_address#7473 bag_id:bits256 = DNSRecord;
+
+_ (HashmapE 256 ^DNSRecord) = DNS_RecordSet;
 ```
 
 # Drawbacks
@@ -175,7 +180,7 @@ If we support UTF-8, it would be possible to create domains which will look same
 It is possible to implement any logic for subdomains in custom resolver contract.
 
 ## Why domains are not bought forever?
-There is a possibility that access to wallet which owns a domain will be lost, so domain will be lost forever. In TON DNS, it is required to prolong domains each year by sending 0.00000001 TON to the contract.
+There is a possibility that access to wallet which owns a domain will be lost, so domain will be lost forever. In TON DNS, it is required to prolong domains each year by sending at least 0.005 TON (minimal amount of TONs for message to be processed) to the contract.
 
 # Prior art
 
