@@ -9,16 +9,18 @@
 
 # Summary
 
-1. The common deployed implementation of contract that performs wrapping and unwrapping TON on-demand.
+Wrapped TON (WTON) is a jetton that is locking TON 1-to-1 on mint and releases TON on burn. WTON is used to unify interaction between TON and jettons of TEP-74 and TEP-89 standards. There is a need to have a universally adopted WTON with a common standard of interaction and single source of origin.
+
+This document describes the deployed implementation of WTON that is based on TEP-89 standard, but introduces logic enabling a pipeline of transactions on minting (wrapping) and burning (unwrapping) TON.
+
+The introduced implementation of WTON contract is secure, efficient and meant to be universally adopted by ecosystem players.
 
 - **Source code:** https://github.com/NickNekilov/wton-contract
 - **Contract address:** [TO BE DEPLOYED]
 
-2. Standard that is defining interfaces for interaction with this deployed implementation.
-
 # Motivation
 
-Interaction with different kinds of assets requires additional conditional logic. To avoid that and unify interaction between TON and jettons of TEP-74 and TEP-89 standards, we introduce a jetton that is locking TON 1-to-1 on mint and releases TON on burn. We call it wrapped TON - WTON.
+Interaction with different kinds of assets requires additional conditional logic. To avoid that and unify interaction between TON and jettons of TEP-74 and TEP-89 standards, we introduce a jetton that is locking TON 1-to-1 on mint and releases TON on burn.
 
 Implementation of a wrapped TON contract doesnt require a lot of effort. As a matter of fact, several implementations already exist. The problem is that numerous different wrapped TONs (wTON, jTON etc) created by different developers bare lots of risks:
 
@@ -28,11 +30,15 @@ Implementation of a wrapped TON contract doesnt require a lot of effort. As a ma
 
 # Guide
 
-Despite the specification of usecase, one using WTON should be aware of how **wrapping** and **unwrapping** of TON generally works in our deployed implementation.
+As mentioned above, the universal WTON has a single source of origin. The contract address of the deployed solution is following:
+
+- **Contract address:** [TO BE DEPLOYED]
+
+Two core functionalities of WTON are **wrapping** and **unwrapping** TON.
 
 ### Wrapping
 
-After receiving a mint operation code with a message, WTON minter reserves `amount + minimal_balance()` TON on the minter contract and sends the rest to a WTON wallet of `recipient` within `internal_transfer` message.
+In order to wrap WTON, send a `mint` operation code with a message. WTON minter will reserve `amount + minimal_balance()` TON on the minter contract and will send the rest to a WTON wallet of `recipient` within `internal_transfer` message.
 
 One of the most important things is the ability to attach `forward_amount` and `forward_payload` to build a pipeline of transactions.
 
@@ -74,6 +80,8 @@ mint#864e0716 query_id:uint64 amount:Coins recipient:MsgAddress forward_amount:C
 
 release#71c6af6b query_id:uint64 custom_payload:(Maybe ^Cell) = InternalMsgBody;
 ```
+
+The source code of the deployed universal WTON implementation is available here: https://github.com/NickNekilov/wton-contract
 
 # Drawbacks
 
