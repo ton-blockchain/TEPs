@@ -119,10 +119,8 @@ If the Provider receives a subscription message from e.g. an `ton_subscribe` sub
 ```
 interface TonSubscription extends ProviderMessage {
   readonly type: 'ton_subscription';
-  readonly data: {
-    readonly subscription: string;
-    readonly result: unknown;
-  };
+  readonly subscriptionId: string;
+  readonly data: unknown;
 }
 ```
 
@@ -224,7 +222,7 @@ function that SHOULD be used by dApp for a subscription on blockchain events. Me
 
 ## ton_unsubscribe
 
-function that SHOULD be used by dApp for an unsubscription on blockchain events. `params` for this method is subscriptionID from `ton_subscribe` as string.
+function that SHOULD be used by dApp for an unsubscription on blockchain events. `params` for this method is account address from `ton_subscribe` as string.
 
 ## ton_sendTransaction
 
