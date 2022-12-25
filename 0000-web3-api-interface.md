@@ -36,6 +36,10 @@ Wallet - An end-user application that manages private keys, performs signing ope
 
 Remote Procedure Call (RPC) - A Remote Procedure Call (RPC), is any request submitted to a Provider for some procedure that is to be processed by a Provider, its Wallet, or its Client.
 
+## Versions
+
+For backwards compatibility and extension of this API, “wallets” MUST have a property on the `windows.ton` object prefixed with `isTEPs` and PR number. For example, for this the PR number is 105, then `windows.ton.isTEPs105` MUST return `true` if the full API specification is implemented by “wallet”.
+
 ## Request
 
 ```
