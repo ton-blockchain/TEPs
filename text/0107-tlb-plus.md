@@ -1,4 +1,4 @@
-- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
+- **TEP**: [107](https://github.com/ton-blockchain/TEPs/pull/107)
 - **title**: TLB Plus
 - **status**: Draft
 - **type**: Core
