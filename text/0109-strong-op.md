@@ -32,6 +32,8 @@ strong_id#7e8A2c00 op:uint256 message:^Cell = InternalMsgBody
 
 Sender would send this message with a calculated on client-side op value from the payload schema and wraps the original message. Smart contract should check if the message is wrapped and if so, it should check the op value. If the op value is not equal to the one calculated from the payload schema, the message should be rejected.
 
+To indicate that contract supports this wrapper, it MUST return a supported interface: `org.ton.strong.v1`.
+
 # Drawbacks
 
 - This is a wasteful wrapper, it introduces a one more reference in the messages that would increase gas and forward fees. This method is designed mostly to be used for human-operated wallets.
