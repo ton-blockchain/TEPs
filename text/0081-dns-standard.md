@@ -127,7 +127,7 @@ A smart contract that implements the TON DNS standard must contain a `dnsresolve
 ## DNS Records
 Standard categories:
 
-Category `sha256("dns_next_resolver)` - DNS next resolver, contains smart contract address of next DNS resolver in `dns_next_resolver` schema;
+Category `sha256("dns_next_resolver")` - DNS next resolver, contains smart contract address of next DNS resolver in `dns_next_resolver` schema;
 
 Category `sha256("wallet")` - TON Wallet, contains smart contract address in `dns_smc_address` schema;
 
