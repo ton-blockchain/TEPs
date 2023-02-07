@@ -2,10 +2,10 @@
 - **title**: TEP Template *(write title of TEP here)*
 - **status**: Draft
 - **type**: Meta / Core / Contract Interface *(choose one)*
-- **authors**: [Vladimir Lebedev](https://github.com/hacker-volodya) *(replace)*
-- **created**: DD.MM.YYYY *(fill with current date)*
-- **replaces**: [TEP-0](https://github.com/ton-blockchain/TEPs/blob/master/0000-template.md)
-- **replaced by**: -
+- **authors**: [Dima brook](https://github.com/orgs/XP-NETWORK/people/dima-brook) *(replace)*
+- **created**: 07.02.2023 *(fill with current date)*
+- **replaces**: [TEP-62](https://github.com/ton-blockchain/TEPs/blob/master/0000-template.md)
+- **replaced by**: - TEP-63
 
 # Summary
 
