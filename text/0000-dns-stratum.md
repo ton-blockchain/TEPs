@@ -43,7 +43,7 @@ a model for discovering contracts of this type.
 ### Internal messages
 When receiving an internal message with any specified op to change
 the DNS item's record, a smart contract that implements the DNS Stratum
-standart **should**:
+standard **should**:
    * Reject it if the sender does not have editorship for this category
    or the expiration time passed.
    * Otherwise should resend it to the DNS Item.
@@ -87,7 +87,7 @@ the following TEPs.
 
 # Unresolved questions
 
-### Should the filters architecture be present in the standart?
+### Should the filters architecture be present in the standard?
 If we add the following section to the [Specification](#specification), developers will have
 fewer opportunities to create contracts with advanced functionality according to
 this standard. However, this will make it much easier for scanners and
@@ -111,8 +111,8 @@ filter#89e1 white_list: Bool categories: Categories = Filter;
 _ (HashmapE 256 Filter) = Filters;
 ```
 
-Where every address hashpart (256 bits) points on an individual filter. \
-And every individial filter consists of whitelist boolean marker
+Where every address hashpart (256 bits) points to an individual filter. \
+And every individual filter consists of whitelist boolean marker
 and categories hashmap. In the categories hashmap every 256-bit key
 points on time of the editorship (or block) expiration.
 
@@ -121,7 +121,7 @@ points on time of the editorship (or block) expiration.
 
 # Future possibilities
 - To create an operator who will manage the rights to edit the domain.
-- To create a domain rent contract based on this standart.
+- To create a domain rent contract based on this standard.
 - To implement the possibility of transferring editorship.
 - To create a contract for selling the ability to change some records
   on some domain.
