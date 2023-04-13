@@ -26,7 +26,7 @@ Upon calling `get_locked_balance` get method Jetton Wallet should respond with i
 
 # Specification
 
-## New Jetton Master contracts
+## Jetton Wallet contracts
 An example of the implementation jetton wallet code can be found [here](https://github.com/OpenProduct/jetton-dao-contracts/blob/ece785f82e07a7833194992cfc0e2fa1a690b524/contracts/jetton_wallet.func#L367)
 
 
