@@ -1,5 +1,5 @@
 - **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
-- **title**: Lockable Jettons Wallets
+- **title**: Lockable Jetton Wallet
 - **status**: Draft
 - **type**: Contract Interface
 - **authors**: [KuznetsovNikita](https://github.com/KuznetsovNikita)
@@ -9,7 +9,7 @@
 
 # Summary
 
-This proposal suggests extending the standard Jetton Wallet by adding the option `get_locked_balance` get method.
+This proposal suggests extending the Jetton Wallet by adding the option `get_locked_balance` get method.
 
 # Motivation
 
