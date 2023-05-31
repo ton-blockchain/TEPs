@@ -2,7 +2,7 @@
 - **title**: Onchain reveal mechanic
 - **status**: Draft
 - **type**: Contract Interface
-- **authors**: [Andrey Tvorozhkov](https://github.com/hacker-volodya) *(replace)*
+- **authors**: [Andrey Tvorozhkov](https://github.com/tvorogme)
 - **created**: 31.10.2022
 - **replaces**: -
 - **replaced by**: -
