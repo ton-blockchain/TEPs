@@ -16,14 +16,14 @@ Proposal management is done using GitHub pull requests, the process is described
 
 ## Merged TEPs
 ## Active
-| TEP                                          | Title                                          | Type               | Created    |
-|----------------------------------------------|------------------------------------------------|--------------------|------------|
-| [1](./text/0001-tep-lifecycle.md)            | TEP Lifecycle                                  | Meta               | 11.06.2022 |
-| [62](./text/0062-nft-standard.md)            | NFT Standard                                   | Contract Interface | 01.02.2022 |
-| [64](./text/0064-token-data-standard.md)     | Token Data Standard                            | Contract Interface | 03.02.2022 |
-| [66](./text/0066-nft-royalty-standard.md)    | NFTRoyalty Standard Extension                  | Contract Interface | 12.02.2022 |
-| [74](./text/0074-jettons-standard.md)        | Fungible tokens (Jettons) standard             | Contract Interface | 12.03.2022 |
-| [81](./text/0081-dns-standard.md)            | TON DNS Standard                               | Contract Interface | 25.06.2022 |
-| [85](./text/0085-sbt-standard.md)            | SBT Contract                                   | Contract Interface | 09.08.2022 |
-| [89](./text/0089-jetton-wallet-discovery.md) | Discoverable Jettons Wallets                   | Contract Interface | 08.09.2022 |
-| [115](./text/0115-ton-connect.md)            | Communication between TON wallets and TON apps | Core               | 20.10.2022 |
+| TEP                                          | Title                              | Type               | Created    |
+|----------------------------------------------|------------------------------------|--------------------|------------|
+| [1](./text/0001-tep-lifecycle.md)            | TEP Lifecycle                      | Meta               | 11.06.2022 |
+| [62](./text/0062-nft-standard.md)            | NFT Standard                       | Contract Interface | 01.02.2022 |
+| [64](./text/0064-token-data-standard.md)     | Token Data Standard                | Contract Interface | 03.02.2022 |
+| [66](./text/0066-nft-royalty-standard.md)    | NFTRoyalty Standard Extension      | Contract Interface | 12.02.2022 |
+| [74](./text/0074-jettons-standard.md)        | Fungible tokens (Jettons) standard | Contract Interface | 12.03.2022 |
+| [81](./text/0081-dns-standard.md)            | TON DNS Standard                   | Contract Interface | 25.06.2022 |
+| [85](./text/0085-sbt-standard.md)            | SBT Contract                       | Contract Interface | 09.08.2022 |
+| [89](./text/0089-jetton-wallet-discovery.md) | Discoverable Jettons Wallets       | Contract Interface | 08.09.2022 |
+| [115](./text/0115-ton-connect.md)            | TON Connect                        | Core               | 20.10.2022 |
