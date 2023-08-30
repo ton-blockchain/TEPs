@@ -108,9 +108,11 @@ Example:
 }
 ```
 
-##### 2. `/items/:offset/:count`
+##### 2. `/items?offset=:offset&count=:count`
 
 Returns information about multiple items at once.
+
+API implementations MAY impose a limit on the `count` argument. If `count` exceeds the imposed limit, the API implementations MUST treat that request as if it had `count` set to the imposed limit, instead of the actual `count`.
 
 MUST return a JSON object with the following fields:
 
