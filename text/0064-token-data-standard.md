@@ -17,7 +17,7 @@ For applications like wallets or marketplaces it is quite useful to be able auto
 
 # Guide
 
-Each token (and also NFT Collection) has its own metadata. It contains some info about token, such as title and associated image. Metadata can be stored offchain (smart contract will contain only a link to json) or onchain (all data will be stored in smart contract).
+Each token (and also NFT Collection) has its own metadata. It contains some info about token, such as title and associated image. Metadata can be stored offchain (smart contract will contain only a link to json), onchain (all data will be stored in smart contract), or in TON Storage (smart contract will contain only a bag id of a json).
 
 ## NFT Collection metadata example (offchain)
 
@@ -78,10 +78,15 @@ Three options can be used:
    The first byte is `0x00` and the rest is key/value dictionary.
    Key is sha256 hash of string.
    Value is data encoded as described in "Data serialization" paragraph.
-3. **Semi-chain content layout**
+3. **TON Storage content layout**
+   The first byte is `0x02` and the rest is the Bag ID pointing to the JSON document containing the token metadata. Bag ID is stored as a regular 256-bit integer.
+4. **Semi-chain content layout**
    Data encoded as described in "2. On-chain content layout".
-   The dictionary must have `uri` key with a value containing the URI pointing to the JSON document with token metadata.
-   Clients in this case should merge the keys of the on-chain dictionary and off-chain JSON doc.
+   1. **Off-chain continuation**
+      The dictionary must have `uri` key with a value containing the URI pointing to the JSON document with token metadata.
+      Clients in this case should merge the keys of the on-chain dictionary and off-chain JSON doc.   
+   2. **TON Storage continuation**
+      The idea is same as in **4.1** but the key is `bagid` and the value is an integer value of Bag ID.
 
 ## Data serialization
 Data that does not fit in one cell can be stored in two ways:
