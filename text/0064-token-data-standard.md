@@ -17,7 +17,7 @@ For applications like wallets or marketplaces it is quite useful to be able auto
 
 # Guide
 
-Each token (and also NFT Collection) has its own metadata. It contains some info about token, such as title and associated image. Metadata can be stored offchain (smart contract will contain only a link to json) or onchain (all data will be stored in smart contract).
+Each token (and also NFT Collection) has its own metadata. It contains some info about token, such as title and associated image. Metadata can be stored off-chain, whereby the smart contract will contain only a link to the JSON; on-chain, meaning all data will be stored in the smart contract; in TON Storage, where the smart contract will contain only a bag ID of the JSON; or semi-chain, a method where some part of the data will be stored in the contract, as with on-chain, and the rest of the data will be stored either in TON Storage or off-chain.
 
 ## NFT Collection metadata example (offchain)
 
@@ -78,10 +78,15 @@ Three options can be used:
    The first byte is `0x00` and the rest is key/value dictionary.
    Key is sha256 hash of string.
    Value is data encoded as described in "Data serialization" paragraph.
-3. **Semi-chain content layout**
+3. **TON Storage content layout**
+   The first byte is `0x02` and the rest is the Bag ID pointing to the JSON document containing the token metadata. The Bag ID is stored as a regular 256-bit integer.
+4. **Semi-chain content layout**
    Data encoded as described in "2. On-chain content layout".
-   The dictionary must have `uri` key with a value containing the URI pointing to the JSON document with token metadata.
-   Clients in this case should merge the keys of the on-chain dictionary and off-chain JSON doc.
+   1. **Off-chain continuation**
+      The dictionary must have `uri` key with a value containing the URI pointing to the JSON document with token metadata.
+      Clients in this case should merge the keys of the on-chain dictionary and off-chain JSON doc.   
+   2. **TON Storage continuation**
+      Same as in **4.1** but the key is `bagid` and the value is an integer value of Bag ID.
 
 ## Data serialization
 Data that does not fit in one cell can be stored in two ways:
@@ -102,7 +107,7 @@ Data that does not fit in one cell can be stored in two ways:
 
 Data that fits into one cell is stored in "Snake format".
 
-If the prefix is not `0x00` or `0x01`, then the data is probably encoded by the TL-B schema (relating to a specific smart contract), for example, like in the [DNS contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0081-dns-standard.md#dns-records).
+If the prefix is not `0x00`, `0x01` or `0x02`, then the data is probably encoded by the TL-B schema (relating to a specific smart contract), for example, like in the [DNS contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0081-dns-standard.md#dns-records).
 
 ## Informal TL-B scheme:
 ```
@@ -111,27 +116,30 @@ snake#00 data:(SnakeData ~n) = ContentData;
 chunks#01 data:ChunkedData = ContentData;
 onchain#00 data:(HashMapE 256 ^ContentData) = FullContent;
 offchain#01 uri:Text = FullContent;
+tonstorage#02 bagid:uint256 = FullContent;
 ```
 
 Note, that while TL-B scheme does not constrain bit size of each chunk it is expected that all chunks contain ceil number of bytes.
 
 ## NFT metadata attributes
 1. `uri` - Optional. Used by "Semi-chain content layout". ASCII string. A URI pointing to JSON document with metadata.
-2. `name` - Optional. UTF8 string. Identifies the asset.
-3. `description` - Optional. UTF8 string. Describes the asset.
-4. `image` - Optional. ASCII string. A URI pointing to a resource with mime type image.
-5. `image_data` - Optional. Either binary representation of the image for onchain layout or base64 for offchain layout.
+2. `bagid` - Optional. Used by "Semi-chain content layout". Integer. A Bag ID pointing to JSON document with metadata.
+3. `name` - Optional. UTF8 string. Identifies the asset.
+4. `description` - Optional. UTF8 string. Describes the asset.
+5. `image` - Optional. ASCII string. A URI pointing to a resource with mime type image.
+6. `image_data` - Optional. Either binary representation of the image for onchain layout or base64 for offchain layout.
 
 ## Jetton metadata attributes
 1. `uri` - Optional. Used by "Semi-chain content layout". ASCII string. A URI pointing to JSON document with metadata.
-2. `name` - Optional. UTF8 string. The name of the token - e.g. "Example Coin".
-3. `description` - Optional. UTF8 string. Describes the token - e.g. "This is an example jetton for the TON network".
-4. `image` - Optional. ASCII string. A URI pointing to a jetton icon with mime type image.
-5. `image_data` - Optional. Either binary representation of the image for onchain layout or base64 for offchain layout.
-6. `symbol` - Optional. UTF8 string. The symbol of the token - e.g. "XMPL". Used in the form "You received 99 XMPL".
-7. `decimals` - Optional. If not specified, 9 is used by default. UTF8 encoded string with number from 0 to 255. The number of decimals the token uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation, while 0 means that tokens are indivisible: user representation of token number should correspond to token amount in wallet-contract storage.
+2. `bagid` - Optional. Used by "Semi-chain content layout". Integer. A Bag ID pointing to JSON document with metadata.
+3. `name` - Optional. UTF8 string. The name of the token - e.g. "Example Coin".
+4. `description` - Optional. UTF8 string. Describes the token - e.g. "This is an example jetton for the TON network".
+5. `image` - Optional. ASCII string. A URI pointing to a jetton icon with mime type image.
+6. `image_data` - Optional. Either binary representation of the image for onchain layout or base64 for offchain layout.
+7. `symbol` - Optional. UTF8 string. The symbol of the token - e.g. "XMPL". Used in the form "You received 99 XMPL".
+8. `decimals` - Optional. If not specified, 9 is used by default. UTF8 encoded string with number from 0 to 255. The number of decimals the token uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation, while 0 means that tokens are indivisible: user representation of token number should correspond to token amount in wallet-contract storage.
    In case you specify decimals, it is highly recommended that you specify this parameter on-chain and that the smart contract code ensures that this parameter is immutable.
-8. `amount_style` - Optional. Needed by external applications to understand which format for displaying the number of jettons. 
+9. `amount_style` - Optional. Needed by external applications to understand which format for displaying the number of jettons. 
  - "n" - number of jettons (default value). If the user has 100 tokens with decimals 0, then display that user has 100 tokens
  - "n-of-total" - the number of jettons out of the total number of issued jettons. For example, totalSupply Jetton = 1000. A user has 100 jettons in the jetton wallet. For example must be displayed in the user's wallet as 100 of 1000 or in any other textual or graphical way to demonstrate the particular from the general.
  - "%" - percentage of jettons from the total number of issued jettons. For example, totalSupply Jetton = 1000. A user has 100 jettons in the jetton wallet. For example it should be displayed in the user's wallet as 10%.
@@ -147,7 +155,7 @@ None
 
 Proposed standard allows developers to extend (meta)data on demand by introducing new fields without risk of collisions. An alternative to this approach could be [predefined set of data fields](https://github.com/ton-blockchain/TIPs/issues/79) which, from first glance, could save some storage and gas fees. However, there is no reason not to store the metadata in some compact predefined form in the contract and then just render it in get method (which works offline and thus doesn't waste gas) as Data Standard suggested, allowing lower fees without sacrificing flexibility.
 
-While on-chain data storage is preferred, off-chain/semi-chain options allow flexibly adapt tokens for required usecases.
+While on-chain data storage is preferred, off-chain, semi-chain and TON Storage options allow flexibly adapt tokens for required usecases.
 
 # Prior art
 
@@ -156,7 +164,7 @@ While on-chain data storage is preferred, off-chain/semi-chain options allow fle
 
 # Unresolved questions
 
-1. Shall we authenticate offchain data to prevent it from changing? ([NoelJacob](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1029900008))
+1. Shall we authenticate off-chain data to prevent it from changing? ([NoelJacob](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1029900008))
 2. Shall we support semichain layout, where only some metadata fields may be stored onchain? ([tvorogme](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1028622110))
 3. Shall we standardize attributes, traits, and non-image content? ([tolya-yanot](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1041919338))
 
