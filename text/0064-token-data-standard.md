@@ -107,7 +107,7 @@ Data that does not fit in one cell can be stored in two ways:
 
 Data that fits into one cell is stored in "Snake format".
 
-If the prefix is not `0x00` or `0x01`, then the data is probably encoded by the TL-B schema (relating to a specific smart contract), for example, like in the [DNS contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0081-dns-standard.md#dns-records).
+If the prefix is not `0x00`, `0x01` or `0x02`, then the data is probably encoded by the TL-B schema (relating to a specific smart contract), for example, like in the [DNS contract](https://github.com/ton-blockchain/TEPs/blob/master/text/0081-dns-standard.md#dns-records).
 
 ## Informal TL-B scheme:
 ```
@@ -155,7 +155,7 @@ None
 
 Proposed standard allows developers to extend (meta)data on demand by introducing new fields without risk of collisions. An alternative to this approach could be [predefined set of data fields](https://github.com/ton-blockchain/TIPs/issues/79) which, from first glance, could save some storage and gas fees. However, there is no reason not to store the metadata in some compact predefined form in the contract and then just render it in get method (which works offline and thus doesn't waste gas) as Data Standard suggested, allowing lower fees without sacrificing flexibility.
 
-While on-chain data storage is preferred, off-chain/semi-chain options allow flexibly adapt tokens for required usecases.
+While on-chain data storage is preferred, off-chain, semi-chain and TON Storage options allow flexibly adapt tokens for required usecases.
 
 # Prior art
 
@@ -164,7 +164,7 @@ While on-chain data storage is preferred, off-chain/semi-chain options allow fle
 
 # Unresolved questions
 
-1. Shall we authenticate offchain data to prevent it from changing? ([NoelJacob](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1029900008))
+1. Shall we authenticate off-chain data to prevent it from changing? ([NoelJacob](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1029900008))
 2. Shall we support semichain layout, where only some metadata fields may be stored onchain? ([tvorogme](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1028622110))
 3. Shall we standardize attributes, traits, and non-image content? ([tolya-yanot](https://github.com/ton-blockchain/TIPs/issues/64#issuecomment-1041919338))
 
