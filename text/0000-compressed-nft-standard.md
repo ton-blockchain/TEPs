@@ -39,10 +39,10 @@ Example:
 ```json
 {
 	"metadata": {
-		"owner": "UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ", // user-friendly url-safe address string
+		"owner": "0:0000000000000000000000000000000000000000000000000000000000000000", // raw address string
 		"individual_content": "te6cckEBAQEAAgAAAEysuc0=" // base64 BoC serialized Cell
 	},
-	"index": 0
+	"index": "0" // number as a string
 }
 ```
 
@@ -51,7 +51,7 @@ Example:
 NFT Collection smart contract MUST implement:
 
 #### Get-methods
-1. `get_nft_api_info()` returns `(int version, cell uri)`. `version` is the version of the API that augments this contract. This standard covers API version 1, see below for description. `uri` is the API URI in `SnakeText` format **not including the version postfix**, and the final API URI must be formed as follows: `decoded-uri + '/v1'`.
+1. `get_nft_api_info()` returns `(int version, cell uri)`. `version` is the version of the API that augments this contract. This standard covers API version 1, see below for description. `uri` is the **final** (i.e. including any postfixes) root API URI in `SnakeText` format **without a trailing slash `/`**.
 
 #### Internal messages
 ##### 1. `claim`
@@ -77,11 +77,11 @@ claim#013a3ca6 query_id:uint64 item_index:uint256 proof:^Cell = InternalMsgBody;
 
 ## Augmenting API version 1
 
-Once a user has obtained and decoded the URI using the `get_api_info` get method, verified the version (this standard covers version 1 only) and added the `/v1` postfix, they can use the following methods:
+Once a user has obtained and decoded the URI using the `get_nft_api_info` get method, verified the version (this standard covers version 1 only) and added the `/v1` postfix, they can use the following methods:
 
 (`:arg` means an argument with name `arg`)
 
-##### 1. `/item/:index`
+##### 1. `/items/:index`
 
 Returns full information about a particular item including the proof Cell required to claim it.
 
@@ -99,10 +99,10 @@ Example:
 {
 	"item": {
 		"metadata": {
-			"owner": "UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ",
+			"owner": "0:0000000000000000000000000000000000000000000000000000000000000000",
 			"individual_content": "te6cckEBAQEACAAADDAuanNvbuTiyMU="
 		},
-		"index": 0
+		"index": "0"
 	},
 	"proof_cell": "te6cckEBBgEAeQACAAEDAUOAFa1KqA2Oswxbo4Rgh/q6NEaPLuK9o3fo1TFGn+MySjqQAgAMMi5qc29uAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQBQF4S3GMDJY/HoZd6TCREIOnCaYlF23hNzJaSsfMd1S7nBQAA8muEeQ=="
 }
@@ -129,16 +129,16 @@ Example: (with `offset` 0, `count` 4, with the item list having an item index 0 
 	"items": [
 		{
 			"metadata": {
-				"owner": "UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ",
+				"owner": "0:0000000000000000000000000000000000000000000000000000000000000000",
 				"individual_content": "te6cckEBAQEACAAADDAuanNvbuTiyMU="
 			},
-			"index": 0
+			"index": "0"
 		},
 		null,
 		null,
 		null
 	],
-	"last_index": 4
+	"last_index": "4"
 }
 ```
 
@@ -158,8 +158,8 @@ Other fields MAY be returned.
 Example:
 ```json
 {
-	"last_index": 0,
-	"address": "UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ"
+	"last_index": "0",
+	"address": "0:0000000000000000000000000000000000000000000000000000000000000000"
 }
 ```
 
