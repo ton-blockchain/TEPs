@@ -58,11 +58,11 @@ Ignoring this or any similar standart for burning NFTs will affect users who wan
 
 # Prior art
 
-TODO
+-
 
 # Unresolved questions
 
-TODO
+-
 
 # Future possibilities
 
