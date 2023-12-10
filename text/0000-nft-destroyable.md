@@ -45,11 +45,16 @@ Mint can be done using basic NFT collection where nft-destroyable is an item. Al
 
 # Drawbacks
 
-TODO
+After burning NFT it is impossible to get former NFT content. 
 
 # Rationale and alternatives
 
-TODO
+- Why is this design the best in the space of possible designs?
+This design has all possible functions of burning NFT (NFT transfers its balance to the owner, NFT can't be reminted, NFT looks like it was never minted) 
+- What other designs have been considered and what is the rationale for not choosing them?
+Was considered displaying sended to zero address NFTs as burned, but this solution has problems described in the "Motivation" section
+- What is the impact of not doing this?
+Ignoring this or any similar standart for burning NFTs will affect users who wants to remove NFTs from their wallets and also creators of NFT collections who can accidentally mint unwanted NFT.
 
 # Prior art
 
