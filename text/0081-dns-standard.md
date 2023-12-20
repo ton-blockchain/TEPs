@@ -143,10 +143,7 @@ proto_list_next$1 head:Protocol tail:ProtoList = ProtoList;
 
 
 
-cap_method_seqno#5371 = SmcCapability;
-cap_method_pubkey#71f4 = SmcCapability;
 cap_is_wallet#2177 = SmcCapability;
-cap_name#ff name:Text = SmcCapability;
 
 cap_list_nil$0 = SmcCapList;
 cap_list_next$1 head:SmcCapability tail:SmcCapList = SmcCapList;
@@ -193,3 +190,13 @@ None
 # Future possibilities
 
 1. Implement private (encrypted) fields
+
+# Changelog
+
+* 20 Dec 2023 - deleted unused capabilities:
+  
+   ```
+   cap_method_seqno#5371 = SmcCapability;
+   cap_method_pubkey#71f4 = SmcCapability;
+   cap_name#ff name:Text = SmcCapability;
+   ```
