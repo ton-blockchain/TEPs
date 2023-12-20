@@ -82,6 +82,7 @@ Three options can be used:
    Data encoded as described in "2. On-chain content layout".
    The dictionary must have `uri` key with a value containing the URI pointing to the JSON document with token metadata.
    Clients in this case should merge the keys of the on-chain dictionary and off-chain JSON doc.
+   In case of collisions (the field exists in both off-chain data and on-chain data), on-chain values are used.
 
 ## Data serialization
 Data that does not fit in one cell can be stored in two ways:
@@ -171,3 +172,5 @@ None
 * 31 Aug 2022 - added note about data encoded in TL-B schema in "Data serialization" paragraph.
 
 * 14 Oct 2022 - render_type and amount_style for Jetton metadata
+
+* 20 Dec 2023 - added clarification for semi-chain data: "In case of collisions (the field exists in both off-chain data and on-chain data), on-chain values are used."
