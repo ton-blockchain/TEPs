@@ -1,11 +1,9 @@
 - **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
-- **title**: TEP Template *(write title of TEP here)*
+- **title**: Referral code in Query ID
 - **status**: Draft
-- **type**: Meta / Core / Contract Interface *(choose one)*
-- **authors**: [Vladimir Lebedev](https://github.com/hacker-volodya) *(replace)*
-- **created**: DD.MM.YYYY *(fill with current date)*
-- **replaces**: [TEP-0](https://github.com/ton-blockchain/TEPs/blob/master/0000-template.md)
-- **replaced by**: -
+- **type**: Contract Interface
+- **authors**: [Denis Subbotin](https://github.com/mr-tron), [Oleg Andreev](https://github.com/oleganza)
+- **created**: 26.12.2023
 
 # Summary
 
