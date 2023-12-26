@@ -16,7 +16,7 @@ Standard way to self-identify apps that initiate transactions makes it easier to
 # Guide
 
 * Applications and services may self-assign unique identifiers to disambiguate their application from others.
-* In privacy-preserving applications users may expect absence of any referral codes. In such cases apps may offer an option to leave the referral code as all-zeroes or use other app’s well-known identifier at random.
+* In privacy-preserving applications users may expect absence of any referral codes. In such cases apps may offer an option to leave the referral code as all-zeros or use other app’s well-known identifier at random.
 
 # Specification
 
