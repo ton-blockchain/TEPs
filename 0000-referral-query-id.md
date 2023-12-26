@@ -7,40 +7,29 @@
 
 # Summary
 
-Which feature this document introduces? Describe it in one paragraph.
+This is a proposal to split Query ID in two halves: the referral code and arbitrary app-specific data.
 
 # Motivation
 
-Which problem we address? Why it is important to make a new TEP?
+Standard way to self-identify apps that initiate transactions makes it easier to operate referral and profit-sharing programs and gather usage statistics.
 
 # Guide
 
-Explain this document in simple language, as if you were teaching it to another developers. Give examples how your feature will work in real life.
+* Applications and services may self-assign unique identifiers to disambiguate their application from others.
+* In privacy-preserving applications users may expect absence of any referral codes. In such cases apps may offer an option to leave the referral code as all-zeroes or use other app’s well-known identifier at random.
 
 # Specification
 
-This section describes your feature formally. It contains requirements, which must be followed in order to implement your TEP. To keep things formal, it is convenient to follow [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt). You should include following text at the beginning of this section:
+Split 64-bit Query ID in two halves:
 
-> The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
+* First 32 bits (high bits) identify the author of the transaction: dapp or wallet that originates the message to the TON network.
+* Second 32 bits (low bits) are reserved for arbitrary use: identifying individual queries in smart-contracts, random nonces etc.
 
 # Drawbacks
 
-Why should we *not* do this?
+This proposal splits the space of possible identifiers in two equal halves. If one's application needs a longer than 32-bit identifiers for the queries, part of the referral code space must be used. 
 
 # Rationale and alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not choosing them?
-- What is the impact of not doing this?
+The suggested proposal is simple and easy to follow, making on-chain statistics and referral programs easy to operate.
 
-# Prior art
-
-Discuss prior art, both the good and the bad, in relation to this proposal. How the problem stated in "Motivation" section was solved in another blockchains? This section encourages you as an author to learn from others' mistakes. Feel free to include links to blogs, books, Durov's whitepapers, etc.
-
-# Unresolved questions
-
-If there are some questions that have to be discussed during review process or to be solved during implementation of this TEP, write it here.
-
-# Future possibilities
-
-Do you have ideas, which things can be implemented on top of this TEP later? Write possible ideas of new TEPs, which are related to this TEP.
