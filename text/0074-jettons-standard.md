@@ -25,7 +25,7 @@ Jetton standard describes:
 ## Useful links
 1. [Reference jetton implementation](https://github.com/ton-blockchain/token-contract/)
 2. [Jetton deployer](https://jetton.live/)
-3. FunC Jetton lesson ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/main/9lesson/ninthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/main/9lesson/ninthlesson.md))
+3. FunC Jetton lesson ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/main/arhive/9lesson/ninthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/main/9lesson/ninthlesson.md))
 
 # Specification
 
