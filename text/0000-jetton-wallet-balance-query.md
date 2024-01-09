@@ -2,7 +2,7 @@
 - **title**: Jetton Wallet Balance Query
 - **status**: Draft
 - **type**: Contract Interface
-- **authors**: [Ken](https://github.com/0kenx)
+- **authors**: [Ken](https://github.com/0kenx) [Microcosm Labs](https://github.com/microcosm-labs)
 - **created**: 09.01.2024
 - **replaces**: -
 - **replaced by**: -
@@ -57,13 +57,9 @@ New applications relying on this standard shall also add branch logic for alread
 
 # Rationale and alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not choosing them?
-- What is the impact of not doing this?
+Token standards of other asynchronous blockchains provide similar functions. This functionality cannot be achieved otherwise.
 
 # Prior art
-
-Token standards of other asynchronous blockchains provide similar functions.
 
 - [ICRC-1 Token Standard](https://github.com/dfinity/ICRC-1/tree/main/standards/ICRC-1)
 - [Near Token Standard](https://nomicon.io/Standards/Tokens/FungibleToken/Core)
