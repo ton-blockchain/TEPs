@@ -1,4 +1,4 @@
-- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
+- **TEP**: [137](https://github.com/ton-blockchain/TEPs/pull/137)
 - **title**: Jetton Wallet Balance Query
 - **status**: Draft
 - **type**: Contract Interface
