@@ -1,4 +1,4 @@
-- **TEP**: [139](https://github.com/ton-blockchain/TEPs/pull/139)
+- **TEP**: [140](https://github.com/ton-blockchain/TEPs/pull/140)
 - **title**: *Programmable Action Phase*
 - **status**: Draft
 - **type**: Core
