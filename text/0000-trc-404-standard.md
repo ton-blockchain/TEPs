@@ -23,22 +23,27 @@ TEP404 standard describes:
 
 # Guide
 
-The core process of the TRC404 protocol are as following:
-1.Transfer TRC404 jetton: When userA transfer an TRC404 jetton to userB,userA might burn one of userA's NFT,and TRC404 protocol might mint an new TRC404 NFT for userB.
+The core process of the TRC404 protocol are as following:  
+  
+1.Transfer TRC404 jetton: When userA transfer an TRC404 jetton to userB,userA might burn one of userA's NFT,and TRC404 protocol might mint an new TRC404 NFT for userB.  
 
-2.Transfer TRC404 NFT: When userA transfer an TRC404 NFT to userB,the TRC404 jetton balance of userA will decrease one,the TRC404 jetton balance of userA will increase one.
+2.Transfer TRC404 NFT: When userA transfer an TRC404 NFT to userB,the TRC404 jetton balance of userA will decrease one,the TRC404 jetton balance of userA will increase one.  
 
-The first project implemented TRC404 protocol: [TRC404 probably not found](https://github.com/NotFoundLabs/TRC-404)
+The first project implemented TRC404 protocol: [TRC404 probably not found](https://github.com/NotFoundLabs/TRC-404)  
 
 
 # Specification
 
 
-In order to fully compatible with existing Jetton and NFT standard.TRC404 standard contains four contracts: 
+In order to fully compatible with existing Jetton and NFT standard.TRC404 standard contains four contracts:   
+  
 1.TRC404 Master(Compatible with jetton master standard contract)  
+  
 2.TRC404 Wallet(Compatible with jetton wallet standard contract)  
+  
 3.TRC404 NFT Collection(Compatible with nft collection standard contract)  
-2.TRC404 NFT Item(Compatible with nft item standard contract)  
+  
+4.TRC404 NFT Item(Compatible with nft item standard contract)  
 
 
 ## Jetton master contract
