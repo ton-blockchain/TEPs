@@ -33,6 +33,7 @@ This section describes your feature formally. It contains requirements, which mu
 # Drawbacks
 
 - Most likely, sales/auction contracts will have to be changed to work with NFTs of this type
+- All existing wallets will need to be updated to support this type of NFT and the ability to confirm ownership transfers (Like sending trades in Steam)
 
 # Rationale and alternatives
 
