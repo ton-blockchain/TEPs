@@ -32,17 +32,11 @@ This section describes your feature formally. It contains requirements, which mu
 
 # Drawbacks
 
-**This must be filled out**
-
-Why should we *not* do this?
+- Most likely, sales/auction contracts will have to be changed to work with NFTs of this type
 
 # Rationale and alternatives
 
-**This must be filled out**
-
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered and what is the rationale for not choosing them?
-- What is the impact of not doing this?
+- Index all new NFT-collections and show in apps only if it's smart-contract standard or not malicios
 
 # Prior art
 
