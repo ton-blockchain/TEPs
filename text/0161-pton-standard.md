@@ -2,7 +2,7 @@
 - **title**: Proxy TON for DeFi applications
 - **status**: Draft
 - **type**: Contract Interface
-- **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
+- **authors**: [STON.fi](https://ston.fi), [Dario Tarantini](https://github.com/dariotarantini)
 - **created**: 13.06.2024
 - **replaces**: -
 - **replaced by**: -
