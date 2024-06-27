@@ -19,7 +19,7 @@ A standard interface will greatly simplify interaction and usage of TON in dApps
 
 ## Useful links
 
-1. [Reference pTON implementation](https://docs.ston.fi)
+1. [Reference pTON implementation](https://github.com/ston-fi/pton-contracts)
 
 # Specification
 
