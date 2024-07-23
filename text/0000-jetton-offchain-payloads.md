@@ -32,7 +32,7 @@ Required by [mintless jettons](https://github.com/ton-blockchain/TEPs/blob/maste
 
 ## API
 
-Это апи только описывает только метод полученния данных которые надо приложить в custom payload при переводе jetton. 
+This API only describes the method for obtaining data that must be included in the `custom_payload` when transferring jetton.
 
 ### GetMethods
 
