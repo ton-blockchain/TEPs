@@ -151,7 +151,7 @@ MUST return a JSON object with the following fields:
 | Name | Type | Description |
 | --- | --- | --- |
 | last_index | number | The index of the last item in the item list. Enumeration of items past this index cannot be done |
-| address | string | The address of the collection smart contract that this API augments. Encoded as user-friendly url-safe address string |
+| address | string | The address of the collection smart contract that this API augments. Encoded as raw address string |
 
 Other fields MAY be returned.
 
