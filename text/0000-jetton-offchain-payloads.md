@@ -36,15 +36,15 @@ This API only describes the method for obtaining data that must be included in t
 
 ### Metadata
 
-In metadate stored according to [Metadata standard](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md) should be added field `custom_payload_api_url` with `string` type in json or `ContentData` type in TL-B:
+In metadate stored according to [Metadata standard](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md) should be added field `custom_payload_api_uri` with `string` type in json or `ContentData` type in TL-B:
 
 ```json
 {
-  "custom_payload_api_url":  "https://example.com/api/v1/jetton/0:1234567890absdef1234567890absdef1234567890absdef1234567890absdef"
+  "custom_payload_api_uri":  "https://example.com/api/v1/jetton/0:1234567890absdef1234567890absdef1234567890absdef1234567890absdef"
 }
 ```
 
-`custom_payload_api_url` is the **final** (i.e. including any postfixes) root API URI **without a trailing slash `/`**
+`custom_payload_api_uri` is the **final** (i.e. including any postfixes) root API URI **without a trailing slash `/`**
 
 
 ### API version 1
