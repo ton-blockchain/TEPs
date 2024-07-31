@@ -34,15 +34,22 @@ Required by [mintless jettons](https://github.com/ton-blockchain/TEPs/blob/maste
 
 This API only describes the method for obtaining data that must be included in the `custom_payload` when transferring jetton.
 
-### GetMethods
+### Metadata
 
-1. `get_jetton_custom_api_info()` returns `(int version, cell uri)`. `version` is the version of the API that augments this contract. 
-This standard covers API version 1, see below for description. `uri` is the **final** (i.e. including any postfixes) root API URI in `SnakeText` format **without a trailing slash `/`**.
+In metadate stored according to [Metadata standard](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md) should be added field `custom_payload_api_url` with `string` type in json or `ContentData` type in TL-B:
+
+```json
+{
+  "custom_payload_api_url":  "https://example.com/api/v1/jetton/0:1234567890absdef1234567890absdef1234567890absdef1234567890absdef"
+}
+```
+
+`custom_payload_api_url` is the **final** (i.e. including any postfixes) root API URI **without a trailing slash `/`**
 
 
 ### API version 1
 
-Once a user has obtained and decoded the URI using the `get_jetton_custom_api_info` get method, verified the version (this standard covers version 1 only):
+Once a user has obtained and decoded the URI from metadata:
 
 (`:arg` means an argument with name `arg`)
 
