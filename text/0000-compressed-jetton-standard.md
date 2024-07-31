@@ -74,16 +74,17 @@ After that standard transfer operation should be executed.
 
 ## Indexation and api
 
-
-
 ### Custom payload and indexation API
 
 Described in [Jetton Offchain Payloads](https://github.com/ton-blockchain/TEPs/blob/master/text/0000-jetton-offchain-payloads.md) TEP.
 
-### GetMethods
+###
 
-Method `is_minted()` for jetton wallets returns `bool` whether jetton is minted or not.
+In metadate stored according to [Metadata standard](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md) 
+should be added field "mintles_merkle_dump_uri" with `string` type in json or `ContentData` type in TL-B:
 
-//TODO: make better naming
-Method `get_merkle_dump()` returns (int256 merkle_hash, cell uri) where `uri` is the **final** (i.e. including any postfixes) root URI 
-in `SnakeText` format **without a trailing slash `/`** pointed to BoC with merkle tree dump (as file or to directory with files).
+`mintles_merkle_dump_uri` pointed to binary file contains BoC with merkle tree of all jettons wallets.
+
+## GetMethods
+
+Method `is_claimed()` for jetton wallets returns `bool` whether jetton is minted or not.
