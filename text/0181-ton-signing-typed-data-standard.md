@@ -2,7 +2,7 @@
 - **title**: *TON Signing Typed Data Standard*
 - **status**: Draft
 - **type**: Contract Interface
-- **authors**: [Dr. Awesome Doge](https://github.com/hacker-volodya), [Pei](p@tonx.tg), [CC, Wang](https://github.com/a2468834), [Wei Yi](https://github.com/WeiYiChiuAtTonfura)
+- **authors**: [Dr. Awesome Doge](https://github.com/hacker-volodya), [Pei](p@tonx.tg), [CC Wang](https://github.com/ccwang-at-TONX), [Wei Yi](https://github.com/WeiYiChiuAtTonfura)
 - **created**: 30.07.2024
 
 # Summary
