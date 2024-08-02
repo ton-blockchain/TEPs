@@ -128,12 +128,11 @@ sequenceDiagram
 
 ## Example in TypeScript
 
-https://gist.github.com/a2468834/648bbd72d27cc2dac638b7589c4aa4cf
+https://gist.github.com/a2468834/17dc14ed6e64a30b3df5e44c5da04314
 
+## Example in FunC
 
-## Example in FUNC
-
-https://gist.github.com/a2468834/40f7513a5510159bc37c8b3d4249c0d3
+https://gist.github.com/a2468834/5fa6b5698c0b478296fbedfdc12edb0a
 
 
 # Rationale
