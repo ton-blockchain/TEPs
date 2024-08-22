@@ -1,5 +1,5 @@
-- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0)
-- **title**: Compressed Jetton
+- **TEP**: [177](https://github.com/ton-blockchain/TEPs/pull/177)
+- **title**: Mintless jettons
 - **status**: Draft
 - **type**: Contract Interface
 - **authors**: [Emelyanenko Kirill](https://github.com/EmelyanenkoK),  [Denis Subbotin](https://github.com/mr-tron)
@@ -22,7 +22,7 @@ A straightforward way to achieve properties described in [Motivation](#motivatio
 
 ### Useful links
 
-1. [Reference contract implementation](https://github.com/cJetton/cJetton)
+1. [Reference contract implementation](https://github.com/ton-community/mintless-jetton)
 2. [Custom payload API](ttps://github.com/ton-blockchain/TEPs/blob/master/text/0000-jetton-offchain-payloads.md)
 
 # Specification
@@ -48,7 +48,7 @@ transfer#0f8a7ea5 query_id:uint64 amount:(VarUInteger 16) destination:MsgAddress
 
 This standard propose to use `custom_payload` to store there _claim airdrop_ command with the following scheme:
 ```
-merkle_airdrop_claim proof:^Cell = CustomPayload;
+merkle_airdrop_claim#0df602d6 proof:^Cell = CustomPayload;
 ```
 
 Where proof is _MerkleProof_ exotic cell of `Airdrop` structure with all unused branches pruned and the following scheme:
