@@ -4,12 +4,12 @@
 - **type**: Contract Interface
 - **authors**: [luciferzxj](https://github.com/luciferzxj)
 - **created**: 29.08.2024
-- **replaces**: [TEP-62](https://github.com/ton-blockchain/TEPs/blob/master/0062-nft-standard.md)
+- **replaces**: [TEP-62](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md)
 - **replaced by**: -
 
 # Summary
 
-This standard is an extension of [TEP-62](https://github.com/ton-blockchain/TEPs/blob/master/0062-nft-standard.md). It proposes an additional role (`user`) that can be granted to addresses and a time when the role is automatically revoked (`expires`). The `user` role represents permission to “use” the NFT, but not the ability to transfer it or set users.ERC4907 inspires this protocol, so we also refer to this standard as the TRC4907 protocol.
+This standard is an extension of [TEP-62](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md). It proposes an additional role (`user`) that can be granted to addresses and a time when the role is automatically revoked (`expires`). The `user` role represents permission to “use” the NFT, but not the ability to transfer it or set users.ERC4907 inspires this protocol, so we also refer to this standard as the TRC4907 protocol.
 
 # Motivation
 
