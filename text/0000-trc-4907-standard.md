@@ -2,14 +2,14 @@
 - **title**: Rental NFT, an Extension of TEP-62
 - **status**: Draft
 - **type**: Contract Interface
-- **authors**: [luciferzxj](https://github.com/luciferzxj)https://github.com/sidebyandrew)
+- **authors**: [luciferzxj](https://github.com/luciferzxj)
 - **created**: 29.08.2024
 - **replaces**: [TEP-62](https://github.com/ton-blockchain/TEPs/blob/master/0062-nft-standard.md)
 - **replaced by**: -
 
 # Summary
 
-This standard is an extension of [TEP-62](https://github.com/ton-blockchain/TEPs/blob/master/0062-nft-standard.md). It proposes an additional role (`user`) which can be granted to addresses, and a time where the role is automatically revoked (`expires`). The `user` role represents permission to “use” the NFT, but not the ability to transfer it or set users.This protocol is inspired by ERC4907, so we also refer to this standard as TRC4907 protocol.
+This standard is an extension of [TEP-62](https://github.com/ton-blockchain/TEPs/blob/master/0062-nft-standard.md). It proposes an additional role (`user`) that can be granted to addresses and a time when the role is automatically revoked (`expires`). The `user` role represents permission to “use” the NFT, but not the ability to transfer it or set users.ERC4907 inspires this protocol, so we also refer to this standard as the TRC4907 protocol.
 
 # Motivation
 
@@ -50,12 +50,12 @@ The get_nft_data function needs to determine whether the current user is expired
 
 
 # Drawbacks
-Since the TRC4907 protocol may involve changes in user and expire state when a user transfers an NFT, the gas consumption will be a bit higher
+Since the TRC4907 protocol may involve changes in the user and expire state when a user transfers an NFT, the gas consumption will be a bit higher
 
 
 # Rationale and alternatives
 
-## Why do we need to set expire in nft item contract?
+## Why do we need to set expiration in nft item contract?
 Applications of this model (such as renting) often demand that user addresses have only temporary access to using the NFT. Normally, this means the owner needs to submit two on-chain transactions, one to list a new address as the new user role at the start of the duration and one to reclaim the user role at the end. This is inefficient in both labor and gas, so an “expires” function is introduced to facilitate the automatic end of a usage term without needing a second transaction.
 
 # Prior art
