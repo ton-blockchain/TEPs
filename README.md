@@ -58,3 +58,4 @@ In particular "Status" below has the following sense:
 | [146](https://github.com/ton-blockchain/TEPs/pull/146/files)          | Semi-fungible token standard         | Contract Interface | 17.03.2024 | Proposed |
 | [160](https://github.com/ton-blockchain/TEPs/pull/160)                | Dispatch Queue                       | Core               | 13.06.2024 | 🛠️Partially Deployed🛠️ |
 | [161](https://github.com/ton-blockchain/TEPs/pull/161/files)          | Proxy TON (wTON)                     | Contract Interface | 13.06.2024 | 🛠️Partially Deployed🛠️ |
+0
