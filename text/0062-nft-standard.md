@@ -162,7 +162,7 @@ Must implement:
 3. `get_nft_content(int index, cell individual_content)` returns `cell full_content`
    Gets the serial number of the NFT item of this collection and the individual content of this NFT item and returns the full content of the NFT item in format that complies with standard [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md).
    As an example, if an NFT item stores a metadata URI in its content, then a collection smart contract can store a domain (e.g. "https://site.org/"), and an NFT item smart contract in its content will store only the individual part of the link (e.g "kind-cobra").
-   In this example the `get_nft_content` method concatenates them and return "https://site.org/kind-cobra".
+   In this example the `get_nft_content` method concatenates them and return "https://site.org/kind-cobra". In addition, the returned string must be prefixed with a uint8 tag to indicate whether the metadata is offchain or onchain. If the returned string is an offchain URI, the output should be formatted as uint8(1) followed by the metadata_url.
 
 # Drawbacks
 There is no way to get current owner of NFT onchain because TON is an asynchronous blockchain. When the message with info about NFT owner will be delivered, this info may become irrelevant, so we can't guarantee that current owner hasn't changed.
