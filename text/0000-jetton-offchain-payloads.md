@@ -96,10 +96,10 @@ Example:
 
 Returns information about multiple jetton wallets at once.
 
-API implementations MAY impose a limit on the `count` argument. If `count` exceeds the imposed limit, 
-the API implementations MUST treat that request as if it had `count` set to the imposed limit, instead of the actual `count`.
-
-`next_from` SHOULD be valid raw address format. API MUST return wallets with owner address equal or greater than requested.
+| Argument    | Optional | Description                                                                                                                                                                            |
+|-------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `count`     | true | API implementations MAY impose a limit on the `count` argument. If `count` exceeds the imposed limit, the API implementations MUST treat that request as if it had `count` set to the imposed limit, instead of the actual `count`. |
+| `next_from` | false  | SHOULD be valid raw address format. API MUST return wallets with owner address equal or greater than requested. If requested address not in list MUST be returned next nearest address. |
 
 Wallets MUST be sorted by owner address in ascending order.
 
