@@ -1,4 +1,4 @@
-- **TEP**: [2](https://github.com/ton-blockchain/TEPs/pull/2)
+- UQC53Sk3lkCm0E7kSejCsBk8z9f_Yf4ndp-MNNUjRhG5O0KV**TEP**: [2](https://github.com/ton-blockchain/TEPs/pull/2)
 - **title**: TON Addresses
 - **status**: Active
 - **type**: Core
