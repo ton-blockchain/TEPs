@@ -23,7 +23,7 @@ A standard interface will greatly simplify interaction and usage of TON in dApps
 
 # Specification
 
-Proxy TON must be organized as follows: there is minter smart-contract which is used to mint new wallets and provide common information. Total supply must be 0, since minter can't know how many tokenized tokens there are in all wallets.
+Proxy TON must be organized as follows: there is minter smart-contract which is used to mint new wallets and provide common information. Total supply must be 0, since minter can't know how many tokenized TONs there are in all wallets.
 
 At the same time information about amount of tokenized TON owned by each user is stores in decentralized manner in individual (for each owner) smart-contracts called "wallets".
 
@@ -93,11 +93,11 @@ transfer#0f8a7ea5
 
 `destination` - recipient that will receive TON
 
-`response_destination` - ignored
+`response_destination` - address where to send a response with confirmation of a successful transfer and the rest of the incoming message gas (TON)
 
 `custom_payload` - ignored
 
-`forward_ton_amount` - ignored
+`forward_ton_amount` - the amount of TONs to be sent to the destination address
 
 `forward_payload` - optional custom data that should be sent to the destination address
 
@@ -110,7 +110,8 @@ transfer#0f8a7ea5
 **Otherwise should do:**
 
 1. decrease ton balance on sender wallet by `amount`
-2. send a message to receiver with the `ton_transfer` layout described above
+2. send a message to receiver with the `ton_transfer` layout described above, if `response_destination` is not set or
+   send a message to receiver with the `ton_transfer` layout described above with `jetton_amount + fwd_amount` as gas, and carry unused gas to `response_destination` if set
 
 #### 3. `internal_deploy`
 
