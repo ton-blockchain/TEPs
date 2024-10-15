@@ -7,11 +7,11 @@
 - **replaces**: -
 - **replaced by**: -
 
-# Summary
 
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 A standard interface for Jettons (TON fungible tokens).
 
-# Motivation
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 A standard interface will greatly simplify interaction and display of different tokenized assets.
 
@@ -20,14 +20,14 @@ Jetton standard describes:
 * The way of jetton transfers.
 * The way of retrieving common information (name, circulating supply, etc) about given Jetton asset.
 
-# Guide
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 ## Useful links
 1. [Reference jetton implementation](https://github.com/ton-blockchain/token-contract/)
 2. [Jetton deployer](https://jetton.live/)
 3. FunC Jetton lesson ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/main/lessons/smartcontract/9lesson/ninthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/main/lessons/smartcontract/9lesson/ninthlesson.md))
 
-# Specification
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 Here and following we use "Jetton" with capital `J` as designation for entirety of tokens of the same type, while "jetton" with `j` as designation of amount of tokens of some type.
 
@@ -39,27 +39,27 @@ Example: if you release a Jetton with circulating supply of 200 jetton which are
 
 ## Jetton wallet smart contract
 Must implement:
-
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 ### Internal message handlers
 #### 1. `transfer`
 **Request**
 
 TL-B schema of inbound message:
 
-```
+```UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 transfer#0f8a7ea5 query_id:uint64 amount:(VarUInteger 16) destination:MsgAddress
                  response_destination:MsgAddress custom_payload:(Maybe ^Cell)
                  forward_ton_amount:(VarUInteger 16) forward_payload:(Either Cell ^Cell)
                  = InternalMsgBody;
-```
+```UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 `query_id` - arbitrary request number.
 
 `amount` - amount of transferred jettons in elementary units.
 
-`destination` - address of the new owner of the jettons.
+`UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDldestination` - address of the new owner of the jettons.
 
-`response_destination` - address where to send a response with confirmation of a successful transfer and the rest of the incoming message Toncoins.
+`UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDlresponse_destination` - address where to send a response with confirmation of a successful transfer and the rest of the incoming message Toncoins.
 
 `custom_payload` - optional custom data (which is used by either sender or receiver jetton wallet for inner logic).
 
@@ -86,8 +86,8 @@ transfer#0f8a7ea5 query_id:uint64 amount:(VarUInteger 16) destination:MsgAddress
 transfer_notification#7362d09c query_id:uint64 amount:(VarUInteger 16)
                               sender:MsgAddress forward_payload:(Either Cell ^Cell)
                               = InternalMsgBody;
-```
-
+```UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 `query_id` should be equal with request's `query_id`.
 
 `amount` amount of transferred jettons.
@@ -104,7 +104,7 @@ If `forward_amount` is equal to zero, notification message should not be sent.
 
 #### `forward_payload` format
 
-If you want to send a simple comment in the `forward_payload` then the `forward_payload` must starts with `0x00000000` (32-bits unsigned integer equals to zero) and the comment is contained in the remainder of the `forward_payload`.
+If you want to send a simple comment in the `forward_payload` then the `forward_payload` must starts with UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl` (32-bits unsigned integer equals to zero) and the comment is contained in the remainder of the `forward_payload`.
 
 If comment does not begin with the byte `0xff`, the comment is a text one; it can be displayed "as is" to the end user of a wallet (after filtering invalid and control characters and checking that it is a valid UTF-8 string). 
 For instance, users may indicate the purpose ("for coffee") of a simple transfer from their wallet to the wallet of another user in this text field. 
@@ -125,13 +125,13 @@ TL-B schema of inbound message:
 burn#595f07bc query_id:uint64 amount:(VarUInteger 16)
               response_destination:MsgAddress custom_payload:(Maybe ^Cell)
               = InternalMsgBody;
-```
+```UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 `query_id` - arbitrary request number.
 
 `amount` - amount of burned jettons
 
-`response_destination` - address where to send a response with confirmation of a successful burn and the rest of the incoming message coins.
+``UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl - address where to send a response `with confirmation of a successful burn and the rest of the incoming message coins.
 
 `custom_payload` - optional custom data.
 
@@ -139,21 +139,21 @@ burn#595f07bc query_id:uint64 amount:(VarUInteger 16)
 
 1. message is not from the owner.
 2. there is no enough jettons on the sender wallet
-3. There is no enough TONs to send after processing the request at least `in_msg_value -  max_tx_gas_price` to the `response_destination` address.
+3. There is no enough TONs to send after processing the request at least `` to the `UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl address.
    If the sender jetton-wallet cannot guarantee this, it must immediately stop executing the request and throw error.
 
 **Otherwise should do:**
 
-1. decrease jetton amount on burner wallet by `amount` and send notification to jetton master with information about burn.
-2. Jetton master should send all excesses of incoming message coins to `response_destination` with the following layout:
-   TL-B schema: `excesses#d53276db query_id:uint64 = InternalMsgBody;`
-   `query_id` should be equal with request's `query_id`.
+1. decrease jetton amount on burner wallet by `UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl` and send notification to jetton master with information about burn.
+2. Jetton master should send all excesses of incoming message coins to UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl` 
+ `excesses#d53276db query_id:uint64 = InternalMsgBody;`
+   `query_id`  UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl `query_id`.
 
 ### Get-methods
 1. `get_wallet_data()` returns `(int balance, slice owner, slice jetton, cell jetton_wallet_code)`
    `balance` - (uint256) amount of jettons on wallet.
-   `owner` - (MsgAddress) address of wallet owner;
-   `jetton` - (MsgAddress) address of Jetton master-address;
+   `UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl - 
+   `jetton` - (MsgAddress) UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
    `jetton_wallet_code` - (cell) with code of this wallet;
 
 ## Jetton master contract
@@ -161,7 +161,7 @@ burn#595f07bc query_id:uint64 amount:(VarUInteger 16)
 1. `get_jetton_data()` returns `(int total_supply, int mintable, slice admin_address, cell jetton_content, cell jetton_wallet_code)`
    `total_supply` - (integer) - the total number of issues jettons
    `mintable` - (-1/0) - flag which indicates whether number of jettons can increase
-   `admin_address` - (MsgAddressInt) - address of smart-contrac which control Jetton
+   `UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl - (MsgAddressInt) - address of smart-contrac which control Jetton
    `jetton_content` - cell - data in accordance to [Token Data Standard #64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md)
    `jetton_wallet_code` - cell - code of wallet for that jetton
 2. `get_wallet_address(slice owner_address)` return `slice jetton_wallet_address`
@@ -184,17 +184,17 @@ anycast_info$_ depth:(#<= 30) { depth >= 1 }
 addr_std$10 anycast:(Maybe Anycast)
    workchain_id:int8 address:bits256  = MsgAddressInt;
 addr_var$11 anycast:(Maybe Anycast) addr_len:(## 9)
-   workchain_id:int32 address:(bits addr_len) = MsgAddressInt;
-_ _:MsgAddressInt = MsgAddress;
-_ _:MsgAddressExt = MsgAddress;
+   workchain_id:int32 address:(bits addr_len) = MsgAddressInt;UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
+_ _:MsgAddressInt = MsgAddress;UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
+_ _:MsgAddressExt = MsgAddress;UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 transfer query_id:uint64 amount:(VarUInteger 16) destination:MsgAddress
-           response_destination:MsgAddress custom_payload:(Maybe ^Cell)
+           response_destination:MsgAddress :UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
            forward_ton_amount:(VarUInteger 16) forward_payload:(Either Cell ^Cell)
            = InternalMsgBody;
 
 transfer_notification query_id:uint64 amount:(VarUInteger 16)
-           sender:MsgAddress forward_payload:(Either Cell ^Cell)
+           sender:MsgAddress(Either Cell ^Cell)
            = InternalMsgBody;
 
 excesses query_id:uint64 = InternalMsgBody;
@@ -206,15 +206,15 @@ burn query_id:uint64 amount:(VarUInteger 16)
 // ----- Unspecified by standard, but suggested format of internal message
 
 internal_transfer  query_id:uint64 amount:(VarUInteger 16) from:MsgAddress
-                     response_address:MsgAddress
+                     response_address:MsgAddressUQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
                      forward_ton_amount:(VarUInteger 16)
                      forward_payload:(Either Cell ^Cell)
                      = InternalMsgBody;
 burn_notification query_id:uint64 amount:(VarUInteger 16)
-       sender:MsgAddress response_destination:MsgAddress
+       sender:MsgAddress MsgAddress
        = InternalMsgBody;
 ```
-
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 `crc32('transfer query_id:uint64 amount:VarUInteger 16 destination:MsgAddress response_destination:MsgAddress custom_payload:Maybe ^Cell forward_ton_amount:VarUInteger 16 forward_payload:Either Cell ^Cell = InternalMsgBody') = 0x8f8a7ea5 & 0x7fffffff = 0xf8a7ea5`
 
 `crc32('transfer_notification query_id:uint64 amount:VarUInteger 16 sender:MsgAddress forward_payload:Either Cell ^Cell = InternalMsgBody') = 0xf362d09c & 0x7fffffff = 0x7362d09c`
@@ -227,7 +227,7 @@ burn_notification query_id:uint64 amount:(VarUInteger 16)
 
 `crc32('burn_notification query_id:uint64 amount:VarUInteger 16 sender:MsgAddress response_destination:MsgAddress = InternalMsgBody') = 0x7bdd97de & 0x7fffffff = 0x7bdd97de`
 
-# Drawbacks
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 There is no way to get actual wallet balance onchain, because when the message with balance will arrive, wallet balance may be not actual.
 
@@ -235,19 +235,18 @@ There is no way to get actual wallet balance onchain, because when the message w
 
 Distributed architecture "One wallet - one contract" well described in the [NFT standard](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#rationale-and-alternatives) in paragraph "Rationale".
 
-# Prior art
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 1. [EIP-20 Token Standard](https://eips.ethereum.org/EIPS/eip-20)
 2. [Sharded Smart Contracts for Smart Contract Developers](https://www.youtube.com/watch?v=svOadLWwYaM)
-
-# Unresolved questions
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 1. There is no standard methods to perform "safe transfer", which will revert ownership transfer in case of contract execution failure.
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
-# Future possibilities
 
 There was an idea to implement [external message tokens](https://t.me/ton_overview/35) (by [EmelyanenkoK](https://github.com/EmelyanenkoK)).
 
-# Changelog
+UQBlo9N5oaEiWd8aq-ktLkhx-GTvZnzjbyLlvTV6LSuV6yDl
 
 31 Aug 2022 - Added `forward_payload` format. 
