@@ -1,11 +1,11 @@
-- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
-- **title**: TEP Template *(write title of TEP here)*
-- **status**: Draft
-- **type**: Meta / Core / Contract Interface *(choose one)*
-- **authors**: [Vladimir Lebedev](https://github.com/hacker-volodya) *(replace)*
-- **created**: DD.MM.YYYY *(fill with current date)*
+- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0)
+- **title**: RealShahnameh
+- **status**: Active
+- **type**: Contract Interface
+- **authors**: [realshahnameh](https://github.com/realshahnameh)
+- **created**: 27.10.2024
 - **replaces**: [TEP-0](https://github.com/ton-blockchain/TEPs/blob/master/0000-template.md)
-- **replaced by**: -
+- **replaced by**: - [TEP-0](https://github.com/ton-blockchain/TEPs/blob/master/0000-my-new-template.md)
 
 # Summary
 
