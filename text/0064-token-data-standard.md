@@ -57,11 +57,10 @@ Metadata:
 ```json
 {
    "name": "RealShahnameh",
-   "description": ""REAL is the Shahnameh game's utility token, linked to the Iranian Rial. Starting with 227 tokens, the supply grows with players!"
-",
+   "description": "REAL is the Shahnameh game's utility token, linked to the Iranian Rial. Starting with 227 tokens, the supply grows with players!",
    "symbol": "REAL",
    "decimals": 9,
-   "image_data": "te6cckECEAEAAacAAQMAwAECASACBAFDv/CC62Y7V6ABkvSmrEZyiN8t/t252hvuKPZSHIvr0h8ewAMAbABodHRwczovL3JlYWxzaGFobmFtZWguZ2l0aHViLmlvL3JlYWx0b24vMTE3NTU4NTQwLnBuZwIBIAUKAgEgBggBQb9FRqb/4bec/dhrrT24dDE9zeL7BeanSqfzVS2WF8edEwcAHABSZWFsU2hhaG5hbWVoAUG/btT5QqeEjOLLBmt3oRKMah/4xD9Dii3OJGErqf+riwMJAAoAUkVBTAIBIAsOAUG/Ugje9G9aHU+dzmarMJ9KhRMF8Wb5Hvedkj71jjT5ogkMAf4AUkVBTCBpcyB0aGUgU2hhaG5hbWVoIGdhbWUncyB1dGlsaXR5IHRva2VuLCBsaW5rZWQgdG8gdGhlIElyYW5pYW4gUmlhbC4gU3RhcnRpbmcgd2l0aCAyMjcgdG9rZW5zLCB0aGUgc3VwcGx5IGdyb3dzIHdpdGggcGxheWVyDQAEcyEBQb9dAfpePAaQHEUEbGst3Opa92T+oO7XKhDUBPIxLOskfQ8ABAA5bDd9Vg=="
+   "image_data": "[https://cache.tonapi.io/imgproxy/Dxq5eYmU-HqSQoVYzgtT0RKGsAkC17lDwsNI2zSXecA/rs:fill:200:200:1/g:no/aHR0cHM6Ly9yZWFsc2hhaG5hbWVoLmdpdGh1Yi5pby9yZWFsdG9uLzExNzU1ODU0MC5wbmc.webp](https://storage.dyor.io/jettons/EQDhq_DjQUMJqfXLP8K8J6SlOvon08XQQK0T49xon2e0xU8p/image.png)"
 }
 ```
 
