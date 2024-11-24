@@ -23,7 +23,7 @@ to be used by default whenever an application or a service wants to translate hu
 1. [Reference DNS smart contracts](https://github.com/ton-blockchain/dns-contract)
 2. [DNS Auction](https://dns.ton.org/) ([source code](https://github.com/ton-blockchain/dns))
 3. [ton.org documentation](https://ton.org/docs/#/web3/dns)
-4. Tolya answers about TON DNS (ru) - [1](https://github.com/ton-blockchain/TEPs/commit/4a09bfc737823f09f05dfb7008eec7784543bb2b), [2](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-2-08-06), [3](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-3-08-09)
+4. Tolya answers about TON DNS (ru) - [1](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-1-08-05), [2](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-2-08-06), [3](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-3-08-09)
 
 # Specification
 
