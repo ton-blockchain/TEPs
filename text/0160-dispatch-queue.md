@@ -1,6 +1,6 @@
-- **TEP**: [160](https://github.com/ton-blockchain/TEPs/pull/160) *(don't change)*
+- **TEP**: [160](https://github.com/ton-blockchain/TEPs/pull/160)
 - **title**: Dispatch Queue
-- **status**: Testing
+- **status**: Implemented
 - **type**: Core
 - **created**: 13.06.2024
 - **replaces**: -
