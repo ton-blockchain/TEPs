@@ -33,7 +33,7 @@ B) "User-friendly", which is obtained by first generating:
 - 32 bytes containing 256 bits of the smart-contract address inside the workchain (big-endian)
 - 2 bytes containing CRC16-CCITT of the previous 34 bytes
 
-In case B), the 36 bytes thus obtained are then encoded using base64 (i.e., with digits, upper- and lowercase Latin letters, '/' and '+') or base64url (with '_' and '-' instead of '/' and '+'), yielding 48 printable non-space characters.
+In case B), the 36 bytes thus obtained are then encoded using base64url (with '_' and '-' instead of '/' and '+'), yielding 48 printable non-space characters.
 
 Example:
 
@@ -51,27 +51,30 @@ and
 
 in the "user-friendly" form (to be displayed by user-friendly clients). 
 
-Notice that both forms (base64 and base64url) are valid and must be accepted.
-
 ## Wallets applications
 
 At the moment, TON wallets work with addresses as follows:
 
 For receiving:
 
-- Wallets display the user's address in a user-friendly bounceable or non-bounceable form (at the moment, the majority of wallet apps display bounceable form).
+- Wallets display the user's address in a user-friendly non-bounceable form.
+
+- Addresses of other smart contracts (DEXes, NFT, etc.) are displayed in a user-friendly bounceable form.
 
 When sending:
 
-1) The wallet app checks the validity of the destination address representation - its length, valid characters, prefix and checksum. If the address is not valid, then an alert is shown and the sending operation is not performed.
+1) The wallet apps accept only user-friendly address form and don't accept "raw" address form. 
 
-2) If the address has a testnet flag, and the wallet app works with the mainnet network, then an alert is shown and the sending operation is not performed.
+2) The wallet app checks the validity of the destination address representation - its length, valid characters, prefix and checksum. If the address is not valid, then an alert is shown and the sending operation is not performed.
 
-3) The wallet app retrieve from address bounceable flag.
+3) If the address has a testnet flag, and the wallet app works with the mainnet network, then an alert is shown and the sending operation is not performed.
 
-4) The wallet app check the destination address - if it has `unitialized` state wallet force set `bounce` field of sending message to `false` and ignore bounceable/non-bounceable flag from address representation.
+4) The wallet app retrieve from address bounceable flag.
+   if `true` - all messages to this address can ONLY be sent in bounceable mode, even if the destination contract has an `uninitialized` state.
 
-5) If destination is not `unitialized` then wallet app uses the bounceable/non-bounceable flag from the address representation for the `bounce` field of sending message.
+   if `false` - means that a non-bounceable message can be sent to the destination address.
+
+   The wallet app checks the destination address - if it has an `uninitialized` state, then it sends a non-bounceable message, otherwise it sends a bounceable message.
 
 ## Public keys
 
