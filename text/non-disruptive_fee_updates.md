@@ -27,7 +27,9 @@ While correct protocol execution still requires calculating necessary fees for o
 
 1. **Validator Overhead**: Validators will need to remember and verify configuration parameters that existed in the past. Note that the chain depth limitation may not directly translate to a time limitation.
 
-2. **Complex Config Management**: Modifying certain configuration parameters in `c7` while keeping others (unrelated to gas) untouched during execution can be complex and may introduce potential errors.
+2. **Complicated Config Management**: Modifying certain configuration parameters in `c7` while keeping others (unrelated to gas) untouched during execution can be complex and may introduce potential errors.
+
+3. **Complicated emulation**: proper historical emulation like [Retracer](retracer.ton.org) or TVM replay, as well as pending transaction chains emulation become more cumbersome: we need to retieve message envelop and historical config.
 
 # Alternatives
 
