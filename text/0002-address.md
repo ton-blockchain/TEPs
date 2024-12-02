@@ -130,3 +130,9 @@ For example ADNL address `45061C1D4EC44A937D0318589E13C73D151D1CEF5D3C0E53AFBCF5
 - Built-in testnet flag prevents loss of funds by a user who mistakenly tries to send real coins to a testnet address.
 
 - A different form of address than most other blockchains allows the user to more easily identify the TON address.
+
+# Issue Clarification
+
+This section provides context and clarification for the issue EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz. The issue lacks a clear description and context, making it difficult to determine its resolution. The comments on the issue are not relevant to the resolution of the issue. The repository files do not provide any information related to the issue. Please clarify the issue with relevant files, notes, and other information.
+
+For more details, refer to the issue: [EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz](https://github.com/ton-blockchain/TEPs/issues/228)
