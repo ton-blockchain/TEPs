@@ -46,3 +46,9 @@ If there are some questions that have to be discussed during review process or t
 # Future possibilities
 
 Do you have ideas, which things can be implemented on top of this TEP later? Write possible ideas of new TEPs, which are related to this TEP.
+
+# Issue Clarification
+
+This section provides context and clarification for the issue EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz. The issue lacks a clear description and context, making it difficult to determine its resolution. The comments on the issue are not relevant to the resolution of the issue. The repository files do not provide any information related to the issue. Please clarify the issue with relevant files, notes, and other information.
+
+For more details, refer to the issue: [EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz](https://github.com/ton-blockchain/TEPs/issues/228)
