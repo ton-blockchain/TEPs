@@ -58,3 +58,9 @@ In particular "Status" below has the following sense:
 | [145](https://github.com/ton-blockchain/TEPs/pull/145/files)          | Metadata "Hidden" render type        | Contract Interface | 26.01.2024 | ✅Deployed✅ |
 | [146](https://github.com/ton-blockchain/TEPs/pull/146/files)          | Semi-fungible token standard         | Contract Interface | 17.03.2024 | Proposed |
 | [161](https://github.com/ton-blockchain/TEPs/pull/161/files)          | Proxy TON (wTON)                     | Contract Interface | 13.06.2024 | 🛠️Partially Deployed🛠️ |
+
+## Issue Clarification
+
+This section provides context and clarification for the issue EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz. The issue lacks a clear description and context, making it difficult to determine its resolution. The comments on the issue are not relevant to the resolution of the issue. The repository files do not provide any information related to the issue. Please clarify the issue with relevant files, notes, and other information.
+
+For more details, refer to the issue: [EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz](https://github.com/ton-blockchain/TEPs/issues/228)

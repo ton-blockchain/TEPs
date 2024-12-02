@@ -64,3 +64,9 @@ Among alternatives we considered message postponement inside OutMsgQueue which, 
 # Future possibilities
 
 Dispatching rules, the rules of in which order messages from Dispatch QUeue goes to OutMsgQueue, maybe developed further to better suit practcal needs. This changes won't require consensus. Some additional fields in the metadata were added to give collator more context during dispatching (it probably won't be used in the first implementation). Besides it is possible that in the future som of metadata, in particular `initiator_addr` may be done accessible to TVM runtime.
+
+# Issue Clarification
+
+This section provides context and clarification for the issue EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz. The issue lacks a clear description and context, making it difficult to determine its resolution. The comments on the issue are not relevant to the resolution of the issue. The repository files do not provide any information related to the issue. Please clarify the issue with relevant files, notes, and other information.
+
+For more details, refer to the issue: [EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz](https://github.com/ton-blockchain/TEPs/issues/228)

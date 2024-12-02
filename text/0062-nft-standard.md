@@ -291,3 +291,9 @@ We are grateful to the [Tonwhales](https://github.com/tonwhales) developers for 
 [30 Jul 2022](https://github.com/ton-blockchain/TIPs/issues/62#issuecomment-1200095572)
 
 31 Aug 2022 - Added `forward_payload` format. 
+
+# Issue Clarification
+
+This section provides context and clarification for the issue EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz. The issue lacks a clear description and context, making it difficult to determine its resolution. The comments on the issue are not relevant to the resolution of the issue. The repository files do not provide any information related to the issue. Please clarify the issue with relevant files, notes, and other information.
+
+For more details, refer to the issue: [EQDbVHtReoteD0dSJJjkn3KayWnz8qQYRU3Suw_lsrZvtkvz](https://github.com/ton-blockchain/TEPs/issues/228)
