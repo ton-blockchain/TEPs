@@ -34,8 +34,10 @@ forward_payload:^Cell with_content:Bool = InternalMsgBody;
 
 `with_content` - if true, SBT's content cell will be included in message to contract.
 
-**Should do:**
+**Should be rejected if:**
+* Sender address is not the owner's address.
 
+**Otherwise should do:**
 Send message with TL-B schema to `dest` contract:
 ```
 ownership_proof#0524c7ae query_id:uint64 item_id:uint256 owner:MsgAddress 

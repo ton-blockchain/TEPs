@@ -1,4 +1,4 @@
-- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0)
+- **TEP**: [115](https://github.com/ton-blockchain/TEPs/blob/master/text/0115-ton-connect.md)
 - **title**: TON Connect
 - **status**: Active
 - **type**: Core
