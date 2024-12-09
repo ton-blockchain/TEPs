@@ -28,7 +28,6 @@ Proposal management is done using GitHub pull requests, the process is described
 | [85](./text/0085-sbt-standard.md)            | SBT Contract                       | Contract Interface | 09.08.2022 |
 | [89](./text/0089-jetton-wallet-discovery.md) | Discoverable Jettons Wallets       | Contract Interface | 08.09.2022 |
 | [115](./text/0115-ton-connect.md)            | TON Connect                        | Core               | 20.10.2022 |
-| [160](./text/0160-dispatch-queue.md)         | Dispatch Queue                     | Core               | 13.06.2024 |
 
 
 ## WIP
@@ -57,4 +56,5 @@ In particular "Status" below has the following sense:
 | [142](https://github.com/ton-blockchain/TEPs/pull/142/files)          | TBRC-20 Inscription Token Standard   | Contract Interface | 26.01.2024 | Proposed |
 | [145](https://github.com/ton-blockchain/TEPs/pull/145/files)          | Metadata "Hidden" render type        | Contract Interface | 26.01.2024 | ✅Deployed✅ |
 | [146](https://github.com/ton-blockchain/TEPs/pull/146/files)          | Semi-fungible token standard         | Contract Interface | 17.03.2024 | Proposed |
+| [160](https://github.com/ton-blockchain/TEPs/pull/160)                | Dispatch Queue                       | Core               | 13.06.2024 | 🛠️Partially Deployed🛠️ |
 | [161](https://github.com/ton-blockchain/TEPs/pull/161/files)          | Proxy TON (wTON)                     | Contract Interface | 13.06.2024 | 🛠️Partially Deployed🛠️ |
