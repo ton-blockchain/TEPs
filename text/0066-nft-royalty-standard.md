@@ -58,7 +58,7 @@ NFT Collection smart contract MUST implement:
    Send back message with the following layout and send-mode `64` (return msg amount except gas fees):
    TL-B schema `report_royalty_params#a8cb00ad query_id:uint64 numerator:uint16 denominator:uint16 destination:MsgAddress = InternalMsgBody;`
 
-It is expected that marketplaces which want to participate in royalty payments will send `muldiv(price, nominator, denominator)` to `destination` address after NFT sale.
+It is expected that marketplaces which want to participate in royalty payments will send `muldiv(price, numerator, denominator)` to `destination` address after NFT sale.
 
 Marketplaces SHOULD neglect zero-value royalty payments.
 
