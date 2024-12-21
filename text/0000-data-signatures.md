@@ -1,11 +1,11 @@
-- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
+tab- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
 - **title**: Data Signatures
 - **status**: Draft
 - **type**: Core
 - **authors**: [Oleg Andreev](https://github.com/oleganza), [Sergey Andreev](https://github.com/siandreev), [Denis Subbotin](https://github.com/mr-tron)
 - **created**: 13.12.2022
 - **replaces**: [TEP-0](https://github.com/ton-blockchain/TEPs/blob/master/0000-template.md)
-- **replaced by**: -
+  esc- **replaced by**: -
 
 # Summary
 
@@ -88,7 +88,7 @@ Cell {
 ```
 
 
-## Payload verification
+tab## Payload verification
 
 For users’ safety every signature should be bound to a specific *place* and *time*. Note that all the signatures are produced by the same wallet’s key and each app, service or smart contract must enforce domain separation for itself.
 
