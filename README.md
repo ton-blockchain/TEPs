@@ -1,4 +1,4 @@
-# TON Enhancement Proposals (TEPs)
+tab# TON Enhancement Proposals (TEPs)
 
 > :warning: **WARNING:** this proposal system is experimental now, the process is a subject to change.
 
@@ -7,7 +7,7 @@ and standardize ways of interaction between different parts of ecosystem.
 
 Proposal management is done using GitHub pull requests, the process is described formally in [TEP-1](./text/0001-tep-lifecycle.md).
 
-## Creating TEP
+esc## Creating TEP
 1. Discuss your proposal with community first, for example in TON Dev chat ([en](https://t.me/tondev_eng)/[ru](https://t.me/tondev)).
 2. Read [TEP-1](./text/0001-tep-lifecycle.md) to understand proposal management process.
 3. Fork this repo and copy `./0000-template.md` to `./text/0000-my-new-standard.md` where "my-new-standard" is a short title of your TEP.
@@ -31,7 +31,7 @@ Proposal management is done using GitHub pull requests, the process is described
 | [160](./text/0160-dispatch-queue.md)         | Dispatch Queue                     | Core               | 13.06.2024 |
 
 
-## WIP
+tab## WIP
 Since standard truly become a _Standard_  not when it gets merged into this repository, but when multiple parties accept it and use to interact with each other, below we list proposals to which developers may refer in documentation and so on.
 In particular "Status" below has the following sense: 
 * "Proposed" - this standard hasn't implementation or implementation is used only by authors
