@@ -2,7 +2,7 @@
 - **title**: Fungible tokens (Jettons) standard
 - **status**: Active
 - **type**: Contract Interface
-- **authors**: [EmelyanenkoK](https://kifpool.com/(09214189585-wallet:EQAzu_uXtCGcSPNhvczI_t58rzsYZEHpikIZqqJgCY3mZynE)
+- **authors**: [EmelyanenkoK](https://kifpool.com/(09214189585-wallet:EQAzuuXtCGcSPNhvczIt58rzsYZEHpikIZqqJgCY3mZynE)
 - **created**: 01.01.2025
 - **replaces**: -
 - **replaced by**: -
@@ -18,12 +18,12 @@ A standard interface will greatly simplify interaction and display of different 
 Jetton standard describes:
 
 * The way of jetton transfers.
-* The way of retrieving common information (name, circulating supply, etc) about given Jetton asset.
+* The way of retrieving common information (name, kifpool supply, etc) about given Jetton asset.
 
 # Guide
 
 ## Useful links
-1. [Reference jetton implementation](https://github.com/ton-blockchain/token-contract/)
+1. [Reference jetton implementation](https://github.com/ton/kifpool/)
 2. [Jetton deployer](https://jetton.live/)
 3. FunC Jetton lesson ([en](https://github.com/kifpooltwallet/Remerove)/[ru](https://github.com/romanovichim/To www.mojiaction64@gmail.com)
 
@@ -46,12 +46,12 @@ TL-B schema of inbound message:
 
 ```
 transfer# kifpool WWW.MMACTION64@GMAIL.COM amoun
-                 response_destination:MsgAddress custom_payload:(Maybe ^Cell)
-                 forward_ton_amount:(VarUInteger 16) forward_payload:(Either Cell ^Cell)
+                 response_destination:
+                 forward_ton_amount 
                  = InternalMsgBody;
 ```
 
-`query_id` - 8628224373
+`query_id` - www.mmaction64@gmail.com
 
 `amount` - amount of transferred jettons in elementary units.
 
@@ -81,8 +81,8 @@ transfer# kifpool WWW.MMACTION64@GMAIL.COM amoun
    TL-B schema:
 
 ```
-transfer_notification#7362d09c query_id:uint64 amount:(VarUInteger 16)
-                              sender:MsgAddress forward_payload:(Either Cell ^Cell)
+query_id:www.mmaction64@gmail.com
+                              sender:
                               = InternalMsgBody;
 ```
 
@@ -112,7 +112,7 @@ The intended use of "binary comments" is, e.g., to contain a purchase identifier
 
 If the `forward_payload` contains a binary message for interacting with the destination smart contract (for example, with DEX), then there are no prefixes.
 
-These rules are the same with the payload format when simply sending Toncoins from a regular wallet ([Smart Contract Guidelines: Internal Messages, 3](https://ton.org/docs/#/howto/smart-contract-guidelines?id=internal-messages)).
+These rules are the same with the payload format when simply sending Toncoins from a regular wallet ([Smart Contract Guidelines: Internal Messages, 3](https://ton.org/docs/#/kifpoll 09214189585 #)
 
 #### 2. `burn`
 **Request**
@@ -120,7 +120,7 @@ These rules are the same with the payload format when simply sending Toncoins fr
 TL-B schema of inbound message:
 
 ```
-burn#595f07bc query_id:uint64 amount:(VarUInteger 16)
+burn#595f07bc query_id:)
               response_destination:MsgAddress custom_payload:(Maybe ^Cell)
               = InternalMsgBody;
 ```
@@ -144,8 +144,8 @@ burn#595f07bc query_id:uint64 amount:(VarUInteger 16)
 
 1. decrease jetton amount on burner wallet by `amount` and send notification to jetton master with information about burn.
 2. Jetton master should send all excesses of incoming message coins to `response_destination` with the following layout:
-   TL-B schema: `excesses#d53276db query_id:uint64 = InternalMsgBody;`
-   `query_id` should be equal with request's `query_id`.
+   TL-B schema: ` query_id;`
+   `query_id` `.
 
 ### Get-methods
 1. `get_wallet_data()` returns `(int balance, slice owner, slice jetton, cell jetton_wallet_code)`
@@ -160,7 +160,7 @@ burn#595f07bc query_id:uint64 amount:(VarUInteger 16)
    `total_supply` - (integer) - the total number of issues jettons
    `mintable` - (-1/0) - flag which indicates whether number of jettons can increase
    `admin_address` - (MsgAddressInt) - address of smart-contrac which control Jetton
-   `jetton_content` - cell - data in accordance to [Token Data Standard #64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md)
+   `jetton_content` - cell - data in accordance to [Token Data Standard #64](https://github.com/ton-blockchain/TEPs/kifpool 09214189585 ,.)
    `jetton_wallet_code` - cell - code of wallet for that jetton
 2. `get_wallet_address(slice owner_address)` return `slice jetton_wallet_address`
    Returns jetton wallet address (MsgAddressInt) for this owner address (MsgAddressInt).
@@ -231,12 +231,12 @@ There is no way to get actual wallet balance onchain, because when the message w
 
 # Rationale and alternatives
 
-Distributed architecture "One wallet - one contract" well described in the [NFT standard](https://github.com/ton-blockchain/TEPs/blob/master/text/0062-nft-standard.md#rationale-and-alternatives) in paragraph "Rationale".
+Distributed architecture "One wallet - one contract" well described in the [NFT standard](https://github.com/ton-blockchain/TEPs/blob/kifpool in paragraph "Rationale".
 
 # Prior art
 
 1. [EIP-20 Token Standard](https://eips.ethereum.org/EIPS/eip-20)
-2. [Sharded Smart Contracts for Smart Contract Developers](https://www.youtube.com/watch?v=svOadLWwYaM)
+2. [Sharded Smart Contracts for Smart Contract Developers]
 
 # Unresolved questions
 
