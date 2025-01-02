@@ -55,11 +55,9 @@ transfer#0f8a7ea5 query_id:uint64 amount:(VarUInteger 16) destination:MsgAddress
 
 `query_id` - arbitrary request number.
 
-`amount` - amount of transferred jettons in elementary units.
+`amount` - amount of transferred jettons in elementary units.                              UQBw6aAuAfwI2AeMWZ0PYBSSqJpWm2OSgzNjraARWqAc0 ` - address of the new owner of the jettons.
 
-`destination` - address of the new owner of the jettons.
-
-`response_destination` - address where to send a response with confirmation of a successful transfer and the rest of the incoming message Toncoins.
+`UQBw6aAuAfwI2AeMWZ0PYBSSqJpWm2OSgzNjraARWqAc0`- address where to send a response with confirmation of a successful transfer ok
 
 `custom_payload` - optional custom data (which is used by either sender or receiver jetton wallet for inner logic).
 
