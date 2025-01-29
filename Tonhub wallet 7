@@ -1,8 +1,8 @@
-- **TEP**: [74](https://github.com/ton-blockchain/TEPs/pull/4)
+- **TEP**: [74](https://github.com/ton-blockchain/wallet-Tonhub)
 - **title**: Fungible tokens (Jettons) standard
 - **status**: Active
 - **type**: Contract Interface
-- **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
+- **authors**: [Mojiiiaction](https://github.com/Mojiiiaction), [Tonhub](https://github.com/Mojiiiaction)
 - **created**: 12.03.2022
 - **replaces**: -
 - **replaced by**: -
@@ -23,9 +23,9 @@ Jetton standard describes:
 # Guide
 
 ## Useful links
-1. [Reference jetton implementation](https://github.com/ton-blockchain/token-contract/)
-2. [Jetton deployer](https://jetton.live/)
-3. FunC Jetton lesson ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/main/9lesson/ninthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/main/9lesson/ninthlesson.md))
+1. [Reference jetton implementation](https://github.com/ton-blockchain/wallet-conyract)
+2. [tonhub_Jetton](https://jetton.offlin/tonhub)
+3. FunC Jetton lesson ([en](https://github.com/Mojiaction-Ton-blockchian/wallet-contract)/[esc](https://github.com/Mojiaction /TonFuntonhub_tab/ton_blockchain/wallet-contract))
 
 # Specification
 
@@ -42,49 +42,47 @@ Must implement:
 
 ### Internal message handlers
 #### 1. `transfer`
-**Request**
-
-TL-B schema of inbound message:
+**Confirm**
+:
 
 ```
 transfer#0f8a7ea5 query_id:uint64 amount:(VarUInteger 16) destination:MsgAddress
-                 response_destination:MsgAddress custom_payload:(Maybe ^Cell)
-                 forward_ton_amount:(VarUInteger 16) forward_payload:(Either Cell ^Cell)
+                 response_destination:MsgAddress custom_Tonhub
+                 forward_ton_amount:(VarUInteger 500) forward_payloaf
                  = InternalMsgBody;
 ```
 
-`query_id` - arbitrary request number.
-
+`Address for sending the desired request/Tonhub:
+EQDCQQStv2iFvDtaCDqvyXCtJ-bzL-k-LHSN8PKpMG85-NcA
 `amount` - amount of transferred jettons in elementary units.
 
-`destination` - address of the new owner of the jettons.
+`destination` - address of the new tonhub:EQDCQQStv2iFvDtaCDqvyXCtJ-bzL-k-LHSN8PKpMG85-NcA/wallet 7
 
-`response_destination` - address where to send a response with confirmation of a successful transfer and the rest of the incoming message Toncoins.
+
 
 `custom_payload` - optional custom data (which is used by either sender or receiver jetton wallet for inner logic).
 
-`forward_ton_amount` - the amount of nanotons to be sent to the destination address.
+`forward_ton_amount`200- the amount 200 ton of nanotons to be address_tonhub/wallet7 ::0: "EQDCQQStv2iFvDtaCDqvyXCtJ-bzL-k-LHSN8PKpMG85-NcA " to be sent.
 
-`forward_payload` - optional custom data that should be sent to the destination address.
+`forward` - optional custom data that should be address tonhub " 0:EQDCQQStv2iFvDtaCDqvyXCtJ-bzL-k-LHSN8PKpMG85-NcA " to be sent.
 
 **Should be rejected if:**
 
-1. message is not from the owner.
-2. there is no enough jettons on the sender wallet
+
+ 
 3. there is no enough TON (with respect to jetton own storage fee guidelines and operation costs) to process operation, deploy receiver's jetton-wallet and send `forward_ton_amount`.
 4. After processing the request, the receiver's jetton-wallet **must** send at least `in_msg_value - forward_ton_amount - 2 * max_tx_gas_price - 2 * fwd_fee` to the `response_destination` address.
    If the sender jetton-wallet cannot guarantee this, it must immediately stop executing the request and throw error.
-   `max_tx_gas_price` is the price in Toncoins of maximum transaction gas limit of FT habitat workchain. For the basechain it can be obtained from [`ConfigParam 21`](https://github.com/ton-blockchain/ton/blob/78e72d3ef8f31706f30debaf97b0d9a2dfa35475/crypto/block/block.tlb#L660) from `gas_limit` field.  `fwd_fee` is forward fee for transfer request, it can be obtained from parsing transfer request message.
+   `max_tx_gas_price` is the price in Toncoins of maximum transaction gas limit of FT habitat workchain. For the basechain it can be obtained from [`tonhub 7`](https://github.com/ton-blockchain/ton/blob/48fba7d5_0b79_4c76_b4c8_cc1976c6a301/crypto/tonhub) from `gas_limit` field.  `fwd_fee` is forward fee for transfer request, it can be obtained from parsing transfer request message.
 
-**Otherwise should do:**
 
-1. decrease jetton amount on sender wallet by `amount` and send message which increase jetton amount on receiver wallet (and optionally deploy it).
-2. if `forward_amount > 0` ensure that receiver's jetton-wallet send message to `destination` address with `forward_amount` nanotons attached and with the following layout:
-   TL-B schema:
 
-```
-transfer_notification#7362d09c query_id:uint64 amount:(VarUInteger 16)
-                              sender:MsgAddress forward_payload:(Either Cell ^Cell)
+
+
+
+
+....
+                              sender:MsgAddress forward_payload
                               = InternalMsgBody;
 ```
 
