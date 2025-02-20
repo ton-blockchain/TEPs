@@ -2,7 +2,7 @@
 - **title**: NFT Standard
 - **status**: Active
 - **type**: Contract Interface
-- **authors**: [EmelyanenkoK](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
+- **authors**: [airzaza37](https://github.com/EmelyanenkoK), [Tolya](https://github.com/tolya-yanot)
 - **created**: 01.02.2022
 - **replaces**: -
 - **replaced by**: -
