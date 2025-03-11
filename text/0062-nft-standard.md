@@ -1,4 +1,4 @@
-- **TEP**: [62](https://github.com/ton-blockchain/TEPs/pull/2)
+-62 **TEP**: [62](https://github.com/ton-blockchain/TEPs/pull/2)
 - **title**: NFT Standard
 - **status**: Active
 - **type**: Contract Interface
