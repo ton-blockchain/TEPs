@@ -1,4 +1,4 @@
-- **TEP**: [TBD](https://github.com/ton-blockchain/TEPs/pull/TBD)
+- **TEP**: [496](https://github.com/ton-blockchain/TEPs/pull/496)
 - **title**: Configurable Bounce Message Size
 - **status**: Draft
 - **type**: Core
