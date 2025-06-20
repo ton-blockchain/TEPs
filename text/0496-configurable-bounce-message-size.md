@@ -69,7 +69,7 @@ action_send_msg_v2#221a09eb mode:(## 8)
 
 A new TVM opcode `SENDMSGEXT` SHALL be introduced:
 
-- **Opcode**: `0xFB08`
+- **Opcode**: `0xFB09`
 - **Stack**: `c b r x - fee`
 - **Parameters**:
     - `c` (cell) - message to send
