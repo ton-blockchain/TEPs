@@ -47,12 +47,12 @@ The `MsgMetadata` structure SHALL be extended to include bounce configuration:
 
 ```tlb
 msg_metadata_v2#1 depth:uint32 initiator_addr:MsgAddressInt initiator_lt:uint64 
-                  bounce_body_bits:(## 10) bounce_body_refs:(## 2) = MsgMetadata;
+                  bounce_body_bits:(## 10) bounce_body_refs:(## 3) = MsgMetadata;
 ```
 
 Where:
-- `bounce_body_bits` specifies the number of bits from the original message body to include in bounce messages (0-1023)
-- `bounce_body_refs` specifies the number of cell references from the original message body to include in bounce messages (0-3)
+- `bounce_body_bits` specifies the number of bits from the original message body to include in bounce messages (0-991; 991 since body includes `0xffffffff` prefix)
+- `bounce_body_refs` specifies the number of cell references from the original message body to include in bounce messages (0-4)
 
 ## Extended Send Message Action
 
@@ -62,7 +62,7 @@ A new version of `action_send_msg` SHALL be introduced:
 action_send_msg_v2#221a09eb mode:(## 8)
   out_msg:^(MessageRelaxed Any)
   bounce_body_bits:(## 10)
-  bounce_body_refs:(## 2) = OutAction;
+  bounce_body_refs:(## 3) = OutAction;
 ```
 
 ## New TVM Opcode
@@ -73,8 +73,8 @@ A new TVM opcode `SENDMSGEXT` SHALL be introduced:
 - **Stack**: `c b r x - fee`
 - **Parameters**:
     - `c` (cell) - message to send
-    - `b` (integer) - amount of bits to return in bounce message (0-1023)
-    - `r` (integer) - amount of cell references to return in bounce message (0-3)
+    - `b` (integer) - amount of bits to return in bounce message (0-991)
+    - `r` (integer) - amount of cell references to return in bounce message (0-4)
     - `x` (integer) - send mode (same as existing `SENDRAWMSG`)
 - **Returns**: `fee` (integer) - estimated forward fee for the message
 
@@ -87,8 +87,8 @@ The opcode SHALL create an `action_send_msg_v2` action with the specified bounce
     - Existing `SENDRAWMSG` opcode MUST remain unchanged
 
 2. **Bounce Size Limits**: The bounce parameters MUST be limited to prevent abuse:
-    - `bounce_body_bits`: 0-1023 bits (configurable via global config)
-    - `bounce_body_refs`: 0-3 cell references (configurable via global config)
+    - `bounce_body_bits`: 0-991 bits (configurable via global config)
+    - `bounce_body_refs`: 0-4 cell references (configurable via global config)
 
 3. **Fee Calculation**: Forward fees MUST be calculated based on the actual bounce message size, not the requested size.
 
@@ -105,7 +105,7 @@ The opcode SHALL create an `action_send_msg_v2` action with the specified bounce
 A new configuration parameter SHALL be added:
 
 ```tlb
-bounce_config#01 max_bounce_body_bits:(## 10) max_bounce_body_refs:(## 2) = BounceConfig;
+bounce_config#01 max_bounce_body_bits:(## 10) max_bounce_body_refs:(## 3) = BounceConfig;
 _ BounceConfig = ConfigParam 46;
 ```
 
