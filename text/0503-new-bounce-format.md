@@ -26,8 +26,10 @@ which may be too cumbersome (see Alternative Designs Considered below). This TEP
 Current message format for internal messages contains the field `ihr_fee:Coins`, which is always zero, as IHR is
 not implemented. This field will be renamed to `extra_flags` and repurposed for flags.
 
-`(extra_flags & 1) = 1` enables the new bounce format for the message. The bounced message contains information about the transaction.
-If `(extra_flags & 3) = 3`, the bounced message also contains the whole body of the original message.
+`(extra_flags & 1) = 1` enables the new bounce format for the message.
+The bounced message contains information about the transaction and the body of the original message.
+If `(extra_flags & 3) = 3`, the whole body of the original message is included. Otherwise, only the root of the body is included (without refs).
+
 For compatibility, if `(extra_flags & 1) = 0` then the bounced message uses the old format.
 
 # Specification
@@ -50,8 +52,8 @@ In the newer versions, it MUST be treated as `extra_flags`, while IHR fee MUST b
 
 When the transaction bounces, it creates the bounce message depending on the `extra_flags` in the inbound message:
 - If `(extra_flags & 1) = 0`, the bounced message MUST have the old format.
-- If `(extra_flags & 3) = 1`, the bounced message MUST have the new format without the body of the original message (see below).
-- If `(extra_flags & 3) = 3`, the bounced message MUST have the new format with the body of the original message (see below).
+- If `(extra_flags & 3) = 1`, the bounced message MUST have the new format with the root of the body of the original message (see below).
+- If `(extra_flags & 3) = 3`, the bounced message MUST have the new format with the whole body of the original message (see below).
 
 The bounced message (either old or new) SHOULD have `extra_flags = 0`.
 Note: here `extra_flags` is the integer obtained after deserializing `VarUInteger 16`.
@@ -63,13 +65,13 @@ _ value:CurrencyCollection created_lt:uint64 created_at:uint32 = NewBounceOrigin
 _ gas_used:uint32 vm_steps:uint32 = NewBounceComputePhaseInfo;
 
 new_bounce_body#fffffffe
-    original_body:(Maybe ^Cell)
+    original_body:^Cell
     original_info:^NewBounceOriginalInfo
     bounced_by_phase:uint8 exit_code:int32
     compute_phase:(Maybe NewBounceComputePhaseInfo)
     = NewBounceBody;
 ```
-- `original_body` - cell that contains the body of the original message (if `extra_flags & 2`) or nothing (if not `extra_flags & 2`).
+- `original_body` - cell that contains the body of the original message (if `extra_flags & 2`) or only the root of the body without refs (if not `extra_flags & 2`).
 - `original_info` - value, lt and unixtime of the original message.
 - `bounced_by_phase` - reason why the transaction bounced:
     - `0` - compute phase was skipped. `exit_code` denotes the skip reason:
@@ -101,7 +103,7 @@ For compatibility, this format SHOULD NOT be changed if no other extra flags are
 1. **Backward compatibility**: Behavior of existing contracts does not change.
 2. **Opt-in Basis**: Only contracts that need larger bounce messages pay the additional costs.
 3. **Minimal changes**: This required only changing logic for managing message flags and creating bounce messages, without new TVM opcodes or configuration parameters.
-4. **Optional body**: The body of the original message can be big, so it can be omitted (e.g., when only exit code is required).
+4. **Optional full body**: The body of the original message can be big, so it can be trimmed (e.g., when only exit code, opcode and query id are required).
 5. **Extra flags**: Adding `extra_flags` field allows adding more message options in the future.
 
 ## Alternative Designs Considered
@@ -121,8 +123,6 @@ See [TEP-496 / Prior art](https://github.com/ton-blockchain/TEPs/blob/d4d094d419
 # Unresolved questions
 
 1. What info about the transaction (other than what is suggested above) should we include?
-2. Should we truncate the original body if it is too big? The size could be controlled by the caller using special options.
-Or do we consider forward fees for the bounced message small enough so it doesn't matter?
 
 # Future possibilities
 
