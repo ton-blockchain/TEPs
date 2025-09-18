@@ -1,4 +1,4 @@
-- **TEP**: [TBD](https://github.com/ton-blockchain/TEPs/pull/TBD)
+- **TEP**: [524](https://github.com/ton-blockchain/TEPs/pull/524)
 - **title**: Tokenized Vaults Standard for TON Blockchain
 - **status**: Draft
 - **type**: Contract Interface
