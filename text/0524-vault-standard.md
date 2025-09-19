@@ -101,7 +101,7 @@ All vaults implementing this standard MUST implement [`TEP-64`](https://github.c
   ```
 
 - **`Nested<Cell<T>>`** <a id="nestedcellt"></a>: Because TON's Cell can have at most 4 references, if you need to store more than 4 references of the same type data structure, we will enable `Nested<Cell<T>>`, where access is such that 1 cell holds at most 3 references, and the remaining one reference is used to connect to the next layer cell, and then the next layer cell can continue to store at most 3 references and so on, as shown in the diagram below.
-  ![nested-cell](../assets/0000-vault-standard/nested-cell.png)
+  ![nested-cell](../assets/0524-vault-standard/nested-cell.png)
 
 ### Storage
 
@@ -119,7 +119,7 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
 
 **Vault Notification**
 
-![vault-notification](../assets/0000-vault-standard/vault-notification.png)
+![vault-notification](../assets/0524-vault-standard/vault-notification.png)
 
 - **Description**: After vault interaction (`Deposit` or `Withdraw`), the vault sends a notification message to the `receiver` or `initiator`, with user-defined callback payloads for further operations.
 
@@ -184,7 +184,7 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
 
 **Deposit (For TON)**
 
-![deposit-ton](../assets/0000-vault-standard/deposit-ton.png)
+![deposit-ton](../assets/0524-vault-standard/deposit-ton.png)
 
 - **Description**: Mint shares to `receiver` by depositing exactly `depositAmount` of TON.
 - **Requirements**:
@@ -229,7 +229,7 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
 
 **Deposit Forward Payload (For Jetton)**
 
-![deposit-jetton](../assets/0000-vault-standard/deposit-jetton.png)
+![deposit-jetton](../assets/0524-vault-standard/deposit-jetton.png)
 
 - **Description**: Mint shares to `receiver` by depositing exactly `depositAmount` of Jetton.
 - **Requirements**:
@@ -257,7 +257,7 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
 
 **Deposit (For Extra Currency)**
 
-![deposit-ec](../assets/0000-vault-standard/deposit-ec.png)
+![deposit-ec](../assets/0524-vault-standard/deposit-ec.png)
 
 - **Description**: Mint shares to `receiver` by depositing exactly `depositAmount` of Extra Currency.
 - **Requirements**:
@@ -288,7 +288,7 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
 
 **Withdraw (In Burn Notification)**
 
-![withdraw](../assets/0000-vault-standard/withdraw.png)
+![withdraw](../assets/0524-vault-standard/withdraw.png)
 
 - **Description**: Burns exactly `shares` from `initiator` and sends underlying assets to `receiver`.
 - **Requirements**:
@@ -323,7 +323,7 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
 
 **Provide Quote and Take Quote**
 
-![quote](../assets/0000-vault-standard/quote.png)
+![quote](../assets/0524-vault-standard/quote.png)
 
 - **Description**: Fetches current asset-to-share conversion information from the vault.
 - **Requirements**:
@@ -381,7 +381,7 @@ Vaults implementing this standard MUST implement the following functions for que
 
   - Exposed query method (e.g., `getConvertToShares`) that wraps the internal function.
   - It accepts user-provided options (e.g., [DepositOptions](#depositoptions) or [VaultOptions](#vaultoptions) as Cell), resolves them into the corresponding configs, and then passes the resolved configs to the internal function. This method is callable off-chain without gas costs.
-    ![options-params](../assets/0000-vault-standard/option.png)
+    ![options-params](../assets/0524-vault-standard/option.png)
 
 - **`totalAssets`**
 
