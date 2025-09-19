@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身份证裁剪拉直工具 - HarmonyOS Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>身份证裁剪拉直一体化工具</h1>
+        <p class="subtitle">为 HarmonyOS 打造的纯前端离线小工具，支持身份证照片裁剪与透视矫正。</p>
+    </header>
+
+    <main class="app-shell">
+        <section class="panel controls">
+            <h2>步骤</h2>
+            <ol>
+                <li>选择或拖拽身份证图片至下方画布。</li>
+                <li>拖动四个角点对齐身份证边角，可使用放大镜辅助。</li>
+                <li>点击“生成预览”完成裁剪及拉直，可下载高清 PNG。</li>
+            </ol>
+
+            <div class="input-group">
+                <label class="file-input" for="photoInput">
+                    <span>📄 选择身份证图片</span>
+                    <input type="file" id="photoInput" accept="image/*">
+                </label>
+                <button id="resetButton" class="secondary" type="button">重置角点</button>
+            </div>
+
+            <div class="export-group">
+                <button id="previewButton" type="button">生成预览</button>
+                <button id="downloadButton" class="ghost" type="button" disabled>下载 PNG</button>
+            </div>
+
+            <aside class="tips">
+                <h3>使用技巧</h3>
+                <ul>
+                    <li>在 HarmonyOS 浏览器中可直接离线使用。</li>
+                    <li>支持多指缩放页面，便于精确拖动角点。</li>
+                    <li>若身份证倒置，可先旋转手机或在外部相册调整方向。</li>
+                </ul>
+            </aside>
+        </section>
+
+        <section class="panel workspace">
+            <h2>裁剪调整</h2>
+            <div class="canvas-wrapper">
+                <canvas id="editCanvas" width="840" height="560" aria-label="编辑画布"></canvas>
+                <div class="magnifier" id="magnifier" hidden>
+                    <canvas id="magnifierCanvas" width="160" height="160"></canvas>
+                </div>
+                <p class="placeholder" id="placeholder">请先选择图片</p>
+            </div>
+        </section>
+
+        <section class="panel preview">
+            <h2>拉直预览</h2>
+            <canvas id="previewCanvas" width="600" height="380" aria-label="预览画布"></canvas>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>所有计算均在本地浏览器完成，安全、快速且无需任何后端服务。</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
