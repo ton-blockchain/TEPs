@@ -103,6 +103,30 @@ All vaults implementing this standard MUST implement [`TEP-64`](https://github.c
 - **`Nested<Cell<T>>`** <a id="nestedcellt"></a>: Because TON's Cell can have at most 4 references, if you need to store more than 4 references of the same type data structure, we will enable `Nested<Cell<T>>`, where access is such that 1 cell holds at most 3 references, and the remaining one reference is used to connect to the next layer cell, and then the next layer cell can continue to store at most 3 references and so on, as shown in the diagram below.
   ![nested-cell](../assets/0524-vault-standard/nested-cell.png)
 
+- **`TL-B for General Types`**
+  ```tlb
+  opcode$_ value:uint32 = Opcode;
+  query_id$_ value:uint64 = QueryId;
+  extra_currency_id$_ value:uint32 = ExtraCurrencyId;
+  timestamp$_ value:uint32 = Timestamp;
+
+  rounding_down$00 = RoundingType;
+  rounding_up$01 = RoundingType;
+  rounding_half_up$10 = RoundingType;
+
+  result_code$_ value:uint16 = ResultCode;
+
+  ton_asset$0000 = Asset;
+  jetton_asset$0001 jetton_master:MsgAddress = Asset;
+  extra_currency_asset$0010 currency_id:ExtraCurrencyId = Asset;
+
+  nested#_ {T:Type}
+    item1:(Maybe ^T)
+    item2:(Maybe ^T)
+    item3:(Maybe ^T)
+    next:(Maybe ^Nested T) = Nested T;
+  ```
+
 ### Storage
 
 - Vault contracts MUST implement storage fields sufficient to fulfill the TEP-74 Jetton standard, as shares are represented as Jetton.
@@ -181,6 +205,35 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
     | -------------------------- | --------------------------------------------------- | ------------ |
     | `OP_VAULT_NOTIFICATION_EC` | [Opcode](#opcode)                                   | `0x1f9e644b` |
     | `vaultNotificationParams`  | [VaultNotificationParams](#vaultnotificationparams) |              |
+  - **`TL-B for Options, Callbacks, and Notifications`**
+    ```
+    vault_options$_ 
+      custom_data:(Maybe ^Cell) = VaultOptions;
+
+    callback_params$_
+      include_body:Bool
+      payload:^Cell = CallbackParams;
+
+    callbacks$_
+      success_callback:(Maybe ^CallbackParams)
+      failure_callback:(Maybe ^CallbackParams) = Callbacks;
+
+    vault_notification_params$_
+      result_code:ResultCode
+      initiator:MsgAddress
+      callback_payload:(Maybe ^Cell)
+      in_body:(Maybe ^Cell) = VaultNotificationParams;
+
+    vault_notification#86eba146
+      query_id:QueryId
+      vault_notification_params:VaultNotificationParams = InternalMsgBody;
+
+    vault_notification_fp#b00d7656
+      vault_notification_params:VaultNotificationParams = ForwardPayload;
+
+    vault_notification_ec#1f9e644b
+      vault_notification_params:VaultNotificationParams = InternalMsgBody;
+    ```
 
 **Deposit (For TON)**
 
@@ -286,6 +339,31 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
   | `queryId`       | [QueryId](#queryid)             | Unique query identifier. |
   | `depositParams` | [DepositParams](#depositparams) |                          |
 
+- **`TL-B for Deposit`**
+  ```
+  deposit_params$_
+    receiver:MsgAddress
+    min_shares:Coins
+    deposit_options:(Maybe ^DepositOptions)
+    callbacks:Callbacks = DepositParams;
+
+  deposit_options$_
+    vault_options:(Maybe ^VaultOptions)
+    custom_data:(Maybe ^Cell) = DepositOptions;
+
+  deposit#5a66a4a5
+    query_id:QueryId
+    deposit_amount:Coins
+    deposit_params:DepositParams = InternalMsgBody;
+
+  deposit_fp#b534fe7b
+    deposit_params:DepositParams = ForwardPayload;
+
+  deposit_ec#90c2258a
+    query_id:QueryId
+    deposit_params:DepositParams = InternalMsgBody;
+  ```
+
 **Withdraw (In Burn Notification)**
 
 ![withdraw](../assets/0524-vault-standard/withdraw.png)
@@ -320,6 +398,19 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
   | `minWithdraw` | `Coins` | Minimum asset amount to receive, else refund. |
   | `withdrawOptions` | Cell<[WithdrawOptions](#withdrawoptions)>? | Optional parameters (e.g., price data). |
   | `callbacks` | [Callbacks](#callbacks) | Success/failure callbacks. |
+
+- **`TL-B for Withdraw`**
+  ```
+  withdraw_options$_
+    vault_options:(Maybe ^VaultOptions)
+    custom_data:(Maybe ^Cell) = WithdrawOptions;
+
+  withdraw_fp#ecb4d6bf
+    receiver:MsgAddress
+    min_withdraw:Coins
+    withdraw_options:(Maybe ^WithdrawOptions)
+    callbacks:Callbacks = CustomPayload;
+  ```
 
 **Provide Quote and Take Quote**
 
@@ -369,6 +460,30 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
     | `totalAssets`    | `Coins`                 | Total underlying assets.                                  |
     | `timestamp`      | [Timestamp](#timestamp) | Timestamp of `totalSupply` and `totalAssets` calculation. |
     | `forwardPayload` | `Cell?`                 | Initiator-defined payload.                                |
+
+  - **`TL-B for provide and take quote`**
+    ```
+    quote_options$_
+      vault_options:(Maybe ^VaultOptions)
+      custom_data:(Maybe ^Cell) = QuoteOptions;
+
+    provide_quote#c643cc91
+      query_id:QueryId
+      quote_asset:(Maybe ^Asset)
+      receiver:MsgAddress
+      quote_options:(Maybe ^QuoteOptions)
+      forward_payload:^Cell = InternalMsgBody;
+
+    take_quote#68ec31ea
+      query_id:QueryId
+      initiator:MsgAddress
+      quote_asset:^Asset
+      total_supply:Coins
+      total_assets:Coins
+      timestamp:Timestamp
+      forward_payload:(Maybe ^Cell) = InternalMsgBody;
+
+    ```
 
 ### Functions and Get-Methods
 
@@ -693,6 +808,34 @@ Vaults implementing this standard MUST implement the following functions for que
   | `totalAssets` | `Coins` | Total underlying assets at the time of quote. |
   | `timestamp` | [Timestamp](#timestamp) | Event timestamp for off-chain indexing. |
   | `quoteLogOptions` | `Cell<QuoteLogOptions>?` | Custom quote logs. |
+
+- **`TL-B for Events`**
+  ```
+  deposited#11475d67
+    initiator:MsgAddress
+    receiver:MsgAddress
+    deposit_asset:(Maybe ^Asset)
+    deposit_amount:Coins
+    shares:Coins
+    deposit_log_options:(Maybe ^Cell) = EventBody;
+
+  withdrawn#edfb416d
+    initiator:MsgAddress
+    receiver:MsgAddress
+    withdraw_asset:(Maybe ^Asset)
+    withdraw_amount:Coins
+    burned_shares:Coins
+    withdraw_log_options:(Maybe ^Cell) = EventBody;
+
+  quoted#b7bfa697
+    quote_asset:(Maybe ^Asset)
+    initiator:MsgAddress
+    receiver:MsgAddress
+    total_supply:Coins
+    total_assets:Coins
+    timestamp:Timestamp
+    quote_log_options:(Maybe ^Cell) = EventBody;
+  ```
 
 # Drawbacks
 
