@@ -31,22 +31,22 @@ They MUST additionally (w.r.t. TEP-74) support the following get methods:
 1. `get_supply_data()` returns `(int total_onchain_supply, int total_displayed_supply)`
 
    `total_onchain_supply` - (integer) - the sum of balances of jetton wallets of this jetton master (as reported by `get_wallet_data()` calls on the jetton wallets)
-   
-   `total_displayed_supply` - (integer) - the sum of balances presented to users in UIs
+
+   `total_displayed_supply` - (integer) - the sum of balances presented to users in UIs. This value MUST NOT be 0 whenever `total_onchain_supply` is not 0.
 2. `get_displayed_balance(int onchain_balance)` returns `int displayed_balance`
 
    `onchain_balance` - (integer) - the balance of a jetton wallet or a transfer amount as reported by `get_wallet_data()` call on the jetton wallet or in onchain data
    
    `displayed_balance` - (integer) - the equivalent amount that should be displayed in UIs
    
-   In practice this get method SHOULD return the result of `muldiv(onchain_balance, total_displayed_supply, total_onchain_supply)`
+   In practice this get method SHOULD return the result of `muldiv(onchain_balance, total_displayed_supply, total_onchain_supply)`, unless `total_onchain_supply` is 0, in which case the method SHOULD return -1 to indicate data inconsistency.
 3. `get_onchain_balance(int displayed_balance)` returns `int onchain_balance`
 
    `displayed_balance` - (integer) - the balance or transfer amount displayed or inputted in a UI
    
    `onchain_balance` - (integer) - the equivalent amount of onchain tokens
    
-   In practice this get method SHOULD return the result of `muldiv(displayed_balance, total_onchain_supply, total_displayed_supply)`
+   In practice this get method SHOULD return the result of `muldiv(displayed_balance, total_onchain_supply, total_displayed_supply)`, unless `total_displayed_supply` is 0, in which case the method SHOULD return -1 to indicate data inconsistency.
 
 # Drawbacks
 
