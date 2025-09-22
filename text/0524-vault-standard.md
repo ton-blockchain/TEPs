@@ -36,9 +36,28 @@ This standard addresses these by standardizing vault interfaces, reducing integr
 
 # Guide
 
-DeFi protocols (e.g., lending, staking) can implement vaults with this standard through a unified interface for deposits, withdrawals, and rate queries.
+## When to Use This Standard
 
-👉 [Vault Standard Implementation](https://github.com/torch-core/tep-vault-standard)
+Your protocol should implement this vault standard if it:
+- Accepts user deposits and issues share tokens representing their claim
+- Manages deposited assets (yield generation, liquidity provision, etc.)
+- Allows withdrawals by burning shares for underlying assets
+
+## Protocol Examples
+
+| Protocol Type | Examples | Use Case |
+|--------------|----------|----------|
+| **Lending** | Morpho | Deposit assets, receive interest-bearing tokens |
+| **Yield Aggregator** | Yearn Finance | Auto-compound yields across strategies |
+| **Liquid Staking** | Rocket Pool | Stake tokens, receive liquid staking derivatives |
+| **Stablecoin** | Ethena | Collateralized yield-bearing stablecoins |
+| **Liquidity Pools** | Balancer | LP tokens wrapped for additional yield |
+
+## Implementation
+
+Developers can find the reference implementation with complete examples and tests at:
+👉 **[github.com/torch-core/tep-vault-standard](https://github.com/torch-core/tep-vault-standard)**
+
 
 # Specification
 
