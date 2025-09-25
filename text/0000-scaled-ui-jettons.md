@@ -34,7 +34,7 @@ They MUST additionally (w.r.t. TEP-74) support the following get method:
 
    `total_displayed_supply` - (integer) - the sum of balances presented to users in UIs. This value MUST NOT be 0 whenever `total_onchain_supply` is not 0.
 
-The displayed (that is, the value presented to users in UIs supporting this TEP) balance of a jetton wallet MUST be calculated as `muldiv(onchain_balance, total_displayed_supply, total_onchain_supply)`, where `onchain_balance` is the balance of the jetton wallet as reported by `get_wallet_data()`, and `total_displayed_supply` and `total_onchain_supply` are the values returned by `get_supply_data()`.
+The displayed (that is, the value presented to users in UIs supporting this TEP) balance of a jetton wallet MUST be calculated as `muldiv(onchain_balance, total_displayed_supply, total_onchain_supply)`, where `onchain_balance` is the balance of the jetton wallet as reported by `get_wallet_data()`, and `total_displayed_supply` and `total_onchain_supply` are the values returned by `get_supply_data()`. The displayed balance calculated in such a way and presented to the user MUST still respect the `decimals` reported by jetton's metadata.
 
 Values inputted by users in UIs supporting this TEP have to be converted to onchain balance (the value used for sending jettons) as follows: `muldiv(displayed_or_inputted_balance, total_onchain_supply, total_displayed_supply)`, where `displayed_or_inputted_balance` is the value inputted by the user, and `total_onchain_supply` and `total_displayed_supply` are the values returned by `get_supply_data()`.
 
