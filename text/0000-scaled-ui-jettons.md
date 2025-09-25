@@ -27,34 +27,38 @@ TBD
 
 The jetton master contracts following this TEP are extended versions of [TEP-74](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md) jetton masters.
 
-They MUST additionally (w.r.t. TEP-74) support the following get methods:
+They MUST additionally (w.r.t. TEP-74) support the following get method:
 1. `get_supply_data()` returns `(int total_onchain_supply, int total_displayed_supply)`
 
-   `total_onchain_supply` - (integer) - the sum of balances of jetton wallets of this jetton master (as reported by `get_wallet_data()` calls on the jetton wallets)
+   `total_onchain_supply` - (integer) - the sum of balances of jetton wallets of this jetton master, that is, the same value as `total_supply` returned by `get_jetton_data()`
 
    `total_displayed_supply` - (integer) - the sum of balances presented to users in UIs. This value MUST NOT be 0 whenever `total_onchain_supply` is not 0.
-2. `get_displayed_balance(int onchain_balance)` returns `int displayed_balance`
 
-   `onchain_balance` - (integer) - the balance of a jetton wallet or a transfer amount as reported by `get_wallet_data()` call on the jetton wallet or in onchain data
-   
-   `displayed_balance` - (integer) - the equivalent amount that should be displayed in UIs
-   
-   In practice this get method SHOULD return the result of `muldiv(onchain_balance, total_displayed_supply, total_onchain_supply)`, unless `total_onchain_supply` is 0, in which case the method SHOULD return -1 to indicate data inconsistency.
-3. `get_onchain_balance(int displayed_balance)` returns `int onchain_balance`
+The displayed (that is, the value presented to users in UIs supporting this TEP) balance of a jetton wallet MUST be calculated as `muldiv(onchain_balance, total_displayed_supply, total_onchain_supply)`, where `onchain_balance` is the balance of the jetton wallet as reported by `get_wallet_data()`, and `total_displayed_supply` and `total_onchain_supply` are the values returned by `get_supply_data()`.
 
-   `displayed_balance` - (integer) - the balance or transfer amount displayed or inputted in a UI
-   
-   `onchain_balance` - (integer) - the equivalent amount of onchain tokens
-   
-   In practice this get method SHOULD return the result of `muldiv(displayed_balance, total_onchain_supply, total_displayed_supply)`, unless `total_displayed_supply` is 0, in which case the method SHOULD return -1 to indicate data inconsistency.
+Values inputted by users in UIs supporting this TEP have to be converted to onchain balance (the value used for sending jettons) as follows: `muldiv(displayed_or_inputted_balance, total_onchain_supply, total_displayed_supply)`, where `displayed_or_inputted_balance` is the value inputted by the user, and `total_onchain_supply` and `total_displayed_supply` are the values returned by `get_supply_data()`.
+
+Jetton master contracts supporting this TEP MUST send the following external-out message (TL-B structure) whenever the values returned by `get_supply_data()` change (that includes the change of `total_supply` returned by `get_jetton_data()`, since `total_onchain_supply` is equal to `total_supply`):
+```
+supply_data_changed#d917e56f total_onchain_supply:(VarUInteger 32) total_displayed_supply:(VarUInteger 32) = ExternalOutMsgBody;
+```
+
+`total_onchain_supply` and `total_displayed_supply` in the external-out message MUST be the same values as returned by `get_supply_data()` after the transaction that sent the message.
+
+`total_onchain_supply` and `total_displayed_supply` reported by `get_supply_data()` MUST NOT be changed between transactions that send the `supply_data_changed` message.
 
 # Drawbacks
 
-TBD
+1. It is not possible to make a mechanism for calculating the displayed balance in a way that is different from the `muldiv` calculation using this TEP.
 
 # Rationale and alternatives
 
-TBD
+## Why restrict the calculation to `muldiv` and why send the external-out message?
+
+Both of these points significantly simplify the indexing of jettons that support this TEP by allowing indexers to:
+
+1. Only store the multiplier reported by the jetton master contract and use it for displayed balance calculation for both present and historical data, on any reasonable number of jetton wallets.
+2. Not have to call `get_supply_data()` after each transaction in order to obtain the new multiplier and instead rely on the external-out message.
 
 # Prior art
 
