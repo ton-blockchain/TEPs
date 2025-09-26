@@ -39,25 +39,25 @@ This standard addresses these by standardizing vault interfaces, reducing integr
 ## When to Use This Standard
 
 Your protocol should implement this vault standard if it:
+
 - Accepts user deposits and issues share tokens representing their claim
 - Manages deposited assets (yield generation, liquidity provision, etc.)
 - Allows withdrawals by burning shares for underlying assets
 
 ## Protocol Examples
 
-| Protocol Type | Examples | Use Case |
-|--------------|----------|----------|
-| **Lending** | Morpho | Deposit assets, receive interest-bearing tokens |
-| **Yield Aggregator** | Yearn Finance | Auto-compound yields across strategies |
-| **Liquid Staking** | Rocket Pool | Stake tokens, receive liquid staking derivatives |
-| **Stablecoin** | Ethena | Collateralized yield-bearing stablecoins |
-| **Liquidity Pools** | Balancer | LP tokens wrapped for additional yield |
+| Protocol Type        | Examples      | Use Case                                         |
+| -------------------- | ------------- | ------------------------------------------------ |
+| **Lending**          | Morpho        | Deposit assets, receive interest-bearing tokens  |
+| **Yield Aggregator** | Yearn Finance | Auto-compound yields across strategies           |
+| **Liquid Staking**   | Rocket Pool   | Stake tokens, receive liquid staking derivatives |
+| **Stablecoin**       | Ethena        | Collateralized yield-bearing stablecoins         |
+| **Liquidity Pools**  | Balancer      | LP tokens wrapped for additional yield           |
 
 ## Implementation
 
 Developers can find the reference implementation with complete examples and tests at:
 👉 **[github.com/torch-core/tep-vault-standard](https://github.com/torch-core/tep-vault-standard)**
-
 
 # Specification
 
@@ -123,6 +123,7 @@ All vaults implementing this standard MUST implement [`TEP-64`](https://github.c
   ![nested-cell](../assets/0524-vault-standard/nested-cell.png)
 
 - **`TL-B for General Types`**
+
   ```tlb
   opcode$_ value:uint32 = Opcode;
   query_id$_ value:uint64 = QueryId;
@@ -159,6 +160,18 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
 ### Internal Messages
 
 > **TON Balance Preservation**: Any message that interacts with the Vault SHOULD NOT decrease its TON balance after completion, or alternatively, the Vault MUST maintain a minimum TON balance at all times — in both cases excluding TON amounts legitimately deposited by users or withdrawn by users. This ensures the Vault contract cannot be frozen due to insufficient TON.
+
+> **Share Minting**: When minting shares for successful deposits, vault implementations SHOULD use the TEP-74 recommended `internal_transfer` format for consistency across all vault implementations:
+>
+> ```
+> internal_transfer  query_id:QueryId amount:(VarUInteger 16) from:MsgAddress
+>                      response_address:MsgAddress
+>                      forward_ton_amount:(VarUInteger 16)
+>                      forward_payload:(Either Cell ^Cell)
+>                      = InternalMsgBody;
+> ```
+>
+> The `forward_payload` MUST contain [VaultNotifiactionFp](#op_vault_notification_fp) for successful deposits.
 
 **Vault Notification**
 
@@ -224,9 +237,11 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
     | -------------------------- | --------------------------------------------------- | ------------ |
     | `OP_VAULT_NOTIFICATION_EC` | [Opcode](#opcode)                                   | `0x1f9e644b` |
     | `vaultNotificationParams`  | [VaultNotificationParams](#vaultnotificationparams) |              |
+
   - **`TL-B for Options, Callbacks, and Notifications`**
+
     ```
-    vault_options$_ 
+    vault_options$_
       custom_data:(Maybe ^Cell) = VaultOptions;
 
     callback_params$_
@@ -359,6 +374,7 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
   | `depositParams` | [DepositParams](#depositparams) |                          |
 
 - **`TL-B for Deposit`**
+
   ```
   deposit_params$_
     receiver:MsgAddress
@@ -419,6 +435,7 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
   | `callbacks` | [Callbacks](#callbacks) | Success/failure callbacks. |
 
 - **`TL-B for Withdraw`**
+
   ```
   withdraw_options$_
     vault_options:(Maybe ^VaultOptions)
@@ -474,13 +491,14 @@ The specific storage structure for managing underlying assets, Jetton wallets, a
     | `OP_TAKE_QUOTE`  | [Opcode](#opcode)       | `0x68ec31ea`                                              |
     | `queryId`        | [QueryId](#queryid)     | Unique query identifier.                                  |
     | `initiator`      | `Address`               | Address sending `OP_PROVIDE_QUOTE`.                       |
-    | `quoteAsset`     | Cell<[Asset](#asset)>   | Base asset used for calculating the exchange rate.        |
+    | `quoteAsset`     | Cell<[Asset](#asset)>   | Asset used as the basis for normalizing total assets.     |
     | `totalSupply`    | `Coins`                 | Total vault shares.                                       |
-    | `totalAssets`    | `Coins`                 | Total underlying assets.                                  |
+    | `totalAssets`    | `Coins`                 | Total underlying assets normalized to the quote asset.    |
     | `timestamp`      | [Timestamp](#timestamp) | Timestamp of `totalSupply` and `totalAssets` calculation. |
     | `forwardPayload` | `Cell?`                 | Initiator-defined payload.                                |
 
   - **`TL-B for provide and take quote`**
+
     ```
     quote_options$_
       vault_options:(Maybe ^VaultOptions)
@@ -790,9 +808,11 @@ Vaults implementing this standard MUST implement the following functions for que
   | `TOPIC_DEPOSITED` | [Opcode](#opcode) | `0x11475d67` |
   | `initiator` | `Address` | Address initiating the deposit. |
   | `receiver` | `Address` | Address receiving shares. |
-  | `depositAsset` | Cell<[Asset](#asset)>? | Deposited asset (required for multi-asset vaults, null for single asset). |
+  | `depositAsset` | Cell<[Asset](#asset)> | Deposited asset. |
   | `depositAmount` | `Coins` | Deposited asset amount. |
   | `shares` | `Coins` | Minted shares. |
+  | `totalDepositAssetAmount` | `Coins` | Total amount of the deposit asset held by the vault after this deposit. |
+  | `totalSupply` | `Coins` | Total shares in circulation after this deposit. |
   | `depositLogOptions` | `Cell<DepositLogOptions>?` | Custom deposit logs. |
 
 - **`Withdrawn`**
@@ -806,9 +826,11 @@ Vaults implementing this standard MUST implement the following functions for que
   | `TOPIC_WITHDRAWN` | [Opcode](#opcode) | `0xedfb416d` |
   | `initiator` | `Address` | Address initiating the withdrawal. |
   | `receiver` | `Address` | Address receiving assets. |
-  | `withdrawAsset` | Cell<[Asset](#asset)>? | Withdrawn asset (required for multi-asset vaults, null for single asset). |
+  | `withdrawAsset` | Cell<[Asset](#asset)> | Withdrawn asset. |
   | `withdrawAmount` | `Coins` | Withdrawn asset amount. |
   | `burnedShares` | `Coins` | Burned shares. |
+  | `totalWithdrawAssetAmount` | `Coins` | Total amount of the withdraw asset held by the vault after this withdrawal. |
+  | `totalSupply` | `Coins` | Total shares in circulation after this withdrawal. |
   | `withdrawLogOptions` | `Cell<WithdrawLogOptions>?` | Custom withdrawal logs. |
 
 - **`Quoted`**
@@ -820,34 +842,39 @@ Vaults implementing this standard MUST implement the following functions for que
   | Field | Type | Description |
   |----------------|----------------|-------------|
   | `TOPIC_QUOTED` | [Opcode](#opcode) | `0xb7bfa697` |
-  | `quoteAsset` | Cell<[Asset](#asset)>? | `quoteAsset` is used as the basis for calculating the exchange rate. |
+  | `quoteAsset` | Cell<[Asset](#asset)> | `quoteAsset` is used as the basis for calculating the exchange rate. |
   | `initiator` | `Address` | Address initiating the quote request. |
   | `receiver` | `Address` | Address receiving the quote response. |
   | `totalSupply` | `Coins` | Total vault shares at the time of quote. |
-  | `totalAssets` | `Coins` | Total underlying assets at the time of quote. |
+  | `totalAssets` | `Coins` | Total underlying assets normalized to the quote asset at the time of quote. |
   | `timestamp` | [Timestamp](#timestamp) | Event timestamp for off-chain indexing. |
   | `quoteLogOptions` | `Cell<QuoteLogOptions>?` | Custom quote logs. |
 
 - **`TL-B for Events`**
+
   ```
   deposited#11475d67
     initiator:MsgAddress
     receiver:MsgAddress
-    deposit_asset:(Maybe ^Asset)
+    deposit_asset:^Asset
     deposit_amount:Coins
     shares:Coins
+    total_deposit_asset_amount:Coins
+    total_supply:Coins
     deposit_log_options:(Maybe ^Cell) = EventBody;
 
   withdrawn#edfb416d
     initiator:MsgAddress
     receiver:MsgAddress
-    withdraw_asset:(Maybe ^Asset)
+    withdraw_asset:^Asset
     withdraw_amount:Coins
     burned_shares:Coins
+    total_withdraw_asset_amount:Coins
+    total_supply:Coins
     withdraw_log_options:(Maybe ^Cell) = EventBody;
 
   quoted#b7bfa697
-    quote_asset:(Maybe ^Asset)
+    quote_asset:^Asset
     initiator:MsgAddress
     receiver:MsgAddress
     total_supply:Coins
