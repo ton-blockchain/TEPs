@@ -122,6 +122,13 @@ All vaults implementing this standard MUST implement [`TEP-64`](https://github.c
 - **`Nested<Cell<T>>`** <a id="nestedcellt"></a>: Because TON's Cell can have at most 4 references, if you need to store more than 4 references of the same type data structure, we will enable `Nested<Cell<T>>`, where access is such that 1 cell holds at most 3 references, and the remaining one reference is used to connect to the next layer cell, and then the next layer cell can continue to store at most 3 references and so on, as shown in the diagram below.
   ![nested-cell](../assets/0524-vault-standard/nested-cell.png)
 
+- **`VaultStateAfter`** <a id="vaultstateafter"></a>: Represents the vault's state after an operation (deposit, withdraw, or quote).
+
+  | Field              | Type    | Description                                                                                                                                                    |
+  | ------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `totalSupply`      | `Coins` | Total shares in circulation after the operation.                                                                                                               |
+  | `totalAssetAmount` | `Coins` | Total amount of the relevant asset held by the vault after the operation (deposit asset for deposits, withdraw asset for withdrawals, quote asset for quotes). |
+
 - **`TL-B for General Types`**
 
   ```tlb
@@ -145,6 +152,10 @@ All vaults implementing this standard MUST implement [`TEP-64`](https://github.c
     item2:(Maybe ^T)
     item3:(Maybe ^T)
     next:(Maybe ^Nested T) = Nested T;
+
+  vault_state_after$_
+    total_supply:Coins
+    total_asset_amount:Coins = VaultStateAfter;
   ```
 
 ### Storage
@@ -811,8 +822,7 @@ Vaults implementing this standard MUST implement the following functions for que
   | `depositAsset` | Cell<[Asset](#asset)> | Deposited asset. |
   | `depositAmount` | `Coins` | Deposited asset amount. |
   | `shares` | `Coins` | Minted shares. |
-  | `totalDepositAssetAmount` | `Coins` | Total amount of the deposit asset held by the vault after this deposit. |
-  | `totalSupply` | `Coins` | Total shares in circulation after this deposit. |
+  | `vaultStateAfter` | Cell<[VaultStateAfter](#vaultstateafter)> | Vault state after the deposit. |
   | `depositLogOptions` | `Cell<DepositLogOptions>?` | Custom deposit logs. |
 
 - **`Withdrawn`**
@@ -829,8 +839,7 @@ Vaults implementing this standard MUST implement the following functions for que
   | `withdrawAsset` | Cell<[Asset](#asset)> | Withdrawn asset. |
   | `withdrawAmount` | `Coins` | Withdrawn asset amount. |
   | `burnedShares` | `Coins` | Burned shares. |
-  | `totalWithdrawAssetAmount` | `Coins` | Total amount of the withdraw asset held by the vault after this withdrawal. |
-  | `totalSupply` | `Coins` | Total shares in circulation after this withdrawal. |
+  | `vaultStateAfter` | Cell<[VaultStateAfter](#vaultstateafter)> | Vault state after the withdrawal. |
   | `withdrawLogOptions` | `Cell<WithdrawLogOptions>?` | Custom withdrawal logs. |
 
 - **`Quoted`**
@@ -845,8 +854,7 @@ Vaults implementing this standard MUST implement the following functions for que
   | `quoteAsset` | Cell<[Asset](#asset)> | `quoteAsset` is used as the basis for calculating the exchange rate. |
   | `initiator` | `Address` | Address initiating the quote request. |
   | `receiver` | `Address` | Address receiving the quote response. |
-  | `totalSupply` | `Coins` | Total vault shares at the time of quote. |
-  | `totalAssets` | `Coins` | Total underlying assets normalized to the quote asset at the time of quote. |
+  | `vaultStateAfter` | Cell<[VaultStateAfter](#vaultstateafter)> | Vault state at the time of quote. |
   | `timestamp` | [Timestamp](#timestamp) | Event timestamp for off-chain indexing. |
   | `quoteLogOptions` | `Cell<QuoteLogOptions>?` | Custom quote logs. |
 
@@ -859,8 +867,7 @@ Vaults implementing this standard MUST implement the following functions for que
     deposit_asset:^Asset
     deposit_amount:Coins
     shares:Coins
-    total_deposit_asset_amount:Coins
-    total_supply:Coins
+    vault_state_after:^VaultStateAfter
     deposit_log_options:(Maybe ^Cell) = EventBody;
 
   withdrawn#edfb416d
@@ -869,16 +876,14 @@ Vaults implementing this standard MUST implement the following functions for que
     withdraw_asset:^Asset
     withdraw_amount:Coins
     burned_shares:Coins
-    total_withdraw_asset_amount:Coins
-    total_supply:Coins
+    vault_state_after:^VaultStateAfter
     withdraw_log_options:(Maybe ^Cell) = EventBody;
 
   quoted#b7bfa697
     quote_asset:^Asset
     initiator:MsgAddress
     receiver:MsgAddress
-    total_supply:Coins
-    total_assets:Coins
+    vault_state_after:^VaultStateAfter
     timestamp:Timestamp
     quote_log_options:(Maybe ^Cell) = EventBody;
   ```
