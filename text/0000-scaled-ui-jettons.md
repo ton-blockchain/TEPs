@@ -40,12 +40,14 @@ Values inputted by users in UIs supporting this TEP have to be converted to onch
 
 Jetton master contracts supporting this TEP MUST send the following external-out message (TL-B structure) whenever the values returned by `get_supply_data()` change (that includes the change of `total_supply` returned by `get_jetton_data()`, since `total_onchain_supply` is equal to `total_supply`):
 ```
-supply_data_changed#d917e56f total_onchain_supply:(VarUInteger 32) total_displayed_supply:(VarUInteger 32) = ExternalOutMsgBody;
+supply_data_changed#19b5aad2 total_onchain_supply:(VarUInteger 32) total_displayed_supply:(VarUInteger 32) {n:#} comment:(Maybe (SnakeData ~n)) = ExternalOutMsgBody;
 ```
 
 `total_onchain_supply` and `total_displayed_supply` in the external-out message MUST be the same values as returned by `get_supply_data()` after the transaction that sent the message.
 
 `total_onchain_supply` and `total_displayed_supply` reported by `get_supply_data()` MUST NOT be changed between transactions that send the `supply_data_changed` message.
+
+`comment` is an optional field that may be used to describe the reason for the change of `total_onchain_supply` and `total_displayed_supply`. `SnakeData` is described in [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#data-serialization).
 
 # Drawbacks
 
