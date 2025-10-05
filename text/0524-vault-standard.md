@@ -83,7 +83,7 @@ All vaults implementing this standard MUST implement [`TEP-64`](https://github.c
 
 - **`Opcode`** <a id="opcode"></a>: `uint32`
 - **`QueryId`** <a id="queryid"></a>: `uint64`
-- **`ExtraCurrencyId`** <a id="extracurrencyid"></a>: `uint32`
+- **`ExtraCurrencyId`** <a id="extracurrencyid"></a>: `int32`
 - **`Timestamp`** <a id="timestamp"></a>: `uint32`
 - **`RoundingType`** <a id="roundingtype"></a>: `uint2`
   - `ROUND_DOWN = 0`
@@ -103,7 +103,7 @@ All vaults implementing this standard MUST implement [`TEP-64`](https://github.c
   | ------------ | ------------------ | --------------------------------- |
   | `0000`       | **TON (native)**   | —                                 |
   | `0001`       | **Jetton**         | `jettonMasterAddress` (`Address`) |
-  | `0010`       | **Extra Currency** | `tokenId` (`uint32`)              |
+  | `0010`       | **Extra Currency** | `tokenId` (`int32`)              |
 
   **Encoding Examples (Tolk)**
 
@@ -134,7 +134,7 @@ All vaults implementing this standard MUST implement [`TEP-64`](https://github.c
   ```tlb
   opcode$_ value:uint32 = Opcode;
   query_id$_ value:uint64 = QueryId;
-  extra_currency_id$_ value:uint32 = ExtraCurrencyId;
+  extra_currency_id$_ value:int32 = ExtraCurrencyId;
   timestamp$_ value:uint32 = Timestamp;
 
   rounding_down$00 = RoundingType;
