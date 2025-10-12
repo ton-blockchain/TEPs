@@ -9,6 +9,8 @@
 
 # Summary
 
+A Vault is a smart contract that allows users to deposit assets (such as TON, Jetton, or Extra Currency) and receive corresponding shares (represented as Jetton) indicating their proportional ownership. The Vault utilizes the deposited assets to execute various strategies to generate yield. Users can redeem the underlying assets plus any accumulated rewards through their shares, while considering potential fees or risks (such as losses from strategy failures).
+
 This proposal defines a standardized API for tokenized vaults on the TON blockchain, built upon the [TEP-74 Jetton standard](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md) and inspired by the design principles of [ERC-4626](https://eips.ethereum.org/EIPS/eip-4626). It is adapted to TON’s **message-driven async design** and Jetton framework.
 
 The standard supports **deposit, withdrawal, conversion rate queries, and gas operation previews**. It also introduces a standardized **cross-protocol communication interface** with unified notification mechanisms for operation results and callbacks.
@@ -36,15 +38,9 @@ This standard addresses these by standardizing vault interfaces, reducing integr
 
 # Guide
 
-## When to Use This Standard
+## Vault Examples
 
-Your protocol should implement this vault standard if it:
-
-- Accepts user deposits and issues share tokens representing their claim
-- Manages deposited assets (yield generation, liquidity provision, etc.)
-- Allows withdrawals by burning shares for underlying assets
-
-## Protocol Examples
+Based on the vault definition in the [Summary](#summary), here are examples of protocols that match this standard:
 
 | Protocol Type        | Examples      | Use Case                                         |
 | -------------------- | ------------- | ------------------------------------------------ |
