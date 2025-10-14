@@ -28,26 +28,26 @@ TBD
 The jetton master contracts following this TEP are extended versions of [TEP-74](https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md) jetton masters.
 
 They MUST additionally (w.r.t. TEP-74) support the following get method:
-1. `get_supply_data()` returns `(int total_onchain_supply, int total_displayed_supply)`
+1. `get_display_multiplier()` returns `(int numerator, int denominator)`
 
-   `total_onchain_supply` - (integer) - the sum of balances of jetton wallets of this jetton master, that is, the same value as `total_supply` returned by `get_jetton_data()`
+   `numerator` - (integer) - the numerator to be used when calculating displayed amounts from onchain amounts
 
-   `total_displayed_supply` - (integer) - the sum of balances presented to users in UIs. This value MUST NOT be 0 whenever `total_onchain_supply` is not 0.
+   `denominator` - (integer) - the denominator to be used when calculating displayed amounts from onchain amounts
 
-The displayed (that is, the value presented to users in UIs supporting this TEP) balance of a jetton wallet MUST be calculated as `muldiv(onchain_balance, total_displayed_supply, total_onchain_supply)`, where `onchain_balance` is the balance of the jetton wallet as reported by `get_wallet_data()`, and `total_displayed_supply` and `total_onchain_supply` are the values returned by `get_supply_data()`. The displayed balance calculated in such a way and presented to the user MUST still respect the `decimals` reported by jetton's metadata.
+The displayed (that is, the value presented to users in UIs supporting this TEP) balance of a jetton wallet MUST be calculated as `muldiv(onchain_balance, numerator, denominator)`, where `onchain_balance` is the balance of the jetton wallet as reported by `get_wallet_data()`, and `numerator` and `denominator` are the values returned by `get_display_multiplier()`. The displayed balance calculated in such a way and presented to the user MUST still respect the `decimals` reported by jetton's metadata. Similarly, the total displayed supply MUST be calculated as `muldiv(total_onchain_supply, numerator, denominator)`.
 
-Values inputted by users in UIs supporting this TEP have to be converted to onchain balance (the value used for sending jettons) as follows: `muldiv(displayed_or_inputted_balance, total_onchain_supply, total_displayed_supply)`, where `displayed_or_inputted_balance` is the value inputted by the user, and `total_onchain_supply` and `total_displayed_supply` are the values returned by `get_supply_data()`.
+Values inputted by users in UIs supporting this TEP have to be converted to onchain balance (the value used for sending jettons) as follows: `muldiv(displayed_or_inputted_balance, denominator, numerator)`, where `displayed_or_inputted_balance` is the value inputted by the user, and `numerator` and `denominator` are the values returned by `get_display_multiplier()`.
 
-Jetton master contracts supporting this TEP MUST send the following external-out message (TL-B structure) whenever the values returned by `get_supply_data()` change (that includes the change of `total_supply` returned by `get_jetton_data()`, since `total_onchain_supply` is equal to `total_supply`):
+Jetton master contracts supporting this TEP MUST send the following external-out message (TL-B structure) whenever the values returned by `get_display_multiplier()`:
 ```
-supply_data_changed#19b5aad2 total_onchain_supply:(VarUInteger 32) total_displayed_supply:(VarUInteger 32) {n:#} comment:(Maybe (SnakeData ~n)) = ExternalOutMsgBody;
+display_multiplier_changed#ac392598 numerator:(VarUInteger 32) denominator:(VarUInteger 32) {n:#} comment:(Maybe (SnakeData ~n)) = ExternalOutMsgBody;
 ```
 
-`total_onchain_supply` and `total_displayed_supply` in the external-out message MUST be the same values as returned by `get_supply_data()` after the transaction that sent the message.
+`numerator` and `denominator` in the external-out message MUST be the same values as returned by `get_display_multiplier()` after the transaction that sent the message.
 
-`total_onchain_supply` and `total_displayed_supply` reported by `get_supply_data()` MUST NOT be changed between transactions that send the `supply_data_changed` message.
+`numerator` and `denominator` reported by `get_display_multiplier()` MUST NOT be changed between transactions that send the `display_multiplier_changed` message.
 
-`comment` is an optional field that may be used to describe the reason for the change of `total_onchain_supply` and `total_displayed_supply`. `SnakeData` is described in [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#data-serialization).
+`comment` is an optional field that may be used to describe the reason for the change of `numerator` and `denominator`. `SnakeData` is described in [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#data-serialization).
 
 # Drawbacks
 
@@ -60,7 +60,7 @@ supply_data_changed#19b5aad2 total_onchain_supply:(VarUInteger 32) total_display
 Both of these points significantly simplify the indexing of jettons that support this TEP by allowing indexers to:
 
 1. Only store the multiplier reported by the jetton master contract and use it for displayed balance calculation for both present and historical data, on any reasonable number of jetton wallets.
-2. Not have to call `get_supply_data()` after each transaction in order to obtain the new multiplier and instead rely on the external-out message.
+2. Not have to call `get_display_multiplier()` after each transaction in order to obtain the new multiplier and instead rely on the external-out message.
 
 # Prior art
 
