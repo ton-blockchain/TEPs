@@ -30,9 +30,9 @@ The jetton master contracts following this TEP are extended versions of [TEP-74]
 They MUST additionally (w.r.t. TEP-74) support the following get method:
 1. `get_display_multiplier()` returns `(int numerator, int denominator)`
 
-   `numerator` - (integer) - the numerator to be used when calculating displayed amounts from onchain amounts
+   `numerator` - (integer) - the numerator to be used when calculating displayed amounts from onchain amounts. MUST NOT be `0`.
 
-   `denominator` - (integer) - the denominator to be used when calculating displayed amounts from onchain amounts
+   `denominator` - (integer) - the denominator to be used when calculating displayed amounts from onchain amounts. MUST NOT be `0`.
 
 The displayed (that is, the value presented to users in UIs supporting this TEP) balance of a jetton wallet MUST be calculated as `muldiv(onchain_balance, numerator, denominator)`, where `onchain_balance` is the balance of the jetton wallet as reported by `get_wallet_data()`, and `numerator` and `denominator` are the values returned by `get_display_multiplier()`. The displayed balance calculated in such a way and presented to the user MUST still respect the `decimals` reported by jetton's metadata. Similarly, the total displayed supply MUST be calculated as `muldiv(total_onchain_supply, numerator, denominator)`.
 
