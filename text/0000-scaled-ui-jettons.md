@@ -17,7 +17,9 @@ Currently, it is not viable to implement jetton rebasing in any way, since updat
 
 # Guide
 
-TBD
+## Useful links
+
+1. [Reference implementation](https://github.com/the-ton-tech/scaled-ui-jetton)
 
 # Specification
 
@@ -40,14 +42,18 @@ Values inputted by users in UIs supporting this TEP have to be converted to onch
 
 Jetton master contracts supporting this TEP MUST send the following external-out message (TL-B structure) whenever the values returned by `get_display_multiplier()`:
 ```
-display_multiplier_changed#ac392598 numerator:(VarUInteger 32) denominator:(VarUInteger 32) {n:#} comment:(Maybe (SnakeData ~n)) = ExternalOutMsgBody;
+display_multiplier_changed#ac392598 numerator:(VarUInteger 32) denominator:(VarUInteger 32) comment:(Maybe SnakeString) = ExternalOutMsgBody;
 ```
 
 `numerator` and `denominator` in the external-out message MUST be the same values as returned by `get_display_multiplier()` after the transaction that sent the message.
 
 `numerator` and `denominator` reported by `get_display_multiplier()` MUST NOT be changed between transactions that send the `display_multiplier_changed` message.
 
-`comment` is an optional field that may be used to describe the reason for the change of `numerator` and `denominator`. `SnakeData` is described in [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#data-serialization).
+`comment` is an optional field that may be used to describe the reason for the change of `numerator` and `denominator`. `SnakeString` is described as `SnakeData` in [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#data-serialization).
+
+## Already existing Jetton Master contracts
+
+Jettons with non-upgradable Jetton Master may spawn a separate smart contract (Scaled UI extension) which implements the above functionality. In this case the pair of contracts (Jetton Master + Scaled UI extension) will behave in the same way as a new Jetton Master. For non-upgradable Jetton Master with updatable metadata it is recommended to add "scaled-ui" key with value equal to text representaion of Scaled UI extension contract address.
 
 # Drawbacks
 
@@ -68,8 +74,8 @@ Both of these points significantly simplify the indexing of jettons that support
 
 # Unresolved questions
 
-TBD
+\-
 
 # Future possibilities
 
-TBD
+\-
