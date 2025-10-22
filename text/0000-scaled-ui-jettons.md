@@ -51,6 +51,8 @@ display_multiplier_changed#ac392598 numerator:(VarUInteger 32) denominator:(VarU
 
 `comment` is an optional field that may be used to describe the reason for the change of `numerator` and `denominator`. `SnakeString` is described as `SnakeData` in [TEP-64](https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#data-serialization).
 
+Jetton master contracts supporting this TEP MUST emit the `display_multiplier_changed` external-out message upon initialization.
+
 ## Already existing Jetton Master contracts
 
 Jettons with non-upgradable Jetton Master may spawn a separate smart contract (Scaled UI extension) which implements the above functionality. In this case the pair of contracts (Jetton Master + Scaled UI extension) will behave in the same way as a new Jetton Master. For non-upgradable Jetton Master with updatable metadata it is recommended to add "scaled-ui" key with value equal to text representaion of Scaled UI extension contract address.
