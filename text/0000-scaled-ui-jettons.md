@@ -53,10 +53,6 @@ display_multiplier_changed#ac392598 numerator:(VarUInteger 32) denominator:(VarU
 
 Jetton master contracts supporting this TEP MUST emit the `display_multiplier_changed` external-out message upon initialization.
 
-## Already existing Jetton Master contracts
-
-Jettons with non-upgradable Jetton Master may spawn a separate smart contract (Scaled UI extension) which implements the above functionality. In this case the pair of contracts (Jetton Master + Scaled UI extension) will behave in the same way as a new Jetton Master. For non-upgradable Jetton Master with updatable metadata it is recommended to add "scaled-ui" key with value equal to text representaion of Scaled UI extension contract address.
-
 # Drawbacks
 
 1. It is not possible to make a mechanism for calculating the displayed balance in a way that is different from the `muldiv` calculation using this TEP.
