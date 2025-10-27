@@ -55,7 +55,7 @@ When the transaction bounces, it creates the bounce message depending on the `ex
 - If `(extra_flags & 3) = 1`, the bounced message MUST have the new format with the root of the body of the original message (see below).
 - If `(extra_flags & 3) = 3`, the bounced message MUST have the new format with the whole body of the original message (see below).
 
-The bounced message (either old or new) SHOULD have `extra_flags = 0`.
+The bounced message (either old or new) MUST have the same 0th and 1st bits of `extra_flags` as the original message.
 Note: here `extra_flags` is the integer obtained after deserializing `VarUInteger 16`.
 
 New bounced message body has the following TLB scheme:
