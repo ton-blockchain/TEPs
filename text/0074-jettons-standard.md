@@ -79,7 +79,7 @@ transfer#0f8a7ea5 query_id:uint64 amount:(VarUInteger 16) destination:MsgAddress
 **Otherwise should do:**
 
 1. decrease jetton amount on sender wallet by `amount` and send message which increase jetton amount on receiver wallet (and optionally deploy it).
-2. if `forward_ton_amount > 0` ensure that receiver's jetton-wallet send message to `destination` address with `forward_ton_amount` nanotons attached and with the following layout:
+2. if `forward_amount > 0` ensure that receiver's jetton-wallet send message to `destination` address with `forward_amount` nanotons attached and with the following layout:
    TL-B schema:
 
 ```
@@ -96,7 +96,7 @@ transfer_notification#7362d09c query_id:uint64 amount:(VarUInteger 16)
 
 `forward_payload` should be equal with request's `forward_payload`.
 
-If `forward_ton_amount` is equal to zero, notification message should not be sent.
+If `forward_amount` is equal to zero, notification message should not be sent.
 
 3. Receiver's wallet should send all excesses of incoming message coins to `response_destination` with the following layout:
    TL-B schema: `excesses#d53276db query_id:uint64 = InternalMsgBody;`
