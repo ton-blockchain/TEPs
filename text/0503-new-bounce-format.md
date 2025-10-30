@@ -43,7 +43,7 @@ Note: this field is currently unused, as IHR is not implemented, and since globa
 
 `extra_flags` MUST still be `VarUInteger 16` (same as `Coins`). The first two bits of flags (`extra_flags & 3`) will be used to control the new bounce format.
 They can be set by contract sending the message, and they MUST remain in the message unchanged.
-All other bits of `extra_flags` MAY be used in the future for other purposes.
+All other bits of `extra_flags` MAY be used in the future for other purposes. While they are unused they should be set to 0: messages with non-zero higher bits will fail to be sent in Action Phase.
 
 For compatibility, this behavior MUST be enabled by `global_version` in `ConfigParam 8`. In the older versions, the field MUST be treated as IHR fee.
 In the newer versions, it MUST be treated as `extra_flags`, while IHR fee MUST be implicitly considered to be zero.
