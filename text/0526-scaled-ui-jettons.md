@@ -1,6 +1,6 @@
 - **TEP**: [526](https://github.com/ton-blockchain/TEPs/pull/526)
 - **title**: Scaled UI Jettons
-- **status**: Draft
+- **status**: Active
 - **type**: Contract Interface
 - **authors**: [Maxim Gromov](https://github.com/krigga)
 - **created**: 19.09.2025
@@ -20,6 +20,7 @@ Currently, it is not viable to implement jetton rebasing in any way, since updat
 ## Useful links
 
 1. [Reference implementation](https://github.com/the-ton-tech/scaled-ui-jetton)
+2. An example jetton is available in mainnet (`EQBV6CmjuT-dHsEZLrEf24eqqYkpDpWiUr27_JBPdUzdeq3k`, [tonviewer](https://tonviewer.com/EQBV6CmjuT-dHsEZLrEf24eqqYkpDpWiUr27_JBPdUzdeq3k))
 
 # Specification
 
