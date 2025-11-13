@@ -29,6 +29,7 @@ Proposal management is done using GitHub pull requests, the process is described
 | [89](./text/0089-jetton-wallet-discovery.md) | Discoverable Jettons Wallets       | Contract Interface | 08.09.2022 |
 | [115](./text/0115-ton-connect.md)            | TON Connect                        | Core               | 20.10.2022 |
 | [160](./text/0160-dispatch-queue.md)         | Dispatch Queue                     | Core               | 13.06.2024 |
+| [526](./text/0526-scaled-ui-jettons.md)      | Scaled UI Jettons                  | Contract Interface | 19.09.2025 |
 
 
 ## WIP

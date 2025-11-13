@@ -1,4 +1,4 @@
-- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0)
+- **TEP**: [526](https://github.com/ton-blockchain/TEPs/pull/526)
 - **title**: Scaled UI Jettons
 - **status**: Draft
 - **type**: Contract Interface
