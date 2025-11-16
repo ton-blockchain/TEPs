@@ -1,0 +1,197 @@
+:root {
+    color-scheme: light dark;
+    --bg: #f5f7fb;
+    --panel: rgba(255, 255, 255, 0.92);
+    --border: rgba(18, 28, 45, 0.12);
+    --accent: #0a59f7;
+    --accent-weak: rgba(10, 89, 247, 0.14);
+    --text: #1b1f2a;
+    --text-weak: #4f566b;
+    --success: #0fb574;
+    font-family: "HarmonyOS Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(160deg, rgba(10, 89, 247, 0.04), rgba(15, 181, 116, 0.04));
+    color: var(--text);
+}
+
+.app-header,
+.app-footer {
+    padding: 24px clamp(16px, 6vw, 64px);
+    text-align: center;
+}
+
+.app-header h1 {
+    margin-bottom: 8px;
+    font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+}
+
+.subtitle {
+    margin: 0 auto;
+    max-width: 720px;
+    color: var(--text-weak);
+}
+
+.app-shell {
+    display: grid;
+    gap: 20px;
+    padding: 0 clamp(16px, 6vw, 64px) 32px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.panel {
+    background: var(--panel);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 12px 32px rgba(15, 35, 66, 0.08);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(18px);
+}
+
+.panel h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.controls ol {
+    padding-left: 20px;
+    color: var(--text-weak);
+}
+
+.file-input {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 16px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 24px rgba(10, 89, 247, 0.25);
+}
+
+.file-input:hover {
+    transform: translateY(-1px);
+}
+
+.file-input input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-block: 18px;
+}
+
+button {
+    border: none;
+    border-radius: 16px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+button:not(:disabled):hover {
+    transform: translateY(-1px);
+}
+
+#previewButton {
+    background: var(--success);
+    color: #fff;
+    box-shadow: 0 12px 24px rgba(15, 181, 116, 0.25);
+}
+
+.secondary {
+    background: var(--accent-weak);
+    color: var(--accent);
+}
+
+.ghost {
+    background: transparent;
+    color: var(--accent);
+    border: 1px dashed rgba(10, 89, 247, 0.45);
+}
+
+.tips ul {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--text-weak);
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-linear-gradient(135deg, rgba(10, 89, 247, 0.08), rgba(10, 89, 247, 0.08) 12px, transparent 12px, transparent 24px);
+    border-radius: 20px;
+    border: 1px dashed rgba(10, 89, 247, 0.15);
+}
+
+#editCanvas {
+    width: min(100%, 840px);
+    height: auto;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.placeholder {
+    position: absolute;
+    color: var(--text-weak);
+    text-align: center;
+    font-size: 1rem;
+}
+
+.magnifier {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 20px;
+    border: 2px solid var(--accent);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(10, 89, 247, 0.25);
+    backdrop-filter: blur(16px);
+}
+
+#previewCanvas {
+    width: 100%;
+    max-width: 520px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(15, 35, 66, 0.12);
+}
+
+.app-footer {
+    color: var(--text-weak);
+}
+
+@media (max-width: 720px) {
+    .app-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .canvas-wrapper {
+        min-height: 220px;
+    }
+}
