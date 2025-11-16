@@ -57,6 +57,7 @@ Offchain metadata is published for example on web.
 4. [TON NFT Deployer](https://github.com/tondiamonds/ton-nft-deployer)
 5. FunC Lesson - NFT Standard ([en](https://github.com/romanovichim/TonFunClessons_Eng/blob/889424ae6a28453c4188ad65cdd9dbfeb750ecdb/10lesson/tenthlesson.md)/[ru](https://github.com/romanovichim/TonFunClessons_ru/blob/427037e7937f0e2e9caa4b866ee29f9d8e19b3c0/10lesson/tenthlesson.md))
 6. [TON NFT Explorer](https://explorer.tonnft.tools/)
+7. You might find this ready-to-deploy [NFT metadata server](https://github.com/isaev-the-poetry/nft-metadata-server) built with NestJS and Docker useful.
 
 # Specification
 The NFT collection and each NFT item are separate smart contracts.
