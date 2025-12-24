@@ -37,9 +37,9 @@ They MUST additionally (w.r.t. TEP-74) support the following get method:
 
    `denominator` - (integer) - the denominator to be used when calculating displayed amounts from onchain amounts. MUST NOT be `0`.
 
-The displayed (that is, the value presented to users in UIs supporting this TEP) balance of a jetton wallet MUST be calculated as `muldiv(onchain_balance, numerator, denominator)`, where `onchain_balance` is the balance of the jetton wallet as reported by `get_wallet_data()`, and `numerator` and `denominator` are the values returned by `get_display_multiplier()`. The displayed balance calculated in such a way and presented to the user MUST still respect the `decimals` reported by jetton's metadata. Similarly, the total displayed supply MUST be calculated as `muldiv(total_onchain_supply, numerator, denominator)`.
+The displayed (that is, the value presented to users in UIs supporting this TEP) balance of a jetton wallet MUST be calculated as `muldivr(onchain_balance, numerator, denominator)` (`muldivr` - `muldiv` with rounding), where `onchain_balance` is the balance of the jetton wallet as reported by `get_wallet_data()`, and `numerator` and `denominator` are the values returned by `get_display_multiplier()`. The displayed balance calculated in such a way and presented to the user MUST still respect the `decimals` reported by jetton's metadata. Similarly, the total displayed supply MUST be calculated as `muldivr(total_onchain_supply, numerator, denominator)`.
 
-Values inputted by users in UIs supporting this TEP have to be converted to onchain balance (the value used for sending jettons) as follows: `muldiv(displayed_or_inputted_balance, denominator, numerator)`, where `displayed_or_inputted_balance` is the value inputted by the user, and `numerator` and `denominator` are the values returned by `get_display_multiplier()`.
+Values inputted by users in UIs supporting this TEP have to be converted to onchain balance (the value used for sending jettons) as follows: `muldivr(displayed_or_inputted_balance, denominator, numerator)`, where `displayed_or_inputted_balance` is the value inputted by the user, and `numerator` and `denominator` are the values returned by `get_display_multiplier()`.
 
 Jetton master contracts supporting this TEP MUST send the following external-out message (TL-B structure) whenever the values returned by `get_display_multiplier()`:
 ```
@@ -56,11 +56,11 @@ Jetton master contracts supporting this TEP MUST emit the `display_multiplier_ch
 
 # Drawbacks
 
-1. It is not possible to make a mechanism for calculating the displayed balance in a way that is different from the `muldiv` calculation using this TEP.
+1. It is not possible to make a mechanism for calculating the displayed balance in a way that is different from the `muldivr` calculation using this TEP.
 
 # Rationale and alternatives
 
-## Why restrict the calculation to `muldiv` and why send the external-out message?
+## Why restrict the calculation to `muldivr` and why send the external-out message?
 
 Both of these points significantly simplify the indexing of jettons that support this TEP by allowing indexers to:
 
