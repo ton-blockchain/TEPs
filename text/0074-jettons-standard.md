@@ -33,7 +33,7 @@ Here and following we use "Jetton" with capital `J` as designation for entirety 
 
 Jettons are organized as follows: each Jetton has master smart-contract which is used to mint new jettons, account for circulating supply and provide common information.
 
-At the same time information about amount of jettons owned by each user is stores in decentralized manner in individual (for each owner) smart-contracts called "jetton-wallets".
+At the same time information about amount of jettons owned by each user is stored in decentralized manner in individual (for each owner) smart-contracts called "jetton-wallets".
 
 Example: if you release a Jetton with circulating supply of 200 jetton which are owned by 3 people, then you will deploy 4 contracts: 1 Jetton-master and 3 jetton-wallets.
 
