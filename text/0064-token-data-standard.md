@@ -136,7 +136,8 @@ Note, that while TL-B scheme does not constrain bit size of each chunk it is exp
  - "n" - number of jettons (default value). If the user has 100 tokens with decimals 0, then display that user has 100 tokens
  - "n-of-total" - the number of jettons out of the total number of issued jettons. For example, totalSupply Jetton = 1000. A user has 100 jettons in the jetton wallet. For example must be displayed in the user's wallet as 100 of 1000 or in any other textual or graphical way to demonstrate the particular from the general.
  - "%" - percentage of jettons from the total number of issued jettons. For example, totalSupply Jetton = 1000. A user has 100 jettons in the jetton wallet. For example it should be displayed in the user's wallet as 10%.
-9. `render_type` - Optional. Needed by external applications to understand which group the jetton belongs to and how to display it.  
+9. `render_type` - Optional. Needed by external applications to understand which group the jetton belongs to and how to display it.
+ - "hidden" - token should not be visible in wallet (for example for technical NFTs)
  - "currency" - display as currency (default value). 
  - "game" - display for games. It should be displayed as NFT, but at the same time display the number of jettons considering the `amount_style`
 
