@@ -1,6 +1,6 @@
 - **TEP**: [91](https://github.com/ton-blockchain/TEPs/pull/91)
 - **title**: Contract Source Registry
-- **status**: Draft
+- **status**: Active
 - **type**: Contract Interface
 - **authors**: [Tal Kol](https://github.com/talkol), [Shahar Yakir](https://github.com/shaharyakir), [Doron Aviguy](https://github.com/doronaviguy)
 - **created**: 09.09.2022
@@ -38,15 +38,8 @@ The standard relies on the following services to store data:
 
 The standard puts emphasis on keeping all stakeholders equal and storing all data on neutral ground.
 
-## Inspiration mock-ups for user facing aspects
-
-1. [Link on ton.org to verify a contract](https://docs.google.com/presentation/d/1lk4W8-7cOxnKJjytRXWXKqIs04MRW7pKZVEuU0Dj8f0/edit#slide=id.g1470cb0de57_0_30)
-2. [User enters contract address to see verified source](https://docs.google.com/presentation/d/1lk4W8-7cOxnKJjytRXWXKqIs04MRW7pKZVEuU0Dj8f0/edit#slide=id.g1470cb0de57_0_10)
-3. [Verified source-code is displayed to user](https://docs.google.com/presentation/d/1lk4W8-7cOxnKJjytRXWXKqIs04MRW7pKZVEuU0Dj8f0/edit#slide=id.g1470cb0de57_0_6)
-4. [User wants to see the proofs published by verifiers](https://docs.google.com/presentation/d/1lk4W8-7cOxnKJjytRXWXKqIs04MRW7pKZVEuU0Dj8f0/edit#slide=id.g1470cb0de57_0_14)
-5. [Verified source-code embedded inside tonscan.org explorer](https://docs.google.com/presentation/d/1lk4W8-7cOxnKJjytRXWXKqIs04MRW7pKZVEuU0Dj8f0/edit#slide=id.g1470cb0de57_0_18)
-6. [Verified source-code embedded inside TonWhales explorer](https://docs.google.com/presentation/d/1lk4W8-7cOxnKJjytRXWXKqIs04MRW7pKZVEuU0Dj8f0/edit#slide=id.g1470cb0de57_0_22)
-7. [Working demo showing the client for publishing and verifying sources](https://ton-defi-org.github.io/ton-src-webclient/EQDerEPTIh0O8lBdjWc6aLaJs5HYqlfBN2Ruj1lJQH_6vcaZ)
+## Deployed source code verifiers
+[Mainnet](https://verifier.ton.org) and [Testnet](https://verifier.ton.org/?testnet=true)
 
 # Specification
 

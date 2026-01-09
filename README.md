@@ -27,8 +27,12 @@ Proposal management is done using GitHub pull requests, the process is described
 | [81](./text/0081-dns-standard.md)            | TON DNS Standard                   | Contract Interface | 25.06.2022 |
 | [85](./text/0085-sbt-standard.md)            | SBT Contract                       | Contract Interface | 09.08.2022 |
 | [89](./text/0089-jetton-wallet-discovery.md) | Discoverable Jettons Wallets       | Contract Interface | 08.09.2022 |
+| [91](./0092-contract-source-registry.md)     | Contract Source Registry           | Infrastructure     | 09.09.2022 |
 | [115](./text/0115-ton-connect.md)            | TON Connect                        | Core               | 20.10.2022 |
+| [122](./text/0122-onchain-nft-reveal.md)     | Onchain reveal mechanic            | Contract Interface | 31.10.2022 |
+| [126](./text/0126-compressed-nft-standard.md)| Compressed NFT Standard            | Contract Interface | 28.07.2023 |
 | [160](./text/0160-dispatch-queue.md)         | Dispatch Queue                     | Core               | 13.06.2024 |
+| [467](./text/0467-normalized-message-hash.md)| Normalized Message Hash            | Core               | 03.04.2025 |
 | [526](./text/0526-scaled-ui-jettons.md)      | Scaled UI Jettons                  | Contract Interface | 19.09.2025 |
 
 
@@ -41,14 +45,10 @@ In particular "Status" below has the following sense:
 
 | TEP                                          | Title                              | Type               | Created    | Status     |
 |----------------------------------------------|------------------------------------|--------------------|------------|------------|
-| [91](https://github.com/ton-blockchain/TEPs/pull/91/files)            | Contract Source Registry             | Infrastructure     | 09.09.2022 | ✅Deployed✅ |
 | [92](https://github.com/ton-blockchain/TEPs/pull/92/files)            | Wallet Registry                      | Infrastructure     | 11.09.2022 | Proposed    |
 | [96](https://github.com/ton-blockchain/TEPs/pull/96/files)            | Dicts/Arrays in Metadata             | Contract Interface | 21.09.2022 | Proposed    |
 | [104](https://github.com/ton-blockchain/TEPs/pull/104/files)          | Data Signatures                      | Contract Interface | 13.12.2022 | Proposed    |
 | [121](https://github.com/ton-blockchain/TEPs/pull/121/files)          | Lockable Jetton Wallet               | Contract Interface | 13.04.2023 | Proposed    |
-| [122](https://github.com/ton-blockchain/TEPs/pull/122/files)          | Onchain reveal mechanic              | Contract Interface | 31.10.2022 | ✅Deployed✅ |
-| [123](https://github.com/ton-blockchain/TEPs/pull/123/files)          | Address Guideline update             | Guidelines         | 13.06.2023 | 🛠️Partially Deployed🛠️ |
-| [126](https://github.com/ton-blockchain/TEPs/pull/126/files)          | Compressed NFT Standard              | Contract Interface | 28.07.2023 | 🛠️Partially Deployed🛠️ |
 | [127](https://github.com/ton-blockchain/TEPs/pull/127/files)          | TON Storage in Metadata              | Contract Interface | 23.09.2023 | Proposed |
 | [130](https://github.com/ton-blockchain/TEPs/pull/130/files)          | Rebase Jettons standart              | Contract Interface | 04.12.2023 | Proposed |
 | [131](https://github.com/ton-blockchain/TEPs/pull/131/files)          | Referral code in Query ID            | Contract Interface | 26.12.2023 | 🛠️Partially Deployed🛠️ |
@@ -56,6 +56,5 @@ In particular "Status" below has the following sense:
 | [140](https://github.com/ton-blockchain/TEPs/pull/140/files)          | Programmable Action Phase            | Core               | 20.01.2024 | Proposed |
 | [141](https://github.com/ton-blockchain/TEPs/pull/141)                | Remote onchain execution             | Core               | 20.01.2024 | Proposed |
 | [142](https://github.com/ton-blockchain/TEPs/pull/142/files)          | TBRC-20 Inscription Token Standard   | Contract Interface | 26.01.2024 | Proposed |
-| [145](https://github.com/ton-blockchain/TEPs/pull/145/files)          | Metadata "Hidden" render type        | Contract Interface | 26.01.2024 | ✅Deployed✅ |
 | [146](https://github.com/ton-blockchain/TEPs/pull/146/files)          | Semi-fungible token standard         | Contract Interface | 17.03.2024 | Proposed |
 | [161](https://github.com/ton-blockchain/TEPs/pull/161/files)          | Proxy TON (wTON)                     | Contract Interface | 13.06.2024 | 🛠️Partially Deployed🛠️ |

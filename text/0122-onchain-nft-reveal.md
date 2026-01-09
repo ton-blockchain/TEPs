@@ -1,6 +1,6 @@
-- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0) *(don't change)*
+- **TEP**: [122](https://github.com/ton-blockchain/TEPs/pull/122)
 - **title**: Onchain reveal mechanic
-- **status**: Draft
+- **status**: Active
 - **type**: Contract Interface
 - **authors**: [Andrey Tvorozhkov](https://github.com/tvorogme)
 - **created**: 31.10.2022

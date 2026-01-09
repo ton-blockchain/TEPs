@@ -1,6 +1,6 @@
-- **TEP**: [0](https://github.com/ton-blockchain/TEPs/pull/0)
+- **TEP**: [126](https://github.com/ton-blockchain/TEPs/pull/126)
 - **title**: Compressed NFT Standard
-- **status**: Draft
+- **status**: Active
 - **type**: Contract Interface
 - **authors**: [Maxim Gromov](https://github.com/krigga), [Narek Abovyan](https://github.com/naltox), [Ivan Nedzvetsky](https://github.com/stels-cs), [Daniil Sedov](https://github.com/Gusarich)
 - **created**: 28.07.2023
