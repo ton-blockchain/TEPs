@@ -1,6 +1,6 @@
 - **TEP**: [467](https://github.com/ton-blockchain/TEPs/pull/467)
 - **title**: Normalized Message Hash
-- **status**: Draft
+- **status**: Active
 - **type**: Core
 - **authors**: [Denis Subbotin](https://github.com/mr-tron)
 - **created**: 03.04.2025
