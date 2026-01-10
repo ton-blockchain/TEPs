@@ -1,6 +1,6 @@
 # TON Enhancement Proposals (TEPs)
 
-> :warning: **WARNING:** this proposal system is experimental now, the process is a subject to change.
+> :warning: **WARNING:** this proposal system is experimental now, the process is subject to change.
 
 The main goal of TON Enhancement Proposals is to provide a convenient and formal way to propose changes to TON Blockchain
 and standardize ways of interaction between different parts of ecosystem.
@@ -50,7 +50,7 @@ In particular "Status" below has the following sense:
 | [104](https://github.com/ton-blockchain/TEPs/pull/104/files)          | Data Signatures                      | Contract Interface | 13.12.2022 | Proposed    |
 | [121](https://github.com/ton-blockchain/TEPs/pull/121/files)          | Lockable Jetton Wallet               | Contract Interface | 13.04.2023 | Proposed    |
 | [127](https://github.com/ton-blockchain/TEPs/pull/127/files)          | TON Storage in Metadata              | Contract Interface | 23.09.2023 | Proposed |
-| [130](https://github.com/ton-blockchain/TEPs/pull/130/files)          | Rebase Jettons standart              | Contract Interface | 04.12.2023 | Proposed |
+| [130](https://github.com/ton-blockchain/TEPs/pull/130/files)          | Rebase Jettons standard              | Contract Interface | 04.12.2023 | Proposed |
 | [131](https://github.com/ton-blockchain/TEPs/pull/131/files)          | Referral code in Query ID            | Contract Interface | 26.12.2023 | 🛠️Partially Deployed🛠️ |
 | [137](https://github.com/ton-blockchain/TEPs/pull/137/files)          | Jetton Wallet Balance Query          | Contract Interface | 09.01.2024 | Proposed |
 | [140](https://github.com/ton-blockchain/TEPs/pull/140/files)          | Programmable Action Phase            | Core               | 20.01.2024 | Proposed |
