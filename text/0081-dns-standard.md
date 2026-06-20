@@ -23,7 +23,7 @@ to be used by default whenever an application or a service wants to translate hu
 1. [Reference DNS smart contracts](https://github.com/ton-blockchain/dns-contract)
 2. [DNS Auction](https://dns.ton.org/) ([source code](https://github.com/ton-blockchain/dns))
 3. [ton.org documentation](https://ton.org/docs/#/web3/dns)
-4. Tolya answers about TON DNS (ru) - [1](https://github.com/ton-blockchain/TEPs/commit/4a09bfc737823f09f05dfb7008eec7784543bb2b), [2](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-2-08-06), [3](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-3-08-09)
+4. Tolya answers about TON DNS (ru) - [1](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-1-08-05), [2](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-2-08-06), [3](https://telegra.ph/Otvety-na-voprosy-o-TON-DNS-kanalu-Investment-kingyru-CHast-3-08-09)
 
 # Specification
 
@@ -143,10 +143,7 @@ proto_list_next$1 head:Protocol tail:ProtoList = ProtoList;
 
 
 
-cap_method_seqno#5371 = SmcCapability;
-cap_method_pubkey#71f4 = SmcCapability;
 cap_is_wallet#2177 = SmcCapability;
-cap_name#ff name:Text = SmcCapability;
 
 cap_list_nil$0 = SmcCapList;
 cap_list_next$1 head:SmcCapability tail:SmcCapList = SmcCapList;
@@ -193,3 +190,13 @@ None
 # Future possibilities
 
 1. Implement private (encrypted) fields
+
+# Changelog
+
+* 20 Dec 2023 - deleted unused capabilities:
+  
+   ```
+   cap_method_seqno#5371 = SmcCapability;
+   cap_method_pubkey#71f4 = SmcCapability;
+   cap_name#ff name:Text = SmcCapability;
+   ```

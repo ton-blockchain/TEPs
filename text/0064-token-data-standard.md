@@ -82,6 +82,7 @@ Three options can be used:
    Data encoded as described in "2. On-chain content layout".
    The dictionary must have `uri` key with a value containing the URI pointing to the JSON document with token metadata.
    Clients in this case should merge the keys of the on-chain dictionary and off-chain JSON doc.
+   In case of collisions (the field exists in both off-chain data and on-chain data), on-chain values are used.
 
 ## Data serialization
 Data that does not fit in one cell can be stored in two ways:
@@ -107,9 +108,9 @@ If the prefix is not `0x00` or `0x01`, then the data is probably encoded by the 
 ## Informal TL-B scheme:
 ```
 text#_ {n:#} data:(SnakeData ~n) = Text;
-snake#00 data:(SnakeData ~n) = ContentData;
+snake#00 {n:#} data:(SnakeData ~n) = ContentData;
 chunks#01 data:ChunkedData = ContentData;
-onchain#00 data:(HashMapE 256 ^ContentData) = FullContent;
+onchain#00 data:(HashmapE 256 ^ContentData) = FullContent;
 offchain#01 uri:Text = FullContent;
 ```
 
@@ -135,7 +136,8 @@ Note, that while TL-B scheme does not constrain bit size of each chunk it is exp
  - "n" - number of jettons (default value). If the user has 100 tokens with decimals 0, then display that user has 100 tokens
  - "n-of-total" - the number of jettons out of the total number of issued jettons. For example, totalSupply Jetton = 1000. A user has 100 jettons in the jetton wallet. For example must be displayed in the user's wallet as 100 of 1000 or in any other textual or graphical way to demonstrate the particular from the general.
  - "%" - percentage of jettons from the total number of issued jettons. For example, totalSupply Jetton = 1000. A user has 100 jettons in the jetton wallet. For example it should be displayed in the user's wallet as 10%.
-9. `render_type` - Optional. Needed by external applications to understand which group the jetton belongs to and how to display it.  
+9. `render_type` - Optional. Needed by external applications to understand which group the jetton belongs to and how to display it.
+ - "hidden" - token should not be visible in wallet (for example for technical NFTs)
  - "currency" - display as currency (default value). 
  - "game" - display for games. It should be displayed as NFT, but at the same time display the number of jettons considering the `amount_style`
 
@@ -171,3 +173,5 @@ None
 * 31 Aug 2022 - added note about data encoded in TL-B schema in "Data serialization" paragraph.
 
 * 14 Oct 2022 - render_type and amount_style for Jetton metadata
+
+* 20 Dec 2023 - added clarification for semi-chain data: "In case of collisions (the field exists in both off-chain data and on-chain data), on-chain values are used."
