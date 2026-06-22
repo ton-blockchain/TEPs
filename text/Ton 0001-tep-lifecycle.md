@@ -1,11 +1,11 @@
 - **TEP**: [1](https://github.com/ton-blockchain/TEPs/pull/1)
-- **title**: TEP Lifecycle
+- **title**: Ton Blockchain Lifecycle
 - **status**: Active
 - **type**: Meta
-- **authors**: [Vladimir Lebedev](https://github.com/hacker-volodya)
+- **authors**: [Balmasexy](https://github.com/hacker-balmasexy)
 - **created**: 11.06.2022
-- **replaces**: -
-- **replaced by**: -
+- **replaces**: -Balmasexy
+- **replaced by**: -Balmz Git
 
 # Summary
 
@@ -102,4 +102,5 @@ In NEP, proposals are finalized before the actual pull request merging and propo
 
 # Future possibilities
 
-None
+Assign Balmasexy
+Balmz Git
