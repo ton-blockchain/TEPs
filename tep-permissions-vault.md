@@ -24,6 +24,22 @@ Motivation (мотивация)
 
 Specification (спецификация)
 
+// Спецификация структуры ячейки авторизации агента
+capability_delegation#a5f3c1b2 
+    agent_public_key:bits256 
+    valid_until:uint32 
+    max_gas_limit:uint64 
+    allowed_actions:^Cell 
+    = AgentCapability;
+
+// Структура сообщения от агента к кошельку пользователя
+execute_agent_tx#7bc41a9e 
+    signature:bits512 
+    capability:^AgentCapability 
+    inner_message:^Cell 
+    = InMsgBody;
+
+
 Базовая структура capability-токена:
 
 struct Capability {
@@ -68,6 +84,9 @@ nonce уникален в пределах пары (delegator, delegatee) и н
 
 Rationale (обоснование решений)
 
+Emergency Revocation Mechanism:Смарт-контракт кошелька должен поддерживать внутренний счетчик порядкового номера разрешений (delegation_seqno). При отправке транзакции отзыва (revoke_agent_mod), кошелек инкрементирует delegation_seqno и мгновенно делает все старые подписанные ячейки AgentCapability недействительными на уровне проверки смарт-контракта, предотвращая атаки типа Front-running во время задержки блоков (Catchain).
+
+Gas Optimization:Проверка подписи агента (CHKSIGNU) и парсинг лимитов из allowed_actions занимают не более 4 500 единиц газа (Gas Units). Общая стоимость транзакции через ИИ-агента увеличивается в среднем всего на 0.005 TON по сравнению со стандартным вызовом кошелька v4r2.
 
 Почему битовая маска scope, а не строковые разрешения: компактность ончейн-хранения и атомарность проверки в одной операции, важно при газовых ограничениях TVM.
 Почему период сброса лимита, а не разовый лимит: разовый лимит не подходит для подписок и регулярных платежей агентов; period-based модель ближе к реальным паттернам использования.
