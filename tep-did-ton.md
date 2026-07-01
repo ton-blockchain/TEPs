@@ -18,6 +18,36 @@ Motivation (мотивация)
 
 Specification (спецификация)
 
+### DID Resolution
+// Псевдокод алгоритма для интеграции в SDK (JavaScript/TypeScript)
+async function resolveDID(didString) {
+    const [scheme, method, network, address] = didString.split(':');
+    if (scheme !== 'did' || method !== 'ton') throw new Error('Invalid DID Scheme');
+    
+    // 1. Запрос к TON RPC-ноде для получения состояния контракта
+    const contractState = await tonRpc.getContractState(address);
+    
+    // 2. Чтение метода-геттера (get_did_document)
+    const { stack } = await tonRpc.runMethod(address, 'get_did_document');
+    const didDocumentCell = stack.readCell();
+    
+    // 3. Парсинг ячейки в JSON-формат стандарта W3C
+    return parseCellToW3CDID(didDocumentCell);
+}
+
+## Smart Contract Interface
+;; Код геттера для возврата публичного ключа и метаданных DID
+cell get_did_document() method_id {
+    var ds = load_data();
+    slice public_key = ds~load_bits(256);
+    cell metadata = ds~load_ref();
+    return begin_cell()
+        .store_slice(public_key)
+        .store_ref(metadata)
+    .end_cell();
+}
+
+
 Формат идентификатора:
 
 did:ton:<network>:<address>
