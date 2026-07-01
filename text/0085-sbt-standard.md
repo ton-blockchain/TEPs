@@ -137,7 +137,7 @@ https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources
 #### Minting
 It can be done using basic NFT collection, SBT should be an item. In mint message additionally authority address should be passed, [after content](https://github.com/getgems-io/nft-contracts/blob/main/packages/contracts/sources/sbt-item.fc#L90). 
 
-Before mint, issuer is recommended to check the wallet code and confirm that it is standartized wallet and not some transferrable contract that can be sold to 3rd parties.
+Before mint, issuer is recommended to check the wallet code and confirm that it is standardized wallet and not some transferrable contract that can be sold to 3rd parties.
 
 #### Proving you ownership to contracts
 SBT contracts has a feature that let you implement interesting mechanics with contracts by proving ownership onchain. 
@@ -241,11 +241,11 @@ slice calculate_sbt_address(slice collection_addr, cell sbt_item_code, int wc, i
 
 - **Why is this design the best in the space of possible designs?**
 
-This design allows us to use SBT as certificates, with revoke and onchain proofs, and in the same time allows to make true SBT if authority in not set.
+This design allows us to use SBT as certificates, with revoke and onchain proofs, and at the same time allows to make true SBT if authority in not set.
 
 - **What other designs have been considered and what is the rationale for not choosing them?**
 
-Initially, the design similar to ETH with address-bounded tokens was considered, but it was extended with usefull onchain proofs and revoke option.
+Initially, the design similar to ETH with address-bounded tokens was considered, but it was extended with useful onchain proofs and revoke option.
 
 - **What is the impact of not doing this?**
 
@@ -253,7 +253,7 @@ Currently, TON have no owner-bounded token standard, so it is a problem to issue
 
 # Prior art
 
-In ETH ([EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973)) - SBT was done as an NFT which could not be transferred between accounts at all. We did tha same but extended the logic with onchain proofs, and added authority which can revoke, so SBT can be used as fully functional certificate.
+In ETH ([EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973)) - SBT was done as an NFT which could not be transferred between accounts at all. We did the same but extended the logic with onchain proofs, and added authority which can revoke, so SBT can be used as fully functional certificate.
 # Drawbacks
 
 [EIP-4973 ABT](https://eips.ethereum.org/EIPS/eip-4973) has equip/unequip mechanics which allows to show/hide SBT temporarily. In current proposal we can only destroy SBT. Actually not sure that show/hide logic is needed for us. 
