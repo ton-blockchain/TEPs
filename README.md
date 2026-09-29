@@ -28,13 +28,17 @@ Proposal management is done using GitHub pull requests, the process is described
 | [81](./text/0081-dns-standard.md)            | TON DNS Standard                   | Contract Interface | 25.06.2022 |
 | [85](./text/0085-sbt-standard.md)            | SBT Contract                       | Contract Interface | 09.08.2022 |
 | [89](./text/0089-jetton-wallet-discovery.md) | Discoverable Jettons Wallets       | Contract Interface | 08.09.2022 |
-| [91](./0092-contract-source-registry.md)     | Contract Source Registry           | Infrastructure     | 09.09.2022 |
 | [115](./text/0115-ton-connect.md)            | TON Connect                        | Core               | 20.10.2022 |
 | [122](./text/0122-onchain-nft-reveal.md)     | Onchain reveal mechanic            | Contract Interface | 31.10.2022 |
 | [126](./text/0126-compressed-nft-standard.md)| Compressed NFT Standard            | Contract Interface | 28.07.2023 |
 | [160](./text/0160-dispatch-queue.md)         | Dispatch Queue                     | Core               | 13.06.2024 |
 | [467](./text/0467-normalized-message-hash.md)| Normalized Message Hash            | Core               | 03.04.2025 |
 | [526](./text/0526-scaled-ui-jettons.md)      | Scaled UI Jettons                  | Contract Interface | 19.09.2025 |
+
+## Deprecated
+| TEP                                          | Title                              | Type               | Created    |
+|----------------------------------------------|------------------------------------|--------------------|------------|
+| [91](./text/0091-contract-source-registry.md) | Contract Source Registry           | Infrastructure     | 09.09.2022 |
 
 
 ## WIP

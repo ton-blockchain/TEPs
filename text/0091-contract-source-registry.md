@@ -1,6 +1,6 @@
 - **TEP**: [91](https://github.com/ton-blockchain/TEPs/pull/91)
 - **title**: Contract Source Registry
-- **status**: Active
+- **status**: Deprecated
 - **type**: Contract Interface
 - **authors**: [Tal Kol](https://github.com/talkol), [Shahar Yakir](https://github.com/shaharyakir), [Doron Aviguy](https://github.com/doronaviguy)
 - **created**: 09.09.2022
