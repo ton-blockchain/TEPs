@@ -74,7 +74,7 @@ A Rotation mnemonic uses:
 
 ```text
 24 words from the BIP39 word list,
-formed as two independent 12-word Multichain mnemonics
+formed as two 12-word Multichain mnemonics
 
 words 1-12  -> anchor half  -> anchor key
 words 13-24 -> signing half -> signing key
@@ -121,7 +121,7 @@ or
 
 Wallet applications **SHOULD NOT** create new wallets using a 24-word Multichain mnemonic. This restriction is intended to reduce ambiguity during import and improve interoperability across the TON ecosystem.
 
-Wallet applications **SHOULD NOT** create new wallets using a Rotation mnemonic either. A Rotation mnemonic is only meaningful for an application that also implements the rotation-capable wallet account of section 13, and in practice it is expected to be produced by a small number of applications.
+Wallet applications **SHOULD NOT** create new wallets using a Rotation mnemonic either. A Rotation mnemonic is only meaningful for an application that also implements the rotation-capable wallet account of section 13. That application is the wallet in Telegram, and Rotation mnemonics are expected to originate there and nowhere else. Every other wallet application meets them on import, never on creation.
 
 ## 5. New Wallet Creation: Smart Contract
 
@@ -258,7 +258,7 @@ An interesting exception is Tonkeeper Pro, which offers its own method for gener
 
 However, to ensure compatibility among wallets, we recommend the method described in section 11.
 
-## 13. Rotation Mnemonic: Wallet Account and Key Rotation
+## 13. Rotation Mnemonic: Wallet Account and Import
 
 Section 13.1 applies to a wallet application that creates and operates rotation wallets. Section 13.2 applies to every wallet application that wants to import them, and is the part the rest of the ecosystem needs.
 
@@ -268,13 +268,17 @@ A Rotation mnemonic requires a wallet smart contract that keeps its current sign
 
 Such a contract **MUST** satisfy all of the following:
 
-1. The account address **MUST NOT** depend on the current signing public key.
+1. The account address **MUST** be derived from the anchor public key, and **MUST NOT** depend on the current signing public key.
 
 2. The contract stores a current signing public key, and that key **MUST** be the only key accepted for ordinary outgoing messages.
 
-Sections 5 and 6 do not apply to rotation wallets. Wallet V3R1 through V5R1 have no rotatable signing key, and the behavior of a Rotation mnemonic with them is not defined; a wallet application **MUST NOT** deploy a V3R1-V5R1 account from a Rotation mnemonic. 
+3. The initial stored signing public key **MUST** be the anchor public key.
 
-### 13.2 Import and recovery
+4. A message authorized by the current signing key **MUST** be able to replace the stored signing public key.
+
+Sections 5 and 6 do not apply to rotation wallets. Wallet V3R1 through V5R1 have no rotatable signing key, and the behavior of a Rotation mnemonic with them is not defined; a wallet application **MUST NOT** deploy a V3R1-V5R1 account from a Rotation mnemonic.
+
+### 13.2 Import
 
 When importing a Rotation mnemonic, a wallet application:
 
@@ -288,4 +292,4 @@ If the two match, the phrase is current and the account can be used immediately.
 
 If they do not match, the phrase carries an outdated signing half. The wallet application **SHOULD** treat the mnemonic as invalid.
 
-The contract itself, including its code and subwallet-id, is out of scope for this document.
+The contract itself, including its code and subwallet-id, is out of scope for this document; it is defined by the [WalletTg implementation](https://github.com/ton-blockchain/tg-wallet-contract).
